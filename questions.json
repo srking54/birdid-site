@@ -1,0 +1,158 @@
+[
+  {
+    "question": "Which bird is commonly seen often walking on lawns in North America?",
+    "choices": [
+      "American Robin",
+      "Northern Cardinal",
+      "House Finch",
+      "Scaret Tanager"
+    ],
+    "answer": "American Robin",
+    "image": "images/robin.jpg",
+    "info": "https://ebird.org/species/amerob"
+  },
+  {
+    "question": "Which large raptor is known for its white head and tail in adulthood?",
+    "choices": [
+      "Bald Eagle",
+      "Osprey",
+      "Golden Eagle",
+      "Turkey Vulture"
+    ],
+    "answer": "Bald Eagle",
+    "image": "images/bald_eagle.jpg",
+    "info": "https://ebird.org/species/baleag"
+  },
+  {
+    "question": "Which duck species has an iridescent green had (male), a white ring and a curly tail?",
+    "choices": [
+      "Mallard",
+      "Northern Shoveler",
+      "Wood Duck",
+      "Gadwall"
+    ],
+    "answer": "Mallard",
+    "image": "images/mallard.jpg",
+    "info": "https://ebird.org/species/mallar3"
+  },
+  {
+    "question": "Which wading bird is tall, slate-blue, and often hunts fish slowly in shallow water?",
+    "choices": [
+      "Great Blue Heron",
+      "Sandhill Crane",
+      "Little Egret",
+      "Black Stork"
+    ],
+    "answer": "Great Blue Heron",
+    "image": "images/great_blue_heron.jpg",
+    "info": "https://www.audubon.org/field-guide/bird/great-blue-heron"
+  },
+  {
+    "question": "Which tiny bird can hover and fly backward thanks to rapid wingbeats?",
+    "choices": [
+      "Hummingbird",
+      "American Goldfinch",
+      "Barn Swallow",
+      "European Starling"
+    ],
+    "answer": "Hummingbird",
+    "image": "images/hummingbird.jpg",
+    "info": "https://www.audubon.org/search_results?search=hummingbird"
+  },
+  {
+    "question": "Which black-and-white seabird has a colorful, triangular bill and nests on cliffs?",
+    "choices": [
+      "Atlantic Puffin",
+      "Common Murre",
+      "Razorbill",
+      "Northern Gannet"
+    ],
+    "answer": "Atlantic Puffin",
+    "image": "images/atlantic_puffin.jpg",
+    "info": "https://www.audubon.org/field-guide/bird/atlantic-puffin"
+  },
+  {
+    "question": "Which bird is famous for its pink plumage due to pigments from the crustaceans it eats?",
+    "choices": [
+      "Roseate Spoonbill",
+      "Scarlet Ibis",
+      "Greater Flamingo",
+      "American Avocet"
+    ],
+    "answer": "Greater Flamingo",
+    "image": "images/flamingo.jpg",
+    "info": "https://www.audubon.org/field-guide/bird/american-flamingo"
+  },
+  {
+    "question": "Which nocturnal bird has a heart-shaped facial disk and screeching call?",
+    "choices": [
+      "Snowy Owl",
+      "Short-eared Owl",
+      "Great Horned Owl",
+      "Barn Owl"
+    ],
+    "answer": "Barn Owl",
+    "image": "images/barn_owl.jpg",
+    "info": "https://www.audubon.org/field-guide/bird/american-barn-owl"
+  },
+  {
+    "question": "Which ground-dwelling African bird is the tallest and lays the largest eggs?",
+    "choices": [
+      "Kori Bustard",
+      "Secretarybird",
+      "Ostrich",
+      "Guineafowl"
+    ],
+    "answer": "Ostrich",
+    "image": "images/ostrich.jpg",
+    "info": "https://ebird.org/species/ostric2"
+  },
+  {
+    "question": "Which Asian bird is famous for its extravagant tail feathers displayed by males?",
+    "choices": [
+      "Common Pheasant",
+      "Indian Peafowl (Peacock)",
+      "Green Bee-eater",
+      "Sarus Crane"
+    ],
+    "answer": "Indian Peafowl (Peacock)",
+    "image": "images/indian_peafowl.jpg",
+    "info": "https://ebird.org/species/compea"
+  },
+  {
+    "question": "Which bird has a massive orange-and-black bill and is native to forests of Central & South America?",
+    "choices": [
+      "Hoatzin",
+      "Toco Toucan",
+      "Scarlet Macaw",
+      "Keel-billed Toucan"
+    ],
+    "answer": "Toco Toucan",
+    "image": "images/tucan.jpg",
+    "info": "https://ebird.org/species/toctou1"
+  },
+  {
+    "question": "Which penguin is the the tallest and breeds during the Antarctic winter?",
+    "choices": [
+      "Adélie Penguin",
+      "Gentoo Penguin",
+      "Penguin",
+      "Emperor Penguin"
+    ],
+    "answer": "Emperor Penguin",
+    "image": "images/emperor_penguin.jpg",
+    "info": "https://ebird.org/species/emppen1"
+  },
+  {
+    "question": "Which bird of prey hovers over fields and has a white rump visible in flight?",
+    "choices": [
+      "Red-tailed Hawk",
+      "Northern Harrier",
+      "Peregrine Falcon",
+      "American Kestrel"
+    ],
+    "answer": "Northern Harrier",
+    "image": "images/northern_harrier.jpg",
+    "info": "https://www.audubon.org/field-guide/bird/northern-harrier"
+  }
+]

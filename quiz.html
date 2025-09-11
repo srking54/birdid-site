@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bird Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #955959;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+header {
+  text-align: center; /* Center contents inside header */
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #005fa3;
+}
+
+    .quiz-container {
+      background-color: rgb(87, 170, 177);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+
+    .more-info button {
+      display: none;
+    }
+
+    #quiz-header { margin-bottom: 15px; }
+    #timer-text {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: black;
+    }
+    #progressBar {
+      background-color: #ddd;
+      height: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    #progressFill {
+      background-color: #5da7f9;
+      height: 100%;
+      width: 100%;
+      transition: width 1s linear;
+    }
+    .question-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .choices button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #85c09a;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .choices button:hover { background-color: #d1d1d1; }
+    .choices button.correct { background-color: #a3e3aa; }
+    .choices button.incorrect { background-color: #f7b5b5; }
+    .next-button {
+      margin-top: 20px;
+      display: none;
+      background-color: #5da7f9;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .result, .final-score {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    
+    /* Force solid background while reviewing answers */
+body.review-mode {
+  background-image: none !important;
+  background-color: #f6f7fb !important; /* soft light gray */
+}
+
+/* Optional: center and constrain the review content */
+#answer-review {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;              /* clean card look, long scroll-friendly */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Quiz page header layout + compact Home button */
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes Home away from the title */
+  gap: 8px;
+  flex-wrap: wrap;                /* allow wrapping instead of overlap on tiny screens */
+}
+
+.quiz-header h1 {
+  margin: 0;
+  line-height: 1.1;
+  font-size: clamp(1.15rem, 5vw, 1.6rem); /* scales down on small screens */
+}
+
+#go-home {
+  padding: 4px 10px;      /* smaller button */
+  font-size: 0.85rem;     /* smaller text */
+  line-height: 1;         /* tighter height */
+  margin-left: auto;      /* ensures space from the title if needed */
+}
+
+/* Force the bottom Home button style on the review page */
+
+  /* Put the two bottom buttons on one line (wrap on tiny screens) */
+/* Put the two bottom buttons on one line (wrap on tiny screens) */
+#answer-review .review-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0 8px;
+  flex-wrap: wrap;
+}
+
+/* Make both buttons look consistent */
+#answer-review #play-again-btn,
+#answer-review #home-review-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Colors */
+#answer-review #play-again-btn {
+  background-color: #4e9af1;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+#answer-review #play-again-btn:hover { background-color: #357ddf; }
+
+#answer-review #home-review-btn {
+  background-color: #0077cc;
+  color: #fff;
+}
+#answer-review #home-review-btn:hover { background-color: #005fa3; }
+
+
+@media (max-width: 430px) {
+  #go-home {
+    padding: 3px 8px;
+    font-size: 0.78rem;
+  }
+}
+
+/* === Tighter quiz sizing (question, image, buttons) === */
+#quiz-wrapper { max-width: 520px; margin: 0 auto; }
+
+.quiz-header h1 {               /* keep title modest */
+  font-size: clamp(1.05rem, 3.6vw, 1.4rem);
+}
+
+.question-text {                /* smaller question text */
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.question-image {               /* cap the image height */
+  max-height: 220px;
+  object-fit: contain;
+}
+
+.choices {                      /* keep your 2×2 grid, tighter gaps */
+  gap: 10px;
+}
+
+.choices button {               /* smaller answer buttons */
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+/* Consistent image frame: fits every photo without cropping */
+#question-img, .question-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;     /* pick a frame shape; try 3/2 or 16/9 if you prefer */
+  object-fit: contain;      /* no cropping; letterboxes if needed */
+  background: #fff;         /* clean frame */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+/* Grid layout for review on wider screens */
+@media (min-width: 900px) {
+  #review-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* two columns on laptop */
+    gap: 16px;
+  }
+  #answer-review .result-item img {
+    width: 100% !important;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+}
+
+/* Optional: three columns on very wide displays */
+@media (min-width: 1300px) {
+  #review-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* timer & next button a bit smaller too */
+#timer-text { font-size: 1rem; }
+.next-button { padding: 8px 12px; font-size: 0.95rem; }
+
+/* Extra-tight on very small screens */
+@media (max-width: 380px) {
+  .question-image { max-height: 180px; }
+  .choices button { padding: 8px 10px; font-size: 0.9rem; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bird Identification Quiz</h1>
+    <a id="go-home" class="btn" href="index.html">Home</a>
+  </header>
+
+  <!-- Wrap the quiz in a container -->
+  <div id="quiz-wrapper">
+    <div class="quiz-container">
+      <div id="quiz-header">
+        <div id="timer-text">Time left: 30s</div>
+        <div id="progressBar">
+          <div id="progressFill"></div>
+        </div>
+      </div>
+
+      <img id="question-img" class="question-image" src="" alt="Bird Image" />
+      <div id="question" class="question-text"></div>
+      <div class="choices" id="choices"></div>
+      <button class="next-button" onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <!-- Final Results Summary -->
+  <div id="results-summary" class="hidden">
+    <h2>You scored</h2>
+    <p><span id="final-score">...</span></p>
+    <p id="final-message">...</p>
+    <button id="view-answers">🔍 View Answers</button>
+    <a href="index.html" class="btn">🏠 Back to Home</a>
+  </div>
+
+  <!-- Answer Review Section -->
+  <div id="answer-review" class="hidden">
+  <div id="review-content"></div>
+
+  <div class="review-actions">
+    <button id="play-again-btn" onclick="location.reload()">🔄 Play Again</button>
+    <a href="index.html" id="home-review-btn">🏠 Home</a>
+  </div>
+</div>
+
+
+  <script>
+  // ===== State =====
+  let quizData = [];
+  let currentQuestion = 0;
+  let score = 0;
+  let timerInterval;
+  let userAnswers = [];
+  let answered = false;
+
+  const imgEl = document.getElementById("question-img");
+
+  // Resolve which questions file to load
+const params = new URLSearchParams(location.search);
+const fileParam   = params.get('file');    // e.g. questions_asia.json
+const regionParam = params.get('region');  // e.g. asia
+
+async function resolveQuestionsFile() {
+  if (fileParam)   return fileParam;
+  if (regionParam) return `questions_${regionParam.toLowerCase()}.json`;
+
+  // Fallback to config.json from the server
+  const cfg = await fetch(`/api/config?v=${Date.now()}`, { cache: 'no-store' })
+                      .then(r => r.json());
+  return cfg.question_file || "questions_africa.json";
+}
+
+  // ===== Helpers =====
+  function sanitizeQuizData(data) {
+    return data.filter(q =>
+      q && q.question && Array.isArray(q.choices) &&
+      q.choices.length >= 2 && q.answer && q.choices.includes(q.answer)
+    );
+  }
+  function imgSrc(src) {
+    if (!src) return "";
+    return src.startsWith("images/") ? src : `images/${src}`;
+  }
+  function setQuestionImage(el, src) {
+    const s = imgSrc(src);
+    el.src = s || "";
+    el.onerror = () => { el.onerror = null; el.src = "images/placeholder.jpg"; };
+  }
+  function preloadImages(list) {
+    list.forEach(s => { const i = new Image(); i.src = imgSrc(s); });
+  }
+
+  // ===== Data load =====
+  
+async function loadQuestions(filename = "questions_africa.json") {
+  try {
+    const res = await fetch(
+      `/api/questions?file=${encodeURIComponent(filename)}&v=${Date.now()}`,
+      { cache: 'no-store' }
+    );
+    if (!res.ok) throw new Error("Failed to load questions");
+    quizData = await res.json();
+    loadQuestion();
+  } catch (err) {
+    console.error("Error loading quiz data:", err);
+    document.getElementById("question").textContent = "Failed to load quiz questions.";
+  }
+}
+
+  // ===== Timer =====
+  function startTimer(duration = 30) {
+    clearInterval(timerInterval);
+    let timeLeft = duration;
+    const timerText = document.getElementById("timer-text");
+    const progressFill = document.getElementById("progressFill");
+
+    timerText.textContent = `Time left: ${timeLeft}s`;
+    timerText.style.color = "black";
+    timerText.style.fontWeight = "normal";
+    progressFill.style.width = "100%";
+
+    timerInterval = setInterval(() => {
+      if (answered) { clearInterval(timerInterval); return; }
+
+      timeLeft--;
+      timerText.textContent = `Time left: ${timeLeft}s`;
+      progressFill.style.width = `${(timeLeft / duration) * 100}%`;
+
+      if (timeLeft === 10) timerText.style.color = "orange";
+      if (timeLeft <= 5) {
+        timerText.style.color = "red";
+        timerText.style.fontWeight = "bold";
+      }
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerText.textContent = "⏰ Time's up!";
+        disableChoices();
+      }
+    }, 1000);
+  }
+
+  function disableChoices() {
+    document.querySelectorAll(".choices button").forEach(btn => btn.disabled = true);
+    document.querySelector(".next-button").style.display = 'block';
+    answered = true;
+  }
+
+  // ===== Render =====
+  function loadQuestion() {
+    answered = false;
+
+    const q = quizData[currentQuestion];
+    if (!q) return;
+
+    document.getElementById("question").textContent = q.question;
+    setQuestionImage(imgEl, q.image);
+
+    const choicesBox = document.getElementById("choices");
+    choicesBox.innerHTML = '';
+    document.querySelector(".next-button").style.display = 'none';
+
+    q.choices.forEach(choice => {
+      const btn = document.createElement("button");
+      btn.textContent = choice;
+      btn.onclick = () => handleAnswer(btn, choice === q.answer, q);
+      document.getElementById("choices").appendChild(btn);
+    });
+
+    startTimer(30);
+  }
+
+  function handleAnswer(button, isCorrect, q) {
+    if (answered) return;
+    answered = true;
+
+    disableChoices();
+
+    if (isCorrect) {
+      button.classList.add("correct");
+      score++;
+      clearInterval(timerInterval);
+    } else {
+      button.classList.add("incorrect");
+    }
+
+    userAnswers.push({
+      question: q.question,
+      image: imgSrc(q.image),
+      selected: button.textContent,
+      correct: q.answer,
+      info: q.info || ""
+    });
+  }
+
+  function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showResults();
+    }
+  }
+  window.nextQuestion = nextQuestion;
+
+  function showResults() {
+    document.getElementById("quiz-wrapper").style.display = "none";
+    document.getElementById("results-summary").classList.remove("hidden");
+
+    const percent = Math.round((score / quizData.length) * 100);
+    document.getElementById("final-score").textContent = `${score} / ${quizData.length} (${percent}%)`;
+
+    let message;
+    if (percent === 100) message = "You're a master birder! 🦅🏆";
+    else if (percent >= 80) message = "Fantastic job! You really know your birds 🐦👏";
+    else if (percent >= 50) message = "Nice work! There’s a birder in you yet 🌿";
+    else message = "Keep exploring — birding is a journey 🐣";
+
+    document.getElementById("final-message").textContent = message;
+  }
+
+  // ===== Review Mode =====
+  document.getElementById("view-answers").onclick = function () {
+    document.body.classList.add("review-mode");
+    document.getElementById("results-summary").classList.add("hidden");
+    document.getElementById("answer-review").classList.remove("hidden");
+
+    const reviewContent = document.getElementById("review-content");
+    reviewContent.innerHTML = "";
+
+    userAnswers.forEach((entry, index) => {
+      const div = document.createElement("div");
+      div.className = "result-item";
+      div.style.marginBottom = "20px";
+      div.innerHTML = `
+        <img src="${entry.image}" loading="lazy" decoding="async"
+       alt="Bird Image" style="width:100%; border-radius:8px;" />
+        <p><strong>Question ${index + 1}:</strong> ${entry.question}</p>
+        <p><strong>Your Answer:</strong> ${entry.selected}</p>
+        <p><strong>Correct Answer:</strong> ${entry.correct}</p>
+        ${entry.info ? `<button class="info-button" onclick="window.open('${entry.info}','_blank','noopener,noreferrer')">More Information</button>` : ""}
+        <hr/>
+      `;
+      reviewContent.appendChild(div);
+    });
+
+    // --- Actions row: Play Again + Home (identical look, one row) ---
+    let actions = document.getElementById("review-actions");
+    if (!actions) {
+      actions = document.createElement("div");
+      actions.id = "review-actions";
+      document.getElementById("answer-review").appendChild(actions);
+    }
+
+    let playAgain = document.getElementById("play-again-btn") || document.querySelector('#answer-review button[onclick*="location.reload"]');
+    if (!playAgain) {
+      playAgain = document.createElement("button");
+      playAgain.id = "play-again-btn";
+      playAgain.textContent = "🔄 Play Again";
+      playAgain.onclick = () => location.reload();
+    }
+
+    let homeBtn = document.getElementById("home-review-btn");
+    if (!homeBtn) {
+      homeBtn = document.createElement("a");
+      homeBtn.id = "home-review-btn";
+      homeBtn.href = "index.html";
+      homeBtn.textContent = "🏠 Home";
+    }
+
+    const imp = (el, prop, val) => el.style.setProperty(prop, val, "important");
+
+    // Flex row, no wrap
+    imp(actions, "display", "flex");
+    imp(actions, "flex-wrap", "nowrap");
+    imp(actions, "justify-content", "center");
+    imp(actions, "align-items", "center");
+    imp(actions, "gap", "12px");
+    actions.style.margin = "16px 0 8px";
+
+    // Unified button style
+    const styleActionBtn = (el) => {
+      imp(el, "display", "inline-flex");
+      imp(el, "white-space", "nowrap");
+      imp(el, "flex", "0 0 auto");
+      el.style.alignItems = "center";
+      el.style.justifyContent = "center";
+      el.style.padding = "8px 14px";
+      el.style.borderRadius = "6px";
+      el.style.fontSize = "0.95rem";
+      el.style.fontWeight = "bold";
+      el.style.textDecoration = "none";
+      el.style.backgroundColor = "#4e9af1";
+      el.style.color = "#fff";
+      el.style.border = "0";
+      el.style.cursor = "pointer";
+      el.style.lineHeight = "1";
+      el.style.boxShadow = "0 2px 4px rgba(0,0,0,0.2)";
+    };
+    styleActionBtn(playAgain);
+    styleActionBtn(homeBtn);
+
+    const hoverOn  = (e) => e.currentTarget.style.backgroundColor = "#357ddf";
+    const hoverOff = (e) => e.currentTarget.style.backgroundColor = "#4e9af1";
+    [playAgain, homeBtn].forEach(el => {
+      el.addEventListener("mouseenter", hoverOn);
+      el.addEventListener("mouseleave", hoverOff);
+      el.addEventListener("focus", hoverOn);
+      el.addEventListener("blur", hoverOff);
+    });
+
+    actions.appendChild(playAgain);
+    actions.appendChild(homeBtn);
+
+    if (window.innerWidth < 360) {
+      [playAgain, homeBtn].forEach(el => {
+        el.style.padding = "6px 10px";
+        el.style.fontSize = "0.85rem";
+      });
+    }
+  };
+
+  // ===== Init =====
+  document.addEventListener("DOMContentLoaded", async () => {
+  const filename = await resolveQuestionsFile();
+  const DEFAULT_FILE = "questions.json";
+  loadQuestions(filename);
+});
+
+</script>
+
+</body>
+</html>

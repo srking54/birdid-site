@@ -1,0 +1,707 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+h1, h2, h3 {
+  font-family: 'Pacifico', cursive;
+  color: #00796b; /* keep your original shade */
+  text-align: center;
+  font-size: x-large;
+}
+
+section {
+  background-image: url('images/feathers.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 60px;
+}
+
+.home-box:hover {
+  background-color: #45a049;
+}
+
+/* === Base Layout & Global Styles === */
+
+#intro-text {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #00695c;
+}
+
+#welcome-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+  color: #00695c;
+}
+
+#welcome-section h2 {
+  text-align: center;
+  color: #00796b;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#welcome-section a {
+  color: #00695c;
+  text-decoration: underline;
+}
+
+#start-section {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+#quiz-section {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+#start-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 30vh;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(253,246,227,0.7), rgba(230,230,250,0.7));
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 85%;
+  max-width: 400px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  background-image: url('images/world_map.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+a {
+  color: #0288d1;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* === Header & Navigation === */
+header {
+  display: flex;
+  justify-content: center;      /* centers items horizontally */
+  align-items: center;          /* centers items vertically */
+  flex-wrap: wrap;              /* allows title and nav to stack if needed */
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  text-align: center; /* Center contents inside header */
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 12px auto;
+}
+
+.btn .a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #005fa3;
+}
+
+.instructions {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid #ceda46;
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.instructions h2 {
+  margin-top: 0;
+  color: #00796b;
+}
+
+.instructions p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #00695c;
+}
+
+.hamburger {
+  background-color: #00796b;
+  color: white;
+  font-size: 28px;
+  padding: 0.3em;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.hamburger:hover {
+  color: #ffd700;
+}
+
+.menu {
+  z-index: 999;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: #b3be6a;
+  padding: 1em;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  gap: 0.5em;
+  min-width: 150px;
+}
+
+.menu.show {
+  display: flex;
+}
+.menu li a {
+  color: rgb(41, 159, 102);
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  background: #f0f0f0;
+  color: #0077cc;
+  font-size: 1rem; /* or try 16px, 1.2em, etc. */
+}
+
+nav.menu li {
+  list-style-type: none;
+}
+
+/* === Main Layout & Sections === */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+}
+
+section {
+  background-color: rgba(16, 184, 50, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2em;
+  margin: 1em;
+  max-width: 600px;
+  width: 90%;
+}
+
+/* === Quiz Section === */
+#quiz-section {
+  max-width: 100%;
+  padding: 1em;
+}
+
+#quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#timer-text {
+  color: black;
+  font-weight: normal;
+}
+
+.timer-text {
+  font-weight: bold;
+  color: #ff5555;
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#progressBar {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #eee;
+  overflow: hidden;
+}
+#progressBar::-webkit-progress-value,
+#progressBar::-moz-progress-bar {
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.progress-bar {
+  background-color: #ddd;
+  height: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.progress-fill {
+  background-color: #5da7f9;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* === Buttons & Interactivity === */
+button {
+  padding: 0.7em 1.2em;
+  margin: 0.5em;
+  border-radius: 8px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  font-size: 1rem;
+  width: auto;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #005fa3;
+}
+
+/* === Images === */
+#bird-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 1em auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* === Feedback Messages === */
+.feedback {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1em;
+  padding: 0.5em;
+  position: centered;
+  border-radius: 6px;
+}
+.correct {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+.incorrect {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two columns of equal width */
+  gap: 10px; /* space between buttons */
+}
+
+.choices button {
+  width: 100%; /* fill the grid cell */
+  padding: 12px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #85c09a;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.choices button:hover { background-color: #d1d1d1; }
+.choices button.correct { background-color: #a3e3aa; }
+.choices button.incorrect { background-color: #f7b5b5; }
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  section {
+    padding: 1em;
+  }
+
+  #quiz-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #progress-container {
+    max-width: 100%;
+  }
+
+  #progressFill {
+  transition: width 0.9s linear;
+  }
+
+}
+
+/* === Desktop Navigation === */
+/* Show hamburger only on small screens */
+@media (max-width: 768px) {}
+    .hamburger {
+    display: block;
+}
+
+@media screen and (min-width: 1024px) {
+  nav.menu a {
+    font-size: 0.8rem; /* or any smaller size you prefer */
+  }
+}
+
+@media (min-width: 769px) {
+  .menu {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    background: none;
+    padding: 0;
+    gap: 1em;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+}
+
+/* On wider screens, menu is always visible */
+@media (min-width: 769px) {
+  .menu {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    background: none;
+    padding: 0;
+    gap: 1em;
+  }
+
+  .hamburger {
+    display: none;
+  
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+button:hover {
+  transform: scale(1.05);
+   }
+}
+/* === Base Layout & Global Styles === */
+
+#intro-text {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+#quiz-section {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#results-summary {
+  text-align: center;
+  border: 2px solid black; /* Example border */
+  padding: 20px; /* Example padding */
+  margin: 20px auto; /* Example margin and centering the block element */
+  text-align: center;
+}
+
+#results-summary p {
+  font-size: 1.2em; /* Example font size for general paragraphs */
+  text-align: center;
+}
+
+#final-message {
+  font-size: 1.5em; /* Example font size for the final message */
+  font-weight: bold; /* Example bolding */
+  text-align: center;
+}
+
+a {
+  color: #0288d1;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+#result {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center
+}
+
+/* === Main Layout & Sections === */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+}
+
+
+/* === Quiz Section === */
+#quiz-section {
+  max-width: 100%;
+  padding: 1em;
+}
+
+#quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#timer-text {
+  color: black;
+  font-weight: normal;
+}
+
+.timer-text {
+  font-weight: bold;
+  color: #ff5555;
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#progressBar {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #eee;
+  overflow: hidden;
+}
+#progressBar::-webkit-progress-value,
+#progressBar::-moz-progress-bar {
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.progress-bar {
+  background-color: #ddd;
+  height: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.progress-fill {
+  background-color: #5da7f9;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.correct {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+.incorrect {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+/* === End of Quiz === */
+#end-screen {
+  text-align: center;
+  padding: 2em;
+}
+#end-screen h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  color: #333;
+  }
+}
+
+#restart-btn {
+  background-color: #4caf50;
+  color: white;
+
+/* === Responsive Design === */
+
+  #quiz-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #progress-container {
+    max-width: 100%;
+  }
+
+  #progressFill {
+  transition: width 0.9s linear;
+}
+
+ /* === Desktop Navigation === */
+
+  .hamburger {
+    display: none;
+  }
+
+.result-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 8px solid;
+  background-color: #f9f9f9;
+}
+.result-item.correct {
+  border-color: #4CAF50;
+  background-color: #e7fce7;
+}
+.result-item.incorrect {
+  border-color: #f44336;
+  background-color: #ffecec;
+}
+.result-item a {
+  display: inline-block;
+  margin-top: 0.5em;
+  color: #0077cc;
+}
+
+.final-score {
+  text-align: center;
+  background-color: #f0f4fc;
+  border: 2px solid #a2bcd6;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 30px auto;
+  max-width: 400px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0077cc;
+  margin-bottom: 1em;
+}
+
+#restart-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4e9af1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#restart-btn:hover {
+  background-color: #357ddf;
+}
+
+
+.info-button {
+  background-color: #0077cc;       /* match main quiz button blue */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-top: 8px;
+}
+
+.info-button:hover {
+  background-color: #005fa3;       /* darker hover */
+  transform: scale(1.05);          /* subtle grow on hover */
+}
+
+.info-button:hover {
+  color: #005fa3;
+}
+
+
+
+@media (max-width: 600px) {
+  #go-home {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@keyframes popUp {
+  0% { transform: scale(0.8); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+#go-home {
+  display: inline-block;
+  padding: 6px 10px;      /* smaller height/width */
+  font-size: 0.85rem;     /* slightly smaller text */
+  background-color: #0078d4;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+#go-home:hover {
+  background-color: #005ea2;
+}
+
+}
+
+#go-home:hover {
+  background-color: #45a049;
+}

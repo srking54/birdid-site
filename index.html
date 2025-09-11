@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bird ID Lite Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Bird-ID Lite</h1>
+    <button class="hamburger" id="menu-toggle">☰</button>
+    
+<nav class="menu" id="menu">
+  <ul>
+  <li><a href="index.html">Home</a>
+  <a href="quiz.html">Leisure</a>
+  <!-- 🔥 Timed Quiz temporarily removed -->
+  <a href="resources.html">Resources</a>
+  <ul>
+</nav>
+
+  </header>
+  
+  <section class="instructions">
+  <h2>Welcome to Bird ID Lite</h2>
+  <p>Welcome to the Bird Identification Quiz, created for Pi Network bird enthusiasts and newcomers alike! Inspired by trusted sources like <a href="https://ebird.org/home">Ebird </a> and <a href="https://https://www.audubon.org//home">Audubon </a> and other conservation leaders. This quiz invites you to discover the amazing diversity of birds around us.
+As you test your skills and learn new facts, you will also uncover the urgent reality of declining bird populations due to habitat loss and climate change. Want to make a difference? Subscribe to <a href="https://ebird.org/home">Ebird </a> and help count birds in your area, or join a local <a href="https://https://www.audubon.org//home">Audubon </a> group to connect with fellow birders and support conservation efforts.
+Join the movement to understand, appreciate, and protect our feathered friends—one question at a time.
+Happy birding!
+ 🐦🪶
+</p>
+</section>
+
+<section id="welcome-section">
+  <h2>How to Play</h2>
+  <p>
+    Start the quiz then identify as many birds as you can. Click on a bird name to select your answer. At the end of the quiz check your answers and learn a little more about the Birds. Enjoy learning and discovering new species!
+  </p>
+</section>
+
+  <!-- 🐦 Start Page -->
+<section id="start-section">
+  <h1>This Week: "Birds in General"</h1>
+  <h2> Start The Quiz</h2>
+    <button onclick="window.location.href='quiz.html?mode=leisure'">Leisure Quiz</button>
+      
+</section>
+
+<!-- 🧠 Quiz Page -->
+<section id="quiz-section" style="display: none;">
+  <div id="quiz-header" style="display: none;">
+    <div id="timer-text">Time left: 30s</div>
+    <div id="progressBar"></div>
+  </div>
+
+  <div id="result-box" class="hidden">
+    <p id="feedback"></p>
+    <a id="info-link" href="#" target="_blank">More Information</a><br>
+    <button id="next-btn" style="display: none;">Next</button>
+  </div>
+  <div id="final-result" style="display: none;"></div>
+    <button id="start-quiz">Start Quiz</button>
+    <button id="info-button" style="display: none;">More Info</button>
+</section>
+
+<!-- 🌟 Results Page -->
+<section id="results-section" style="display: none;">
+  <div id="results"></div>
+  <div id="result" style="display: none;"></div>
+</section>
+
+<!-- 📜 Scripts -->
+<script type="module" src="script.js"></script>
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+
+  // Toggle menu visibility when hamburger is clicked
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+      menu.classList.remove('show');
+    }
+  });
+</script>
+
+</body>
+
