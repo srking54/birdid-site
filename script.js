@@ -393,6 +393,14 @@ document.getElementById("menu-toggle").onclick = () => {
 };
   const reviewContainer = document.getElementById("review-content");
   reviewContainer.innerHTML = "";
+// ... all your helper functions and async function initQuiz() { ... } above
+
+// Run only on the quiz page (element exists there)
+if (document.getElementById('quiz-image')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    initQuiz().catch(console.error);
+  });
+}
 
   userAnswers.forEach((entry, index) => {
     reviewContainer.innerHTML += `
