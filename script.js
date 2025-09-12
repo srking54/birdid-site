@@ -4,7 +4,7 @@ const startTimedButton = document.getElementById("start-timed-button");
 const nextButton = document.getElementById("next-btn");
 const questionEl = document.getElementById("question");
 const choicesEl = document.getElementById("choices");
-const birdImage = document.getElementById("bird-img");
+const birdImage = document.getElementById("quiz-image");
 const feedbackEl = document.getElementById("feedback");
 const progressBar = document.getElementById("progressBar");
 const timerText = document.getElementById("timer-text");
@@ -59,7 +59,34 @@ async function loadConfig(file = 'config.json') {
   return response.json();
 }
 
+function resolveImageUrl(imgPath) {
+  if (!imgPath) return null;
+  // Full URL already?
+  if (/^https?:\/\//i.test(imgPath)) return imgPath;
+  // Already absolute from root?
+  if (imgPath.startsWith('/')) return imgPath;
 
+  // Strip legacy prefixes from your old Pi setup
+  let p = imgPath
+    .replace(/^backend\/static\/images\//, '')
+    .replace(/^static\/images\//, '')
+    .replace(/^images\//, '');
+
+  // Serve from /images on Cloudflare Pages
+  return `/images/${p}`;
+}
+
+function showQuestionImage(question) {
+  const url = resolveImageUrl(question?.image);
+  if (birdImage && url) {
+    birdImage.src = url;
+    birdImage.style.display = 'block';
+    birdImage.alt = question.title || 'Bird image';
+  } else if (birdImage) {
+    birdImage.removeAttribute('src');
+    birdImage.style.display = 'none';
+  }
+}
 
 // ======= Start Quiz =======
 // Detect if we're on the quiz page (has the main quiz image element)
@@ -137,7 +164,8 @@ function showQuestion() {
   console.log("Question:", question);
 
   if (question.image) {
-    imageEl.src = `/static/${question.image}`;
+    showQuestionImage(currentQuestion);
+
     birdImage.style.display = "block";
   } else {
     birdImage.style.display = "none";
