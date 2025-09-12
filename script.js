@@ -24,16 +24,42 @@ let isTimedMode = false;
 let timerInterval = null;
 
 // ======= Load Questions =======
-async function loadQuestions() {
+async function loadQuestions(filename = 'questions.json') {
+  // sanitize + ensure .json
+  let safe = (filename || 'questions.json').trim();
+  if (!safe.endsWith('.json')) safe += '.json';
+  safe = safe.replace(/[^a-zA-Z0-9._/-]/g, ''); // keep simple safe chars
+
+  const url = `/${safe}?v=${Date.now()}`; // cache-bust; _headers already sets no-store
+
   try {
-    const res = await fetch(`/api/questions?file=${encodeURIComponent(filename)}&v=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
+
+    // Optional: verify content-type
+    const ct = response.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) {
+      const sample = (await response.text()).slice(0, 120);
+      throw new Error(`Expected JSON, got: ${sample}`);
+    }
+
     return await response.json();
   } catch (error) {
-    console.error("Failed to load questions:", error);
+    console.error('Failed to load questions:', error);
     return null;
   }
 }
+async function loadConfig(file = 'config.json') {
+  let safe = (file || 'config.json').trim();
+  if (!safe.endsWith('.json')) safe += '.json';
+  safe = safe.replace(/[^a-zA-Z0-9._/-]/g, '');
+
+  const response = await fetch(`/${safe}?v=${Date.now()}`, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+
 
 // ======= Start Quiz =======
 async function startQuiz(timed = false) {
