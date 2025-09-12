@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bird Quiz</title>
   <link rel="stylesheet" href="style.css" />
+  <img id="quiz-image" alt="Bird image" />
 
   <style>
     body {
@@ -334,7 +335,7 @@ async function resolveQuestionsFile() {
   if (regionParam) return `questions_${regionParam.toLowerCase()}.json`;
 
   // Fallback to config.json from the server
-  const cfg = await fetch(`/api/config?v=${Date.now()}`, { cache: 'no-store' })
+  const cfg = await fetch(`/config?v=${Date.now()}`, { cache: 'no-store' })
                       .then(r => r.json());
   return cfg.question_file || "questions_africa.json";
 }
@@ -364,7 +365,7 @@ async function resolveQuestionsFile() {
 async function loadQuestions(filename = "questions_africa.json") {
   try {
     const res = await fetch(
-      `/api/questions?file=${encodeURIComponent(filename)}&v=${Date.now()}`,
+      `/questions?file=${encodeURIComponent(filename)}&v=${Date.now()}`,
       { cache: 'no-store' }
     );
     if (!res.ok) throw new Error("Failed to load questions");
