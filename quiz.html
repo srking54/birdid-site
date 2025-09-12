@@ -337,7 +337,7 @@ async function resolveQuestionsFile() {
   // Fallback to config.json from the server
   const cfg = await fetch(`/config?v=${Date.now()}`, { cache: 'no-store' })
                       .then(r => r.json());
-  return cfg.question_file || "questions_africa.json";
+  return cfg.question_file || "questions.json";
 }
 
   // ===== Helpers =====
@@ -362,7 +362,7 @@ async function resolveQuestionsFile() {
 
   // ===== Data load =====
   
-async function loadQuestions(filename = "questions_africa.json") {
+async function loadQuestions(filename = "questions.json") {
   try {
     const res = await fetch(
       `/questions?file=${encodeURIComponent(filename)}&v=${Date.now()}`,
