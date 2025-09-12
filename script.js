@@ -62,6 +62,15 @@ async function loadConfig(file = 'config.json') {
 
 
 // ======= Start Quiz =======
+// Detect if we're on the quiz page (has the main quiz image element)
+const quizImgEl = document.getElementById('quiz-image'); // add id="quiz-image" on <img> in quiz.html if missing
+const onQuizPage = !!quizImgEl;
+
+// Only run quiz logic on the quiz page
+if (onQuizPage) {
+  // ... your quiz setup and event listeners go here
+}
+
 async function startQuiz(timed = false) {
   isTimedMode = timed;
   console.log("▶️ startQuiz triggered");
@@ -101,7 +110,10 @@ function normalizePath(p) {
 }
 
 // when setting the img src:
-img.src = normalizePath(question.image);
+if (quizImgEl && currentQuestion?.image) {
+  quizImgEl.src = currentQuestion.image;
+  quizImgEl.alt = currentQuestion.title || 'Bird image';
+}
 
 window.startQuiz = startQuiz; // ⬅️ Expose for HTML access
 
