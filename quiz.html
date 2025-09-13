@@ -6,6 +6,8 @@
   <title>Bird Quiz</title>
   <link rel="stylesheet" href="style.css" />
   <img id="quiz-image" alt="Bird image" />
+   <!-- in <head> of quiz.html -->
+  <script src="/script.js" defer></script>
 
   <style>
     body {
@@ -595,6 +597,7 @@ async function loadQuestions(filename = "questions.json") {
   const DEFAULT_FILE = "questions.json";
   loadQuestions(filename);
 });
+
 
 </script>
 
