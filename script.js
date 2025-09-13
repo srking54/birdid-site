@@ -22,7 +22,7 @@ const progressFill      = document.getElementById("progressFill");
 
 const homeBtn           = document.getElementById("go-home");
 
-// Optional (used only if present)
+// Optional
 const resultsSummaryEl  = document.getElementById("results-summary");
 const finalScoreEl      = document.getElementById("final-score");
 const finalMessageEl    = document.getElementById("final-message");
@@ -32,7 +32,7 @@ const reviewContentEl   = document.getElementById("review-content");
 const menuToggleBtn     = document.getElementById("menu-toggle");
 const menuEl            = document.getElementById("menu");
 
-// ---------- State ----------
+// ---------- State (scoped) ----------
 let appConfig = {};
 let questions = [];
 let userAnswers = [];
@@ -41,20 +41,12 @@ let score = 0;
 let isTimedMode = false;
 let timerInterval = null;
 
-// ---------- Data loaders (Cloudflare Pages: static files at repo root) ----------
-async function loadConfig(file = "config.json") {
-  const url = `/${file}?v=${Date.now()}`;
+// ---------- Data loaders ----------
+async function loadJsonAt(path) {
+  const url = `/${path.replace(/^\/+/, "")}?v=${Date.now()}`;
+  console.log("[fetch]", url);
   const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Config HTTP ${res.status} for ${url}`);
-  return res.json();
-}
-
-async function loadQuestions(file = "questions.json") {
-  const url = `/${file}?v=${Date.now()}`;
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Questions HTTP ${res.status} for ${url}`);
-
-  // sanity: ensure JSON, not an HTML 404
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   const ct = (res.headers.get("content-type") || "").toLowerCase();
   if (!ct.includes("application/json")) {
     const sample = (await res.text()).slice(0, 120);
@@ -62,13 +54,15 @@ async function loadQuestions(file = "questions.json") {
   }
   return res.json();
 }
+const loadConfig    = (file = "config.json")    => loadJsonAt(file);
+const loadQuestions = (file = "questions.json") => loadJsonAt(file);
 
-// ---------- Image path resolver ----------
+// ---------- Images ----------
 function resolveImageUrl(p) {
   if (!p) return null;
-  if (/^https?:\/\//i.test(p)) return p;          // already absolute URL
-  if (p.startsWith("/")) return p;                // site-root
-  // strip legacy prefixes
+  if (/^https?:\/\//i.test(p)) return p;   // absolute
+  if (p.startsWith("/")) return p;         // site-root
+
   const name = p
     .replace(/^backend\/static\/images\//, "")
     .replace(/^static\/images\//, "")
@@ -92,100 +86,70 @@ function showQuestionImage(q) {
 
 // ---------- Quiz flow ----------
 async function initQuiz() {
-  // Only run on pages that actually have quiz UI
-  if (!questionEl || !choicesEl) return;
+  // Only run on page with quiz UI
+  if (!quizSection || !questionEl || !choicesEl) return;
 
   try {
-    // Load config first (decide which questions file / images base)
     appConfig = await loadConfig().catch(() => ({}));
     const questionsFile = appConfig.questionsFile || "questions.json";
     appConfig.imagesBase = appConfig.imagesBase || "/images/";
 
-    // URL mode override: ?mode=timed or ?mode=leisure
+    // Mode override via URL ?mode=timed|leisure
     const mode = new URLSearchParams(window.location.search).get("mode");
-    if (mode === "timed") isTimedMode = true;
+    if (mode === "timed")   isTimedMode = true;
     if (mode === "leisure") isTimedMode = false;
 
-    // If there are explicit start buttons, we wait for user click.
-    // Otherwise, auto-start when no start UI exists.
-    const hasStartUI = !!startSection;
-    if (!hasStartUI) {
-      await startQuiz(isTimedMode, questionsFile);
-    } else {
-      // Wire start buttons
-      if (startButton) {
-        startButton.addEventListener("click", () => startQuiz(false, questionsFile));
-      }
-      if (startTimedButton) {
-        startTimedButton.addEventListener("click", () => startQuiz(true, questionsFile));
-      }
-    }
+    // Wire buttons
+    startButton?.addEventListener("click", () => startQuiz(false, questionsFile));
+    startTimedButton?.addEventListener("click", () => startQuiz(true, questionsFile));
+    nextButton?.addEventListener("click", nextQuestion);
+    homeBtn?.addEventListener("click", () => (window.location.href = "index.html"));
 
-    // Next / Home
-    if (nextButton) {
-      nextButton.addEventListener("click", () => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          showQuestion();
-        } else {
-          clearInterval(timerInterval);
-          showResults();
-        }
-      });
-    }
-
-    if (homeBtn) {
-      homeBtn.addEventListener("click", () => {
-        window.location.href = "index.html";
-      });
-    }
-
-    // Optional toggles
     if (menuToggleBtn && menuEl) {
       menuToggleBtn.onclick = () => menuEl.classList.toggle("show");
     }
-
-    if (viewAnswersBtn && resultsSummaryEl && answerReviewEl && reviewContentEl) {
+    if (viewAnswersBtn) {
       viewAnswersBtn.addEventListener("click", () => {
-        resultsSummaryEl.classList.add("hidden");
-        answerReviewEl.classList.remove("hidden");
+        resultsSummaryEl?.classList.add("hidden");
+        answerReviewEl?.classList.remove("hidden");
         renderAnswerReview();
       });
     }
 
+    // If there is no explicit start UI, auto-start
+    if (!startSection) {
+      await startQuiz(isTimedMode, questionsFile);
+    }
   } catch (err) {
     console.error("initQuiz failed:", err);
-    if (questionEl) questionEl.textContent = "⚠️ Failed to initialize quiz.";
+    questionEl.textContent = "⚠️ Failed to initialize quiz.";
   }
 }
 
 async function startQuiz(timed, questionsFile) {
   isTimedMode = !!timed;
 
-  // Reset state/UI
+  // Reset
   currentQuestionIndex = 0;
   score = 0;
   userAnswers = [];
   clearInterval(timerInterval);
+  feedbackEl && (feedbackEl.innerHTML = "");
+  birdImage && (birdImage.style.display = "none");
 
-  if (feedbackEl) feedbackEl.innerHTML = "";
-  if (birdImage) birdImage.style.display = "none";
-
-  if (startSection)  startSection.style.display = "none";
-  if (resultsSection) resultsSection.style.display = "none";
-  if (quizSection)   quizSection.style.display = "block";
-  if (quizHeader)    quizHeader.style.display = isTimedMode ? "flex" : "none";
+  startSection  && (startSection.style.display = "none");
+  resultsSection&& (resultsSection.style.display = "none");
+  quizSection   && (quizSection.style.display = "block");
+  quizHeader    && (quizHeader.style.display = isTimedMode ? "flex" : "none");
 
   try {
     const data = await loadQuestions(questionsFile || "questions.json");
-    if (!Array.isArray(data) || data.length === 0) {
-      throw new Error("No questions loaded");
-    }
+    if (!Array.isArray(data) || data.length === 0) throw new Error("No questions loaded");
     questions = data;
     showQuestion();
   } catch (e) {
-    console.error(e);
-    if (questionEl) questionEl.textContent = "⚠️ Failed to load quiz questions.";
+    console.error("startQuiz error:", e);
+    questionEl.textContent = "⚠️ Failed to load quiz questions.";
   }
 }
 
@@ -195,27 +159,20 @@ function showQuestion() {
   const q = questions[currentQuestionIndex];
   if (!q) return;
 
-  if (questionEl) {
-    questionEl.textContent = q.question || "Question";
-  }
-
-  // Image
+  questionEl.textContent = q.question || "Question";
   showQuestionImage(q);
 
-  // Choices
-  if (choicesEl) {
-    choicesEl.innerHTML = "";
-    (q.choices || []).forEach(choice => {
-      const btn = document.createElement("button");
-      btn.className = "choice-btn";
-      btn.textContent = choice;
-      btn.onclick = () => handleAnswer(choice, q.answer, q.info);
-      choicesEl.appendChild(btn);
-    });
-  }
+  choicesEl.innerHTML = "";
+  (q.choices || []).forEach(choice => {
+    const btn = document.createElement("button");
+    btn.className = "choice-btn";
+    btn.textContent = choice;
+    btn.onclick = () => handleAnswer(choice, q.answer, q.info);
+    choicesEl.appendChild(btn);
+  });
 
-  if (feedbackEl) feedbackEl.innerHTML = "";
-  if (nextButton) nextButton.style.display = "none";
+  feedbackEl.innerHTML = "";
+  nextButton.style.display = "none";
 
   updateProgressBar();
   if (isTimedMode) startTimer(30);
@@ -223,65 +180,62 @@ function showQuestion() {
 
 function handleAnswer(selected, correct, info) {
   clearInterval(timerInterval);
-
   const isCorrect = selected === correct;
   if (isCorrect) score++;
 
-  if (feedbackEl) {
-    feedbackEl.innerHTML = isCorrect
-      ? `<p>✅ Correct!</p>${info ? `<p>${info}</p>` : ""}`
-      : `<p>❌ Incorrect. The correct answer was <strong>${correct}</strong>.</p>${info ? `<p>${info}</p>` : ""}`;
-  }
+  feedbackEl.innerHTML = isCorrect
+    ? `<p>✅ Correct!</p>${info ? `<p>${info}</p>` : ""}`
+    : `<p>❌ Incorrect. The correct answer was <strong>${correct}</strong>.</p>${info ? `<p>${info}</p>` : ""}`;
 
   const q = questions[currentQuestionIndex];
-  const entry = {
-    question: q.question,
-    selected,
-    correct,
-    isCorrect,
-    info: info || ""
-  };
-
+  const entry = { question: q.question, selected, correct, isCorrect, info: info || "" };
   const idx = userAnswers.findIndex(x => x.question === q.question);
   if (idx >= 0) userAnswers[idx] = entry; else userAnswers.push(entry);
 
-  if (nextButton) nextButton.style.display = "block";
+  nextButton.style.display = "block";
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    clearInterval(timerInterval);
+    showResults();
+  }
 }
 
 function showResults() {
-  if (quizSection) quizSection.style.display = "none";
-  if (quizHeader)  quizHeader.style.display = "none";
-  if (resultsSection) resultsSection.style.display = "block";
+  quizSection.style.display = "none";
+  quizHeader.style.display  = "none";
+  resultsSection.style.display = "block";
 
   const correctCount = userAnswers.filter(x => x.isCorrect).length;
   const total = questions.length;
   const percent = total ? Math.round((correctCount / total) * 100) : 0;
 
-  if (finalScoreEl) finalScoreEl.textContent = `${correctCount} / ${total} (${percent}%)`;
-
-  let message;
-  if (percent === 100) message = "You're a master birder! 🦅🏆";
-  else if (percent >= 80) message = "Fantastic job! You really know your birds 🐦👏";
-  else if (percent >= 50) message = "Nice work! There’s a birder in you yet 🌿";
-  else message = "Keep exploring — birding is a journey 🐣";
-  if (finalMessageEl) finalMessageEl.textContent = message;
-
-  // If you have a compact summary box:
-  if (resultsSummaryEl) resultsSummaryEl.classList.remove("hidden");
+  finalScoreEl && (finalScoreEl.textContent = `${correctCount} / ${total} (${percent}%)`);
+  let message =
+    percent === 100 ? "You're a master birder! 🦅🏆" :
+    percent >= 80   ? "Fantastic job! You really know your birds 🐦👏" :
+    percent >= 50   ? "Nice work! There’s a birder in you yet 🌿" :
+                      "Keep exploring — birding is a journey 🐣";
+  finalMessageEl && (finalMessageEl.textContent = message);
+  resultsSummaryEl && resultsSummaryEl.classList.remove("hidden");
 }
 
 function renderAnswerReview() {
   if (!reviewContentEl) return;
   reviewContentEl.innerHTML = "";
-  userAnswers.forEach((entry, i) => {
+  userAnswers.forEach((e, i) => {
     const div = document.createElement("div");
-    div.className = `result-item ${entry.isCorrect ? "correct" : "incorrect"}`;
+    div.className = `result-item ${e.isCorrect ? "correct" : "incorrect"}`;
     div.innerHTML = `
       <h3>Question ${i + 1}</h3>
-      <p><strong>Question:</strong> ${entry.question}</p>
-      <p><strong>Your Answer:</strong> ${entry.selected || "(none)"}</p>
-      <p><strong>Correct Answer:</strong> ${entry.correct}</p>
-      ${entry.info ? `<a href="${entry.info}" target="_blank" rel="noopener">🔗 More Information</a>` : ""}
+      <p><strong>Question:</strong> ${e.question}</p>
+      <p><strong>Your Answer:</strong> ${e.selected || "(none)"}</p>
+      <p><strong>Correct Answer:</strong> ${e.correct}</p>
+      ${e.info ? `<a href="${e.info}" target="_blank" rel="noopener">🔗 More Information</a>` : ""}
     `;
     reviewContentEl.appendChild(div);
   });
@@ -289,8 +243,6 @@ function renderAnswerReview() {
 
 // ---------- Timer / Progress ----------
 function startTimer(duration = 30) {
-  if (!quizHeader || !timerText || !progressFill) return;
-
   quizHeader.style.display = "flex";
   let timeLeft = duration;
 
@@ -306,10 +258,8 @@ function startTimer(duration = 30) {
     progressFill.style.width = `${pct}%`;
 
     if (timeLeft === 10) timerText.style.color = "orange";
-    if (timeLeft <= 5) {
-      timerText.style.color = "red";
-      timerText.style.fontWeight = "bold";
-    }
+    if (timeLeft <= 5) { timerText.style.color = "red"; timerText.style.fontWeight = "bold"; }
+
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       const q = questions[currentQuestionIndex];
@@ -319,15 +269,14 @@ function startTimer(duration = 30) {
 }
 
 function updateProgressBar() {
-  if (!progressFill) return;
   const pct = questions.length ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0;
   progressFill.style.width = `${pct}%`;
 }
 
 // ---------- Boot ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // Only initialize quiz logic if the quiz UI exists on this page
-  if (document.getElementById("quiz-section") || document.getElementById("quiz-image")) {
+  // only init on pages that have quiz UI
+  if (quizSection || document.getElementById("quiz-image")) {
     initQuiz().catch(console.error);
   }
 });
