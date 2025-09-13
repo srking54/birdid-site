@@ -180,6 +180,7 @@ function showQuestion() {
 
 function handleAnswer(selected, correct, info) {
   clearInterval(timerInterval);
+
   const isCorrect = selected === correct;
   if (isCorrect) score++;
 
@@ -188,12 +189,23 @@ function handleAnswer(selected, correct, info) {
     : `<p>❌ Incorrect. The correct answer was <strong>${correct}</strong>.</p>${info ? `<p>${info}</p>` : ""}`;
 
   const q = questions[currentQuestionIndex];
-  const entry = { question: q.question, selected, correct, isCorrect, info: info || "" };
+
+  // 🔸 Save a resolved image URL for the review page
+  const entry = {
+    question: q.question,
+    image: resolveImageUrl(q.image) || "",  // <— add this
+    selected,
+    correct,
+    isCorrect,
+    info: info || ""
+  };
+
   const idx = userAnswers.findIndex(x => x.question === q.question);
   if (idx >= 0) userAnswers[idx] = entry; else userAnswers.push(entry);
 
   nextButton.style.display = "block";
 }
+
 
 function nextQuestion() {
   currentQuestionIndex++;
@@ -227,11 +239,13 @@ function showResults() {
 function renderAnswerReview() {
   if (!reviewContentEl) return;
   reviewContentEl.innerHTML = "";
+
   userAnswers.forEach((e, i) => {
     const div = document.createElement("div");
     div.className = `result-item ${e.isCorrect ? "correct" : "incorrect"}`;
     div.innerHTML = `
       <h3>Question ${i + 1}</h3>
+      ${e.image ? `<img src="${e.image}" alt="Bird image" class="question-image" />` : ""}
       <p><strong>Question:</strong> ${e.question}</p>
       <p><strong>Your Answer:</strong> ${e.selected || "(none)"}</p>
       <p><strong>Correct Answer:</strong> ${e.correct}</p>
