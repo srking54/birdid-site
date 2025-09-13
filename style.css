@@ -447,6 +447,16 @@ button:hover {
   text-align: center;
 }
 
+/* Results card for better contrast */
+#results-section {
+  max-width: 720px;
+  margin: 24px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 16px;
+}
+
 #final-message {
   font-size: 1.5em; /* Example font size for the final message */
   font-weight: bold; /* Example bolding */
