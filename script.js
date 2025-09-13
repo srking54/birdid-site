@@ -1,312 +1,296 @@
-// ======= DOM Elements =======
-const startButton = document.getElementById("start-button");
-const startTimedButton = document.getElementById("start-timed-button");
-const nextButton = document.getElementById("next-btn");
-const questionEl = document.getElementById("question");
-const choicesEl = document.getElementById("choices");
-const birdImage = document.getElementById("quiz-image");
-const feedbackEl = document.getElementById("feedback");
-const progressBar = document.getElementById("progressBar");
-const timerText = document.getElementById("timer-text");
-const startSection = document.getElementById("start-section");
-const quizSection = document.getElementById("quiz-section");
-const resultsSection = document.getElementById("results-section");
-const quizHeader = document.getElementById("quiz-header");
-const progressFill = document.getElementById("progressFill");
-const homeBtn = document.getElementById("go-home");
-const button = document.getElementById('info-button');
-// ======= Global Variables =======
-let userAnswers = [];
+// =============================
+// BirdID Quiz — script.js (clean)
+// =============================
+
+// ---------- DOM ----------
+const startButton       = document.getElementById("start-button");
+const startTimedButton  = document.getElementById("start-timed-button");
+const nextButton        = document.getElementById("next-btn");
+
+const questionEl        = document.getElementById("question");
+const choicesEl         = document.getElementById("choices");
+const birdImage         = document.getElementById("quiz-image");
+const feedbackEl        = document.getElementById("feedback");
+
+const startSection      = document.getElementById("start-section");
+const quizSection       = document.getElementById("quiz-section");
+const resultsSection    = document.getElementById("results-section");
+
+const quizHeader        = document.getElementById("quiz-header");
+const timerText         = document.getElementById("timer-text");
+const progressFill      = document.getElementById("progressFill");
+
+const homeBtn           = document.getElementById("go-home");
+
+// Optional (used only if present)
+const resultsSummaryEl  = document.getElementById("results-summary");
+const finalScoreEl      = document.getElementById("final-score");
+const finalMessageEl    = document.getElementById("final-message");
+const viewAnswersBtn    = document.getElementById("view-answers");
+const answerReviewEl    = document.getElementById("answer-review");
+const reviewContentEl   = document.getElementById("review-content");
+const menuToggleBtn     = document.getElementById("menu-toggle");
+const menuEl            = document.getElementById("menu");
+
+// ---------- State ----------
+let appConfig = {};
 let questions = [];
+let userAnswers = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let isTimedMode = false;
 let timerInterval = null;
 
-// ======= Load Questions =======
-async function loadQuestions(filename = 'questions.json') {
-  // sanitize + ensure .json
-  let safe = (filename || 'questions.json').trim();
-  if (!safe.endsWith('.json')) safe += '.json';
-  safe = safe.replace(/[^a-zA-Z0-9._/-]/g, ''); // keep simple safe chars
+// ---------- Data loaders (Cloudflare Pages: static files at repo root) ----------
+async function loadConfig(file = "config.json") {
+  const url = `/${file}?v=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Config HTTP ${res.status} for ${url}`);
+  return res.json();
+}
 
-  const url = `/${safe}?v=${Date.now()}`; // cache-bust; _headers already sets no-store
+async function loadQuestions(file = "questions.json") {
+  const url = `/${file}?v=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Questions HTTP ${res.status} for ${url}`);
+
+  // sanity: ensure JSON, not an HTML 404
+  const ct = (res.headers.get("content-type") || "").toLowerCase();
+  if (!ct.includes("application/json")) {
+    const sample = (await res.text()).slice(0, 120);
+    throw new Error(`Expected JSON from ${url}, got: ${sample}`);
+  }
+  return res.json();
+}
+
+// ---------- Image path resolver ----------
+function resolveImageUrl(p) {
+  if (!p) return null;
+  if (/^https?:\/\//i.test(p)) return p;          // already absolute URL
+  if (p.startsWith("/")) return p;                // site-root
+  // strip legacy prefixes
+  const name = p
+    .replace(/^backend\/static\/images\//, "")
+    .replace(/^static\/images\//, "")
+    .replace(/^images\//, "");
+  const base = (appConfig.imagesBase || "/images/").replace(/\/+$/, "");
+  return `${base}/${name}`;
+}
+
+function showQuestionImage(q) {
+  if (!birdImage) return;
+  const url = resolveImageUrl(q?.image);
+  if (url) {
+    birdImage.src = url;
+    birdImage.alt = q.title || "Bird image";
+    birdImage.style.display = "block";
+  } else {
+    birdImage.removeAttribute("src");
+    birdImage.style.display = "none";
+  }
+}
+
+// ---------- Quiz flow ----------
+async function initQuiz() {
+  // Only run on pages that actually have quiz UI
+  if (!questionEl || !choicesEl) return;
 
   try {
-    const response = await fetch(url, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
+    // Load config first (decide which questions file / images base)
+    appConfig = await loadConfig().catch(() => ({}));
+    const questionsFile = appConfig.questionsFile || "questions.json";
+    appConfig.imagesBase = appConfig.imagesBase || "/images/";
 
-    // Optional: verify content-type
-    const ct = response.headers.get('content-type') || '';
-    if (!ct.includes('application/json')) {
-      const sample = (await response.text()).slice(0, 120);
-      throw new Error(`Expected JSON, got: ${sample}`);
+    // URL mode override: ?mode=timed or ?mode=leisure
+    const mode = new URLSearchParams(window.location.search).get("mode");
+    if (mode === "timed") isTimedMode = true;
+    if (mode === "leisure") isTimedMode = false;
+
+    // If there are explicit start buttons, we wait for user click.
+    // Otherwise, auto-start when no start UI exists.
+    const hasStartUI = !!startSection;
+    if (!hasStartUI) {
+      await startQuiz(isTimedMode, questionsFile);
+    } else {
+      // Wire start buttons
+      if (startButton) {
+        startButton.addEventListener("click", () => startQuiz(false, questionsFile));
+      }
+      if (startTimedButton) {
+        startTimedButton.addEventListener("click", () => startQuiz(true, questionsFile));
+      }
     }
 
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to load questions:', error);
-    return null;
-  }
-}
-async function loadConfig(file = 'config.json') {
-  let safe = (file || 'config.json').trim();
-  if (!safe.endsWith('.json')) safe += '.json';
-  safe = safe.replace(/[^a-zA-Z0-9._/-]/g, '');
+    // Next / Home
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          clearInterval(timerInterval);
+          showResults();
+        }
+      });
+    }
 
-  const response = await fetch(`/${safe}?v=${Date.now()}`, { cache: 'no-store' });
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  return response.json();
-}
+    if (homeBtn) {
+      homeBtn.addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+    }
 
-function resolveImageUrl(imgPath) {
-  if (!imgPath) return null;
-  // Full URL already?
-  if (/^https?:\/\//i.test(imgPath)) return imgPath;
-  // Already absolute from root?
-  if (imgPath.startsWith('/')) return imgPath;
+    // Optional toggles
+    if (menuToggleBtn && menuEl) {
+      menuToggleBtn.onclick = () => menuEl.classList.toggle("show");
+    }
 
-  // Strip legacy prefixes from your old Pi setup
-  let p = imgPath
-    .replace(/^backend\/static\/images\//, '')
-    .replace(/^static\/images\//, '')
-    .replace(/^images\//, '');
+    if (viewAnswersBtn && resultsSummaryEl && answerReviewEl && reviewContentEl) {
+      viewAnswersBtn.addEventListener("click", () => {
+        resultsSummaryEl.classList.add("hidden");
+        answerReviewEl.classList.remove("hidden");
+        renderAnswerReview();
+      });
+    }
 
-  // Serve from /images on Cloudflare Pages
-  return `/images/${p}`;
-}
-
-function showQuestionImage(question) {
-  const url = resolveImageUrl(question?.image);
-  if (birdImage && url) {
-    birdImage.src = url;
-    birdImage.style.display = 'block';
-    birdImage.alt = question.title || 'Bird image';
-  } else if (birdImage) {
-    birdImage.removeAttribute('src');
-    birdImage.style.display = 'none';
+  } catch (err) {
+    console.error("initQuiz failed:", err);
+    if (questionEl) questionEl.textContent = "⚠️ Failed to initialize quiz.";
   }
 }
 
-// ======= Start Quiz =======
-// Detect if we're on the quiz page (has the main quiz image element)
-const quizImgEl = document.getElementById('quiz-image'); // add id="quiz-image" on <img> in quiz.html if missing
-const onQuizPage = !!quizImgEl;
+async function startQuiz(timed, questionsFile) {
+  isTimedMode = !!timed;
 
-// Only run quiz logic on the quiz page
-if (onQuizPage) {
-  // ... your quiz setup and event listeners go here
-}
-
-async function startQuiz(timed = false) {
-  isTimedMode = timed;
-  console.log("▶️ startQuiz triggered");
-
+  // Reset state/UI
   currentQuestionIndex = 0;
   score = 0;
-  birdImage.style.display = "none";
-  feedbackEl.innerHTML = "";
   userAnswers = [];
+  clearInterval(timerInterval);
 
-  startSection.style.display = "none";
-  resultsSection.style.display = "none";
-  quizSection.style.display = "block";
-  quizHeader.style.display = timed ? "flex" : "none";
+  if (feedbackEl) feedbackEl.innerHTML = "";
+  if (birdImage) birdImage.style.display = "none";
 
-  const data = await loadQuestions();
-  if (!data) {
-    questionEl.textContent = "⚠️ Failed to load quiz questions.";
-    return;
+  if (startSection)  startSection.style.display = "none";
+  if (resultsSection) resultsSection.style.display = "none";
+  if (quizSection)   quizSection.style.display = "block";
+  if (quizHeader)    quizHeader.style.display = isTimedMode ? "flex" : "none";
+
+  try {
+    const data = await loadQuestions(questionsFile || "questions.json");
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("No questions loaded");
+    }
+    questions = data;
+    showQuestion();
+  } catch (e) {
+    console.error(e);
+    if (questionEl) questionEl.textContent = "⚠️ Failed to load quiz questions.";
   }
-
-  questions = data;
-  showQuestion();
 }
 
-// Safely generate image path
-function getImagePath(filename) {
-  if (!filename) return "";
-  return filename.includes("/") ? filename : `images/${filename}`;
-}
-
-function normalizePath(p) {
-  if (!p) return p;
-  // If it starts with http(s), leave it; otherwise ensure a leading slash
-  if (p.startsWith('http://') || p.startsWith('https://')) return p;
-  return p.startsWith('/') ? p : '/' + p;
-}
-
-// when setting the img src:
-if (quizImgEl && currentQuestion?.image) {
-  quizImgEl.src = currentQuestion.image;
-  quizImgEl.alt = currentQuestion.title || 'Bird image';
-}
-
-window.startQuiz = startQuiz; // ⬅️ Expose for HTML access
-
-// 🧭 Auto-launch based on URL mode param
- const mode = new URLSearchParams(window.location.search).get("mode");
-
-if (mode === "timed") {
-  startQuiz(true);
-} else if (mode === "leisure") {
-  startQuiz(false);
-}
-
-// ======= Show Question =======
 function showQuestion() {
   clearInterval(timerInterval);
 
-  const question = questions[currentQuestionIndex];
-  questionEl.textContent = question.question;
+  const q = questions[currentQuestionIndex];
+  if (!q) return;
 
-  console.log("🎯 showQuestion called with index:", currentQuestionIndex);
-  console.log("Question:", question);
-
-  if (question.image) {
-    showQuestionImage(currentQuestion);
-
-    birdImage.style.display = "block";
-  } else {
-    birdImage.style.display = "none";
+  if (questionEl) {
+    questionEl.textContent = q.question || "Question";
   }
 
-  choicesEl.innerHTML = "";
-  question.choices.forEach(choice => {
-    const btn = document.createElement("button");
-    btn.className = "choice-btn";
-    btn.textContent = choice;
-    btn.onclick = () => handleAnswer(choice, question.answer, question.info);
-    choicesEl.appendChild(btn);
-  });
+  // Image
+  showQuestionImage(q);
 
-  feedbackEl.innerHTML = "";
-  nextButton.style.display = "none";
+  // Choices
+  if (choicesEl) {
+    choicesEl.innerHTML = "";
+    (q.choices || []).forEach(choice => {
+      const btn = document.createElement("button");
+      btn.className = "choice-btn";
+      btn.textContent = choice;
+      btn.onclick = () => handleAnswer(choice, q.answer, q.info);
+      choicesEl.appendChild(btn);
+    });
+  }
 
-  imageElement.src = getImagePath(questions[currentQuestionIndex].image);
+  if (feedbackEl) feedbackEl.innerHTML = "";
+  if (nextButton) nextButton.style.display = "none";
 
   updateProgressBar();
   if (isTimedMode) startTimer(30);
 }
 
-// ======= Handle Answer =======
 function handleAnswer(selected, correct, info) {
   clearInterval(timerInterval);
-  console.log("✅ handleAnswer triggered");
+
   const isCorrect = selected === correct;
-  
-  if (isCorrect) {
-  score++;
-  feedbackEl.innerHTML = `<p>✅ Correct!</p><p>${info}</p>`;
-} else {
-  feedbackEl.innerHTML = `<p>❌ Incorrect. The correct answer was <strong>${correct}</strong>.</p><p>${info}</p>`;
-}
+  if (isCorrect) score++;
 
-const newEntry = {
-  question: questions[currentQuestionIndex].question,
-  selected,
-  correct,
-  isCorrect,
-  info
-};
-
-const existingIndex = userAnswers.findIndex(
-  (q) => q.question === questions[currentQuestionIndex].question
-);
-
-if (existingIndex > -1) {
-  userAnswers[existingIndex] = newEntry;
-} else {
-  userAnswers.push(newEntry);
-}
-
-  nextButton.style.display = "block";
-}
-
-// ======= Next Question =======
-nextButton.onclick = () => {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    showQuestion();
-     
-  } else {
-    clearInterval(timerInterval); // Make sure timer stops
-    showResults(); // 🐦 Your custom results page function
+  if (feedbackEl) {
+    feedbackEl.innerHTML = isCorrect
+      ? `<p>✅ Correct!</p>${info ? `<p>${info}</p>` : ""}`
+      : `<p>❌ Incorrect. The correct answer was <strong>${correct}</strong>.</p>${info ? `<p>${info}</p>` : ""}`;
   }
-};
+
+  const q = questions[currentQuestionIndex];
+  const entry = {
+    question: q.question,
+    selected,
+    correct,
+    isCorrect,
+    info: info || ""
+  };
+
+  const idx = userAnswers.findIndex(x => x.question === q.question);
+  if (idx >= 0) userAnswers[idx] = entry; else userAnswers.push(entry);
+
+  if (nextButton) nextButton.style.display = "block";
+}
 
 function showResults() {
-  const correctCount = userAnswers.filter(q => q.isCorrect).length;
-  const totalQuestions = questions.length;
-  const percent = Math.round((correctCount / totalQuestions) * 100);
+  if (quizSection) quizSection.style.display = "none";
+  if (quizHeader)  quizHeader.style.display = "none";
+  if (resultsSection) resultsSection.style.display = "block";
 
-  document.getElementById("quiz-section").style.display = "none";
-  document.getElementById("results-summary").classList.remove("hidden");
-  document.getElementById("final-score").textContent = `${correctCount} / ${totalQuestions} (${percent}%)`;
+  const correctCount = userAnswers.filter(x => x.isCorrect).length;
+  const total = questions.length;
+  const percent = total ? Math.round((correctCount / total) * 100) : 0;
 
-  document.body.classList.add("results-page");
-  
+  if (finalScoreEl) finalScoreEl.textContent = `${correctCount} / ${total} (${percent}%)`;
+
   let message;
-  if (percent === 100) {
-    message = "You're a master birder! 🦅🏆";
-  } else if (percent >= 80) {
-    message = "Fantastic job! You really know your birds 🐦👏";
-  } else if (percent >= 50) {
-    message = "Nice work! There’s a birder in you yet 🌿";
-  } else {
-    message = "Keep exploring — birding is a journey 🐣";
-  }
+  if (percent === 100) message = "You're a master birder! 🦅🏆";
+  else if (percent >= 80) message = "Fantastic job! You really know your birds 🐦👏";
+  else if (percent >= 50) message = "Nice work! There’s a birder in you yet 🌿";
+  else message = "Keep exploring — birding is a journey 🐣";
+  if (finalMessageEl) finalMessageEl.textContent = message;
 
-  document.getElementById("final-message").textContent = message;
-}
-console.log("quizData:", quizData);
-console.log("quizData[0]:", quizData ? quizData[0] : "quizData is undefined");
-
-quizData[0].image
-
-const resultEl = document.getElementById("result");
-
-if (resultEl) {
-  resultEl.innerHTML = `
-    <div class="final-score">
-      <h2>You scored <strong>${score} / ${total}</strong> (${percent}%)</h2>
-      <p>${message}</p>
-      <button id="restart-btn" onclick="location.href='index.html'">🔄 Play Again</button>
-    </div>
-  `;
+  // If you have a compact summary box:
+  if (resultsSummaryEl) resultsSummaryEl.classList.remove("hidden");
 }
 
-console.log("✅ showResults triggered");
-
-// ======= End Quiz =======
-
-function endQuiz() {
-  quizSection.style.display = "none";
-  quizHeader.style.display = "none";
-  resultsSection.style.display = "block";
-
-  let correctCount = userAnswers.filter(q => q.isCorrect).length;
-
-  let resultsHTML = `<h2>🌟 You scored ${correctCount} / ${questions.length}</h2>`;
-
-  userAnswers.forEach((entry, index) => {
-    resultsHTML += `
-      <div class="result-item ${entry.isCorrect ? 'correct' : 'incorrect'}">
-        <h3>Question ${index + 1}</h3>
-        <p><strong>Question:</strong> ${entry.question}</p>
-        <p><strong>Your Answer:</strong> ${entry.selected}</p>
-        <p><strong>Correct Answer:</strong> ${entry.correct}</p>
-        ${entry.info ? `<a href="${entry.info}" target="_blank">🔗 More Information</a>` : ''}
-      </div>
+function renderAnswerReview() {
+  if (!reviewContentEl) return;
+  reviewContentEl.innerHTML = "";
+  userAnswers.forEach((entry, i) => {
+    const div = document.createElement("div");
+    div.className = `result-item ${entry.isCorrect ? "correct" : "incorrect"}`;
+    div.innerHTML = `
+      <h3>Question ${i + 1}</h3>
+      <p><strong>Question:</strong> ${entry.question}</p>
+      <p><strong>Your Answer:</strong> ${entry.selected || "(none)"}</p>
+      <p><strong>Correct Answer:</strong> ${entry.correct}</p>
+      ${entry.info ? `<a href="${entry.info}" target="_blank" rel="noopener">🔗 More Information</a>` : ""}
     `;
+    reviewContentEl.appendChild(div);
   });
-
-  resultsSection.innerHTML = resultsHTML;
 }
 
-// ======= Timer Countdown =======
-
+// ---------- Timer / Progress ----------
 function startTimer(duration = 30) {
+  if (!quizHeader || !timerText || !progressFill) return;
+
   quizHeader.style.display = "flex";
   let timeLeft = duration;
 
@@ -317,102 +301,33 @@ function startTimer(duration = 30) {
 
   timerInterval = setInterval(() => {
     timeLeft--;
-
     timerText.textContent = `Time left: ${timeLeft}s`;
-    const percent = (timeLeft / duration) * 100;
-    progressFill.style.width = `${percent}%`;
+    const pct = Math.max(0, (timeLeft / duration) * 100);
+    progressFill.style.width = `${pct}%`;
 
     if (timeLeft === 10) timerText.style.color = "orange";
     if (timeLeft <= 5) {
       timerText.style.color = "red";
       timerText.style.fontWeight = "bold";
     }
-
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-
-      // ⏰ Trigger answer logic here
-      handleAnswer("", questions[currentQuestionIndex].answer, questions[currentQuestionIndex].info);
+      const q = questions[currentQuestionIndex];
+      handleAnswer("", q?.answer, q?.info);
     }
   }, 1000);
 }
 
-// ======= Progress Bar Logic =======
 function updateProgressBar() {
-  const progreconstss = ((currentQuestionIndex + 1) / questions.length) * 100;
-  progressBar.style.width = `${progress}%`;
+  if (!progressFill) return;
+  const pct = questions.length ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0;
+  progressFill.style.width = `${pct}%`;
 }
 
-// ======= Button Setup =======
-function submitAnswer() {
-  document.getElementById("more-info-button").classList.remove("hidden");
-}
-
-function setupEventListeners() {
-
-  // 🌐 Navigation
-  homeBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
-    homeBtn.style.display = "none";
-    document.getElementById("quiz-info").classList.remove("hidden");
-    document.getElementById("question-box").classList.add("hidden");
-    document.getElementById("result-box").classList.add("hidden");
-    document.getElementById("final-result").style.display = "none";
-  });
-
-  // 🐣 Quiz Start
-  document.getElementById("start-quiz").addEventListener("click", () => {
-    document.getElementById("quiz-info").classList.add("hidden");
-    document.getElementById("question-box").classList.remove("hidden");
-    homeBtn.style.display = "inline-block";
-  });
-
-  // 🕐 Next Question
-  nextButton.addEventListener("click", () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-      showQuestion();
-    } else {
-      clearInterval(timerInterval);
-      showResults();
-    }
-  });
-}
-
-// ======= Initialize App =======
-window.addEventListener("DOMContentLoaded", () => {
-  setupEventListeners();
-});
-
-document.getElementById("view-answers").addEventListener("click", () => {
-  document.getElementById("results-summary").classList.add("hidden");
-  document.getElementById("answer-review").classList.remove("hidden");
-
-document.getElementById("menu-toggle").onclick = () => {
-  document.getElementById("menu").classList.toggle("show");
-};
-  const reviewContainer = document.getElementById("review-content");
-  reviewContainer.innerHTML = "";
-// ... all your helper functions and async function initQuiz() { ... } above
-
-// Run only on the quiz page (element exists there)
-if (document.getElementById('quiz-image')) {
-  document.addEventListener('DOMContentLoaded', () => {
+// ---------- Boot ----------
+document.addEventListener("DOMContentLoaded", () => {
+  // Only initialize quiz logic if the quiz UI exists on this page
+  if (document.getElementById("quiz-section") || document.getElementById("quiz-image")) {
     initQuiz().catch(console.error);
-  });
-}
-
-  userAnswers.forEach((entry, index) => {
-    reviewContainer.innerHTML += `
-      <div class="result-item ${entry.isCorrect ? 'correct' : 'incorrect'}">
-        <h3>Question ${index + 1}</h3>
-        <p><strong>Question:</strong> ${entry.question}</p>
-        <p><strong>Your Answer:</strong> ${entry.selected}</p>
-        <p><strong>Correct Answer:</strong> ${entry.correct}</p>
-        ${entry.info ? `<a href="${entry.info}" target="info-button">🔗 More Info</a>` : ''}
-      </div>
-
-      
-    `;
-  });
+  }
 });
