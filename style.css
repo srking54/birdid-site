@@ -723,5 +723,5 @@ main {
 /* Remove busy background on the results page */
 body.results-mode {
   background-image: none !important;
-  background-color: #f6f7fb !important; /* soft neutral */
+  background-color: #F3FAF5 !important; /* or #EDF7F1 or #FFF8F0 */
 }
