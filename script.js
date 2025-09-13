@@ -127,6 +127,7 @@ async function initQuiz() {
 }
 
 async function startQuiz(timed, questionsFile) {
+  document.body.classList.remove("results-mode");
   isTimedMode = !!timed;
 
   // Reset
@@ -221,6 +222,7 @@ function showResults() {
   quizSection.style.display = "none";
   quizHeader.style.display  = "none";
   resultsSection.style.display = "block";
+  document.body.classList.add("results-mode");
 
   const correctCount = userAnswers.filter(x => x.isCorrect).length;
   const total = questions.length;
@@ -234,6 +236,7 @@ function showResults() {
                       "Keep exploring — birding is a journey 🐣";
   finalMessageEl && (finalMessageEl.textContent = message);
   resultsSummaryEl && resultsSummaryEl.classList.remove("hidden");
+  
 }
 
 function renderAnswerReview() {
