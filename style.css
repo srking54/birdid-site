@@ -705,3 +705,17 @@ main {
 #go-home:hover {
   background-color: #45a049;
 }
+
+/* Keep review images contained */
+#answer-review img,
+#answer-review .question-image {
+  width: 100%;
+  height: auto;
+  max-height: 320px;      /* tweak as you like */
+  object-fit: contain;    /* no cropping, letterbox if needed */
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+}
