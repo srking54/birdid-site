@@ -782,3 +782,24 @@ section#how-to-play li,
 section[data-section="instructions"] li {
   font-weight: 700;
 }
+
+/* Match How to play styling to Welcome */
+:root { --deep-green: #284737; }  /* same color we used for Welcome */
+
+body #instructions {
+  color: var(--deep-green);
+}
+
+/* Bold the content inside How to play */
+body #instructions h2,
+body #instructions p,
+body #instructions li {
+  font-weight: 700;
+}
+
+/* (Optional) If your list items still look muted, tighten spacing a bit */
+body #instructions ol,
+body #instructions ul {
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+}
