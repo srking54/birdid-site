@@ -739,3 +739,24 @@ body.results-mode {
   font-weight: 700;
 }
 
+/* Shared text color for Welcome + How to play */
+:root { --deep-green: #284737; }  /* pairs well with #85C09A border */
+
+#welcome-section,
+#instructions {
+  color: var(--deep-green);
+}
+
+/* Bold body text in both sections */
+#welcome-section p,
+#welcome-section li,
+#instructions p,
+#instructions li {
+  font-weight: 700;   /* change to 600 if too heavy */
+}
+
+/* Ensure headings are bold, too */
+#welcome-section h1,
+#instructions h2 {
+  font-weight: 700;
+}
