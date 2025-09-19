@@ -739,24 +739,46 @@ body.results-mode {
   font-weight: 700;
 }
 
-/* Shared text color for Welcome + How to play */
-:root { --deep-green: #284737; }  /* pairs well with #85C09A border */
+/* unify color + weight for Welcome + How to play */
+:root { --deep-green: #284737; }
 
+/* Welcome */
 #welcome-section,
-#instructions {
+section.welcome {
+  color: var(--deep-green);
+}
+#welcome-section h1,
+section.welcome h1,
+#welcome-section p,
+section.welcome p,
+#welcome-section li,
+section.welcome li {
+  font-weight: 700;
+}
+
+/* How to play — match a few possibilities */
+#instructions,
+section.instructions,
+#how-to-play,
+section#how-to-play,
+section[data-section="instructions"] {
   color: var(--deep-green);
 }
 
-/* Bold body text in both sections */
-#welcome-section p,
-#welcome-section li,
+#instructions h2,
+section.instructions h2,
+#how-to-play h2,
+section#how-to-play h2,
+section[data-section="instructions"] h2,
 #instructions p,
-#instructions li {
-  font-weight: 700;   /* change to 600 if too heavy */
-}
-
-/* Ensure headings are bold, too */
-#welcome-section h1,
-#instructions h2 {
+section.instructions p,
+#how-to-play p,
+section#how-to-play p,
+section[data-section="instructions"] p,
+#instructions li,
+section.instructions li,
+#how-to-play li,
+section#how-to-play li,
+section[data-section="instructions"] li {
   font-weight: 700;
 }
