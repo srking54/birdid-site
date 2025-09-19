@@ -725,3 +725,17 @@ body.results-mode {
   background-image: none !important;
   background-color: #a1c9ac !important; /* or #EDF7F1 or #FFF8F0 */
 }
+/* Make welcome + instructions text bold */
+#welcome-section p,
+#welcome-section li,
+#instructions p,
+#instructions li {
+  font-weight: 700;  /* try 600 if 700 feels too heavy */
+}
+
+/* Keep headings tidy (optional, in case your h1/h2 weren’t bold) */
+#welcome-section h1,
+#instructions h2 {
+  font-weight: 700;
+}
+
