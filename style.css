@@ -803,3 +803,17 @@ body #instructions ul {
   margin-top: 0.4rem;
   margin-bottom: 0.6rem;
 }
+
+/* Force-bold How to play (id="instructions") */
+body #instructions,
+body #instructions h2,
+body #instructions p,
+body #instructions li {
+  font-weight: 700 !important;
+}
+
+/* Make sure links/buttons inside inherit the same color/weight nicely */
+body #instructions a {
+  color: inherit;
+  font-weight: 700 !important;
+}
