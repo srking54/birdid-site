@@ -8,7 +8,7 @@
       "Scaret Tanager"
     ],
     "answer": "American Robin",
-    "image": "images/robin.jpg",
+    "image": "robin.jpg",
     "info": "https://ebird.org/species/amerob"
   },
   {
@@ -20,11 +20,11 @@
       "Turkey Vulture"
     ],
     "answer": "Bald Eagle",
-    "image": "images/bald_eagle.jpg",
+    "image": "bald_eagle.jpg",
     "info": "https://ebird.org/species/baleag"
   },
   {
-    "question": "Which duck species has an iridescent green had (male), a white ring and a curly tail?",
+    "question": "Which duck species has an iridescent green head (male), a white ring and a curly tail?",
     "choices": [
       "Mallard",
       "Northern Shoveler",
@@ -32,7 +32,7 @@
       "Gadwall"
     ],
     "answer": "Mallard",
-    "image": "images/mallard.jpg",
+    "image": "mallard.jpg",
     "info": "https://ebird.org/species/mallar3"
   },
   {
@@ -44,7 +44,7 @@
       "Black Stork"
     ],
     "answer": "Great Blue Heron",
-    "image": "images/great_blue_heron.jpg",
+    "image": "great_blue_heron.jpg",
     "info": "https://www.audubon.org/field-guide/bird/great-blue-heron"
   },
   {
@@ -56,7 +56,7 @@
       "European Starling"
     ],
     "answer": "Hummingbird",
-    "image": "images/hummingbird.jpg",
+    "image": "hummingbird.jpg",
     "info": "https://www.audubon.org/search_results?search=hummingbird"
   },
   {
@@ -68,7 +68,7 @@
       "Northern Gannet"
     ],
     "answer": "Atlantic Puffin",
-    "image": "images/atlantic_puffin.jpg",
+    "image": "atlantic_puffin.jpg",
     "info": "https://www.audubon.org/field-guide/bird/atlantic-puffin"
   },
   {
@@ -80,7 +80,7 @@
       "American Avocet"
     ],
     "answer": "Greater Flamingo",
-    "image": "images/flamingo.jpg",
+    "image": "flamingo.jpg",
     "info": "https://www.audubon.org/field-guide/bird/american-flamingo"
   },
   {
@@ -92,7 +92,7 @@
       "Barn Owl"
     ],
     "answer": "Barn Owl",
-    "image": "images/barn_owl.jpg",
+    "image": "barn_owl.jpg",
     "info": "https://www.audubon.org/field-guide/bird/american-barn-owl"
   },
   {
@@ -104,7 +104,7 @@
       "Guineafowl"
     ],
     "answer": "Ostrich",
-    "image": "images/ostrich.jpg",
+    "image": "ostrich.jpg",
     "info": "https://ebird.org/species/ostric2"
   },
   {
@@ -116,7 +116,7 @@
       "Sarus Crane"
     ],
     "answer": "Indian Peafowl (Peacock)",
-    "image": "images/indian_peafowl.jpg",
+    "image": "indian_peafowl.jpg",
     "info": "https://ebird.org/species/compea"
   },
   {
@@ -128,7 +128,7 @@
       "Keel-billed Toucan"
     ],
     "answer": "Toco Toucan",
-    "image": "images/tucan.jpg",
+    "image": "tucan.jpg",
     "info": "https://ebird.org/species/toctou1"
   },
   {
@@ -140,7 +140,7 @@
       "Emperor Penguin"
     ],
     "answer": "Emperor Penguin",
-    "image": "images/emperor_penguin.jpg",
+    "image": "emperor_penguin.jpg",
     "info": "https://ebird.org/species/emppen1"
   },
   {
@@ -152,7 +152,7 @@
       "American Kestrel"
     ],
     "answer": "Northern Harrier",
-    "image": "images/northern_harrier.jpg",
+    "image": "northern_harrier.jpg",
     "info": "https://www.audubon.org/field-guide/bird/northern-harrier"
   }
 ]
