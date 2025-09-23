@@ -683,39 +683,27 @@ main {
   100% { transform: scale(1); }
 }
 
-/* Consistent, smaller Home buttons */
-#go-home,
-#home-review-btn,
-a.btn-home {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 8px;      /* ↓ smaller box */
-  font-size: 0.80rem;    /* ↓ smaller text */
-  line-height: 1;        /* tighter height */
+#go-home {
+  display: inline-block;
+  padding: 6px 10px;      /* smaller height/width */
+  font-size: 0.85rem;     /* slightly smaller text */
   background-color: #0078d4;
-  color: #fff;
+  color: white;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: bold;
+  border-radius: 4px;
   border: none;
-  border-radius: 4px;    /* just the corner roundness */
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-#go-home:hover,
-#home-review-btn:hover,
-a.btn-home:hover {
-  background-color: #0063ad;
+#go-home:hover {
+  background-color: #005ea2;
 }
 
-/* Optional: even smaller on very small screens */
-@media (max-width: 400px) {
-  #go-home,
-  #home-review-btn,
-  a.btn-home {
-    padding: 3px 7px;
-    font-size: 0.78rem;
-  }
+}
+
+#go-home:hover {
+  background-color: #45a049;
 }
 
 /* Keep review images contained */
