@@ -696,6 +696,11 @@ main {
   transition: background-color 0.3s ease;
 }
 
+/* add to style.css */
+#go-home { 
+  margin-left: 12px;   /* bump it a bit from the title */
+}
+
 #go-home:hover {
   background-color: #45a049;
 }
