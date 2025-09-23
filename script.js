@@ -32,6 +32,14 @@ const reviewContentEl   = document.getElementById("review-content");
 const menuToggleBtn     = document.getElementById("menu-toggle");
 const menuEl            = document.getElementById("menu");
 
+const STATS_KEY = 'birdid_stats_v1';
+// { games: 0, correct: 0, total: 0, bestPercent: 0 }
+function loadStats() {
+  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {games:0, correct:0, total:0, bestPercent:0}; }
+  catch { return {games:0, correct:0, total:0, bestPercent:0}; }
+}
+function saveStats(s) { localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+
 // ---------- State (scoped) ----------
 let appConfig = {};
 let questions = [];
@@ -56,6 +64,63 @@ async function loadJsonAt(path) {
 }
 const loadConfig    = (file = "config.json")    => loadJsonAt(file);
 const loadQuestions = (file = "questions.json") => loadJsonAt(file);
+
+async function tipInPi(amount = 0.1) {
+  const status = document.getElementById('tip-status');
+  status.textContent = 'Preparing…';
+
+  // Detect Pi Browser SDK
+  const hasPi = typeof window !== 'undefined' && window.Pi && window.Pi.createPayment;
+
+  if (hasPi) {
+    try {
+      // TODO: replace placeholders after you enroll the app in Pi Dev Portal
+      await window.Pi.createPayment({
+        // amount in Pi
+        amount: amount,
+        // your memo appears in Pi wallet
+        memo: 'BirdID-Lite donation',
+        // metadata for your backend webhook/verification (optional)
+        metadata: { purpose: 'donation', version: 1 }
+      });
+      status.textContent = 'Payment initiated in Pi Browser. Thank you!';
+      // You will confirm on the backend via webhook later.
+    } catch (e) {
+      console.error(e);
+      status.textContent = 'Payment was cancelled or failed.';
+    }
+    return;
+  }
+
+  // Fallback: record a pledge in your Pi backend ledger so you can show impact
+  try {
+    const res = await fetch('http://127.0.0.1:5000/api/admin/donations', { // via SSH tunnel during demo
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Basic Auth; for demo, you can omit and type in browser, or embed only while on LAN
+        // 'Authorization': 'Basic ' + btoa('admin:YOURPASS')
+      },
+      body: JSON.stringify({
+        amount_pi: amount,
+        note: 'pledged (non-Pi-Browser fallback)',
+        tx_id: '',
+        from_user: ''
+      }),
+      credentials: 'include'
+    });
+    if (!res.ok) throw new Error('pledge save failed');
+    status.textContent = 'Pledge recorded. Thank you!';
+  } catch (e) {
+    console.error(e);
+    status.textContent = 'Could not record pledge (offline?).';
+  }
+}
+
+// wire the button when results appear
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'tip-pi') tipInPi(0.1);
+});
 
 // ---------- Images ----------
 function resolveImageUrl(p) {
@@ -237,6 +302,19 @@ function showResults() {
   finalMessageEl && (finalMessageEl.textContent = message);
   resultsSummaryEl && resultsSummaryEl.classList.remove("hidden");
   
+  const stats = loadStats();
+  stats.games += 1;
+  stats.correct += score;
+  stats.total += quizData.length;
+  stats.bestPercent = Math.max(stats.bestPercent, percent);
+  saveStats(stats);
+
+// render small block under the results
+const p = document.createElement('p');
+p.style.marginTop = '8px';
+p.innerHTML = `Your lifetime stats: <strong>${stats.correct}/${stats.total}</strong> correct (${stats.total ? Math.round(100*stats.correct/stats.total) : 0}%), best game: <strong>${stats.bestPercent}%</strong>.`;
+document.getElementById("results-summary").appendChild(p);
+
 }
 
 function renderAnswerReview() {

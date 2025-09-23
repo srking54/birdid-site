@@ -48,42 +48,6 @@
     "info": "https://www.audubon.org/field-guide/bird/great-blue-heron"
   },
   {
-    "question": "Which tiny bird can hover and fly backward thanks to rapid wingbeats?",
-    "choices": [
-      "Hummingbird",
-      "American Goldfinch",
-      "Barn Swallow",
-      "European Starling"
-    ],
-    "answer": "Hummingbird",
-    "image": "hummingbird.jpg",
-    "info": "https://www.audubon.org/search_results?search=hummingbird"
-  },
-  {
-    "question": "Which black-and-white seabird has a colorful, triangular bill and nests on cliffs?",
-    "choices": [
-      "Atlantic Puffin",
-      "Common Murre",
-      "Razorbill",
-      "Northern Gannet"
-    ],
-    "answer": "Atlantic Puffin",
-    "image": "atlantic_puffin.jpg",
-    "info": "https://www.audubon.org/field-guide/bird/atlantic-puffin"
-  },
-  {
-    "question": "Which bird is famous for its pink plumage due to pigments from the crustaceans it eats?",
-    "choices": [
-      "Roseate Spoonbill",
-      "Scarlet Ibis",
-      "Greater Flamingo",
-      "American Avocet"
-    ],
-    "answer": "Greater Flamingo",
-    "image": "flamingo.jpg",
-    "info": "https://www.audubon.org/field-guide/bird/american-flamingo"
-  },
-  {
     "question": "Which nocturnal bird has a heart-shaped facial disk and screeching call?",
     "choices": [
       "Snowy Owl",
@@ -94,54 +58,6 @@
     "answer": "Barn Owl",
     "image": "barn_owl.jpg",
     "info": "https://www.audubon.org/field-guide/bird/american-barn-owl"
-  },
-  {
-    "question": "Which ground-dwelling African bird is the tallest and lays the largest eggs?",
-    "choices": [
-      "Kori Bustard",
-      "Secretarybird",
-      "Ostrich",
-      "Guineafowl"
-    ],
-    "answer": "Ostrich",
-    "image": "ostrich.jpg",
-    "info": "https://ebird.org/species/ostric2"
-  },
-  {
-    "question": "Which Asian bird is famous for its extravagant tail feathers displayed by males?",
-    "choices": [
-      "Common Pheasant",
-      "Indian Peafowl (Peacock)",
-      "Green Bee-eater",
-      "Sarus Crane"
-    ],
-    "answer": "Indian Peafowl (Peacock)",
-    "image": "indian_peafowl.jpg",
-    "info": "https://ebird.org/species/compea"
-  },
-  {
-    "question": "Which bird has a massive orange-and-black bill and is native to forests of Central & South America?",
-    "choices": [
-      "Hoatzin",
-      "Toco Toucan",
-      "Scarlet Macaw",
-      "Keel-billed Toucan"
-    ],
-    "answer": "Toco Toucan",
-    "image": "tucan.jpg",
-    "info": "https://ebird.org/species/toctou1"
-  },
-  {
-    "question": "Which penguin is the the tallest and breeds during the Antarctic winter?",
-    "choices": [
-      "Adélie Penguin",
-      "Gentoo Penguin",
-      "Penguin",
-      "Emperor Penguin"
-    ],
-    "answer": "Emperor Penguin",
-    "image": "emperor1_penguin.jpg",
-    "info": "https://ebird.org/species/emppen1"
   },
   {
     "question": "Which bird of prey hovers over fields and has a white rump visible in flight?",
