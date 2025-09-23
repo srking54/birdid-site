@@ -67,7 +67,7 @@ const loadQuestions = (file = "questions.json") => loadJsonAt(file);
 
 async function tipInPi(amount = 0.1) {
   const status = document.getElementById('tip-status');
-  status.textContent = 'Preparing…';
+  status.textContent = 'Thanks! (Tip flow pending Pi Browser integration)';
 
   // Detect Pi Browser SDK
   const hasPi = typeof window !== 'undefined' && window.Pi && window.Pi.createPayment;
