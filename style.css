@@ -668,6 +668,14 @@ main {
   color: #005fa3;
 }
 
+#results-summary #view-answers {
+  font-weight: 700 !important;
+  background-color: #0078d4; /* optional */
+  color: #fff;               /* optional */
+}
+#results-summary #view-answers:hover {
+  background-color: #0063ad; /* optional */
+}
 
 
 @media (max-width: 600px) {
