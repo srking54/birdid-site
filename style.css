@@ -685,8 +685,8 @@ main {
 
 #go-home {
   display: inline-block;
-  padding: 6px 10px;      /* smaller height/width */
-  font-size: 0.85rem;     /* slightly smaller text */
+  padding: 4px 8px;      /* smaller height/width */
+  font-size: 0.80rem;     /* slightly smaller text */
   background-color: #0078d4;
   color: white;
   text-decoration: none;
