@@ -571,7 +571,7 @@ main {
 #restart-btn {
   background-color: #4caf50;
   color: white;
-
+}
 /* === Responsive Design === */
 
   #quiz-header {
@@ -694,12 +694,6 @@ main {
   border-radius: 4px;
   border: none;
   transition: background-color 0.3s ease;
-}
-
-#go-home:hover {
-  background-color: #005ea2;
-}
-
 }
 
 #go-home:hover {
