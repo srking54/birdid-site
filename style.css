@@ -827,3 +827,51 @@ body #instructions a {
   color: inherit;
   font-weight: 700 !important;
 }
+
+/* Make 'View Answers' and 'Back to Home' match on the results screen */
+#results-summary #view-answers,
+#results-summary a.btn,
+#results-summary a#back-home,
+#results-summary a[href="index.html"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;     /* same size */
+  font-size: 0.95rem;    /* same text size */
+  line-height: 1;        /* compact height */
+  font-weight: 700;      /* bold to match */
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* If you want them to share the same color too */
+#results-summary #view-answers,
+#results-summary a.btn,
+#results-summary a#back-home,
+#results-summary a[href="index.html"] {
+  background-color: #0078d4;
+  color: #fff;
+}
+#results-summary #view-answers:hover,
+#results-summary a.btn:hover,
+#results-summary a#back-home:hover,
+#results-summary a[href="index.html"]:hover {
+  background-color: #0063ad;
+}
+
+/* Make results and review align exactly with the quiz card */
+#quiz-wrapper,
+#results-summary,
+#answer-review {
+  max-width: 520px;       /* match your #quiz-wrapper width */
+  margin: 0 auto;         /* center horizontally */
+  box-sizing: border-box;
+}
+
+/* Keep consistent spacing above/below */
+#results-summary,
+#quiz-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
