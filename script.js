@@ -305,7 +305,7 @@ function showResults() {
   const stats = loadStats();
   stats.games += 1;
   stats.correct += score;
-  stats.total += quizData.length;
+  stats.total += questions.length;
   stats.bestPercent = Math.max(stats.bestPercent, percent);
   saveStats(stats);
 
