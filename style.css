@@ -899,3 +899,12 @@ body #instructions a {
   background: #357ddf !important;
 }
 
+#answer-review .result-item {
+  border: 2px solid #cfcfcf;  /* base */
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff;
+}
+#answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
+#answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
