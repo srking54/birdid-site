@@ -38,6 +38,7 @@ section {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', sans-serif;
   color: #00695c;
+  border: 2px solid #ceda46;
 }
 
 #welcome-section h2 {
@@ -906,5 +907,87 @@ body #instructions a {
   margin: 12px 0;
   background: #fff;
 }
+
+/* Simple card look to match your quiz container */
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  max-width: 800px;         /* align with quiz/results width */
+  margin: 20px auto;
+  box-sizing: border-box;
+  border: 2px solid #ceda46;
+  
+}
+
+/* Pledge emphasis */
+#conservation .pledge {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-left: 4px solid #2e7d32;   /* your green */
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Quotes styling */
+#quotes blockquote {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-left: 4px solid #2e7d32;
+  background: #f7fbf8;
+  font-style: italic;
+}
+#quotes .attribution {
+  display: block;
+  margin-top: 6px;
+  font-style: normal;
+  font-weight: 800;
+  color: #2e7d32;
+}
+
+/* Sources list */
+#sources .sources-list {
+  margin: 10px 0 6px;
+  padding-left: 18px;
+}
+#sources .sources-list li {
+  margin: 6px 0;
+}
+#sources .note {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.card {
+  background:rgba(255, 255, 255, 0.7); padding:20px; border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  max: width 850px; margin:20px auto; box-sizing:border-box;
+}
+#conservation .pledge {
+  margin-top:10px; padding:10px 14px;
+  border-left:4px solid #2e7d32; background:#f3faf4;
+}
+#quotes blockquote {
+  margin:12px 0; padding:10px 14px;
+  border-left:4px solid #2e7d32; background:#f7fbf8; font-style:italic;
+}
+#quotes .attribution {
+  display:block; margin-top:6px; font-style:normal; font-weight:600; color:#2e7d32;
+}
+#sources .sources-list { margin:10px 0 6px; padding-left:18px; }
+#sources .sources-list li { margin:6px 0; }
+#sources .note { margin-top:8px; font-size:0.95rem; color:#333; }
+
+/* compact Home-style button */
+.btn-home {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 14px; font-size:0.95rem; line-height:1;
+  font-weight:700; border-radius:6px; text-decoration:none;
+  border:0; background:#0078d4; color:#fff;
+  box-shadow:0 2px 4px rgba(0,0,0,.2);
+}
+.btn-home:hover { background:#0063ad; }
+
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
