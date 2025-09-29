@@ -918,7 +918,7 @@ body #instructions a {
   margin: 20px auto;
   box-sizing: border-box;
   border: 2px solid #ceda46;
-  
+  font-weight: 700;
 }
 
 /* Pledge emphasis */
@@ -962,7 +962,7 @@ body #instructions a {
 .card {
   background:rgba(255, 255, 255, 0.7); padding:20px; border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  max: width 850px; margin:20px auto; box-sizing:border-box;
+  max-width: 800px; margin:20px auto; box-sizing:border-box;
 }
 #conservation .pledge {
   margin-top:10px; padding:10px 14px;
