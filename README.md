@@ -1,6 +1,3 @@
 # Sansio
 
-This folder contains code that can be used by alternative Flask
-implementations, for example Quart. The code therefore cannot do any
-IO, nor be part of a likely IO path. Finally this code cannot use the
-Flask globals.
+BirdID Lite helps people learn to identify birds through a fast, image-based quiz that works great on mobile. The app is built for Pi Browser and integrates Pi tips so users can directly support bird-conservation organizations. We publicly commit 25% of Pi tips to vetted, non-profit beneficiaries and publish a transparent ledger on the site. BirdID Lite emphasizes accessibility (alt text, clean layout) and low bandwidth, so more bird lovers can participate. It’s easy to update questions and images via a secured admin and to deploy to a global static site for reliability. Our goal: learning, enjoyment, and real-world conservation impact—powered by Pi.

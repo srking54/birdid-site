@@ -5,9 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bird ID Lite Quiz</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="/images/brand/birdid-logo-512.png">
+  <meta property="og:title" content="BirdID Lite">
+  <meta property="og:description" content="Learn birds, support conservation.">
+  <meta property="og:image" content="/images/brand/birdid-logo-1024.png">
+  <link rel="icon" type="image/png" href="/images/brand/birdid-logo.png">
+  <meta property="og:title" content="BirdID Lite">
+  <meta property="og:description" content="Learn birds, support conservation.">
+  <meta property="og:image" content="/images/brand/birdid-logo.png">
 </head>
+
+<body class="home">
+
 <body>
+  
   <header>
+    <div class="brand">
+    <a href="/images/brand/birdid-logo.png"
+   class="brand-logo-link"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Open full-size BirdID Lite logo">
+  <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+</a>
+
+    
+  </div>
     <h1>Bird-ID Lite</h1>
     <button class="hamburger" id="menu-toggle">☰</button>
     
@@ -147,6 +170,44 @@
   });
 </script>
   
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+(function () {
+  const isPi = typeof window !== 'undefined' && (/PiBrowser/i.test(navigator.userAgent) || !!window.Pi);
+  const donateBtn = document.getElementById('donate-pi');
+  const note = document.getElementById('donate-note');
+
+  if (!donateBtn) return;
+
+  if (!isPi) {
+    donateBtn.style.display = 'none';
+    if (note) note.innerHTML = 'To donate Pi, open in <strong>Pi Browser</strong>: <code>birdid.pi</code>.';
+    return;
+  }
+
+  // Initialize SDK (no-op if already initialized)
+  try { window.Pi && window.Pi.init({ version: "2.0" }); } catch (e) {}
+
+  donateBtn.style.display = 'inline-block';
+  donateBtn.onclick = async () => {
+    try {
+      if (!window.Pi) throw new Error("Pi SDK not available");
+      // Minimal mock for hackathon demo — replace with real server hooks later
+      const paymentData = { amount: 1, memo: "BirdID donation", metadata: { src: "demo" } };
+      const callbacks = {
+        onReadyForServerApproval: (paymentId) => { console.log("Approve on server:", paymentId); },
+        onReadyForServerCompletion: (paymentId, txid) => { console.log("Complete on server:", paymentId, txid); },
+        onCancel: () => alert("Donation canceled"),
+        onError: (e) => alert("Donation error: " + e?.message)
+      };
+      await window.Pi.createPayment(paymentData, callbacks);
+    } catch (e) {
+      alert("Pi payment not available in this environment.");
+    }
+  };
+})();
+</script>
+
 <footer style="text-align:center; margin:16px 0;">
   <a class="btn-home" href="resources.html">Sources & Credits</a>
 </footer>
