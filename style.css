@@ -1293,8 +1293,8 @@ body.home .instructions {
   text-align: center;
 }
 .brand-logo {
-  width: 64px;                  /* ⬅️ bigger logo (adjust to taste) */
-  height: 64px;
+  width: 100px;                  /* ⬅️ bigger logo (adjust to taste) */
+  height: 100px;
   object-fit: contain;
   border-radius: 10px;
 }
