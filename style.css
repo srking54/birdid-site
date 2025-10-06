@@ -1147,6 +1147,59 @@ body.home .instructions {
   .main-nav { width: 100%; margin-top: 6px; } /* forces nav onto next line */
 }
 
+/* Base header layout */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: none;                /* hidden by default (desktop) */
+  width: 40px; height: 40px;
+  border: none; border-radius: 6px;
+  background: #0078d4;
+  position: relative;
+  cursor: pointer;
+}
+.menu-toggle:hover { background:#005ea2; }
+.menu-toggle span {
+  position: absolute; left: 8px; right: 8px;
+  height: 2px; background: #fff; border-radius: 2px;
+}
+.menu-toggle span:nth-child(1) { top: 12px; }
+.menu-toggle span:nth-child(2) { top: 19px; }
+.menu-toggle span:nth-child(3) { top: 26px; }
+
+/* Nav (desktop default) */
+.main-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Mobile behavior */
+@media (max-width: 640px) {
+  .menu-toggle { display: inline-block; }     /* show hamburger */
+  /* collapse nav by default on phones */
+  .main-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  /* when open, show it */
+  .main-nav.open { display: flex; }
+
+  /* tighten logo/title a bit */
+  .brand-logo { width: 32px; height: 32px; }
+  .brand-name { font-size: 1rem; }
+}
 
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
