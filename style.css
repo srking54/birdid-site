@@ -1106,5 +1106,47 @@ body.home .instructions {
   box-shadow: 0 0 0 2px rgba(26,115,232,0.15);
 }
 
+/* Mobile-friendly header layout */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;           /* <-- let it wrap on small widths */
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;              /* prevent overflow */
+}
+
+.brand-logo { width: 36px; height: 36px; } /* slightly smaller on mobile */
+.brand-name { font-size: 1.1rem; }
+
+/* Nav always visible; drops below brand on wrap */
+.main-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  overflow: visible;         /* ensure not clipped */
+}
+
+.main-nav .nav-link {
+  padding: 6px 10px;
+  font-size: 0.95rem;
+}
+
+/* Tighten further for very small screens */
+@media (max-width: 430px) {
+  .top-bar { align-items: flex-start; }
+  .brand-logo { width: 32px; height: 32px; }
+  .brand-name { font-size: 1rem; }
+  .main-nav { width: 100%; margin-top: 6px; } /* forces nav onto next line */
+}
+
+
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
