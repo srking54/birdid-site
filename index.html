@@ -19,31 +19,30 @@
 
 <body>
   
-  <header>
-    <div class="brand">
+  <header class="top-bar card">
+  <div class="brand">
     <a href="/images/brand/birdid-logo.png"
-   class="brand-logo-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Open full-size BirdID Lite logo">
-  <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
-</a>
-
-    
+       class="brand-logo-link"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Open full-size BirdID Lite logo">
+      <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+    </a>
+    <h1 class="brand-name">Bird-ID Lite</h1>
   </div>
-    <h1>Bird-ID Lite</h1>
-    <button class="hamburger" id="menu-toggle">☰</button>
-    
-<nav class="menu" id="menu">
-  <ul>
-  <li><a href="index.html">Home</a>
-  <a href="quiz.html">Leisure</a>
-  <!-- 🔥 Timed Quiz temporarily removed -->
-  <a href="resources.html">Resources</a>
-  <ul>
-</nav>
 
-  </header>
+  <!-- Hamburger (phones) -->
+  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">☰</button>
+
+  <!-- Nav -->
+  <nav class="menu" id="menu" aria-label="Main navigation">
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+    </ul>
+  </nav>
+</header>
+
   <!-- Welcome -->
   <section id="welcome-section" class="welcome">
   <h1>Welcome to BirdID-Lite</h1>
