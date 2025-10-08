@@ -1334,7 +1334,43 @@ body.home .instructions {
   text-decoration: none;
   font-weight: 600;
   line-height: 1;
+
+  .highlight-card {
+  border-left: 6px solid #2e7d32;  /* your green accent */
+  background: #f5fbf6;             /* subtle green-tinted background */
 }
+#current-quiz h2 { margin-top: 0; }
+#current-quiz-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* Center text inside the "This Week’s Quiz" card */
+#current-quiz {
+  text-align: center;
+}
+
+/* Optional alt style */
+.highlight-card {
+  border-left: none;
+  border-top: 6px solid #2e7d32;
+  background: #f5fbf6;
+}
+
+}
+
+/* Center text inside the "This Week’s Quiz" card */
+section#current-quiz,
+.card.highlight-card#current-quiz {
+  text-align: center !important;
+}
+
+/* Optional: if the left green border looks odd with centered text, use a top border */
+.card.highlight-card {
+  /* border-left: 6px solid #2e7d32; */  /* disable if switching to top border */
+  /* border-top: 6px solid #2e7d32; */
+}
+
 .pill-green:hover { background: #1b5e20; }
 
 
