@@ -69,7 +69,7 @@
   this quiz invites you to explore the amazing diversity of birds around us.
 </p>
 <p>
-  We publish fresh content <strong>every week</strong>: new regions to discover, spotlights on <strong>rare species</strong>,
+  We publish fresh content <strong>every two weeks</strong>: new regions to discover, spotlights on <strong>rare species</strong>,
   and features highlighting <strong>endangered birds</strong> and the threats they face. As you test your skills and learn new facts,
   you’ll also see practical ways to help—log your sightings on
   <a href="https://ebird.org/" target="_blank" rel="noopener noreferrer">eBird</a>,
@@ -88,6 +88,43 @@
  🐦🪶
 </p>
 </section>
+
+<section id="current-quiz" class="card highlight-card">
+  <h2>This Week’s Quiz</h2>
+  <p id="current-quiz-title">Loading…</p>
+</section>
+
+<script>
+(function () {
+  function prettyFromFilename(name) {
+    if (!name) return null;
+    const base = name.replace(/\.json$/i,'').replace(/^questions[_-]?/i,'');
+    if (!base) return null;
+    return base.split(/[_-]/)
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ')
+      .replace(/\bOf\b/g,'of')
+      .replace(/\bAnd\b/g,'and');
+  }
+
+  const el = document.getElementById('current-quiz-title');
+  const url = `/config.json?v=${Date.now()}`;  // ← add .json
+
+  fetch(url, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(cfg => {
+      if (cfg.quiz_title) {
+        el.textContent = cfg.quiz_title;
+      } else {
+        const derived = prettyFromFilename(cfg.question_file || 'questions.json');
+        el.textContent = derived ? `Endangered Birds of ${derived}` : 'Featured quiz';
+      }
+    })
+    .catch(() => {
+      el.textContent = 'Endangered Bird Species of India';
+    });
+})();
+</script>
 
 <!-- Instructions -->
 <section id="instructions" class="instructions">
