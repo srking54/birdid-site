@@ -1365,6 +1365,16 @@ section#current-quiz,
   text-align: center !important;
 }
 
+/* Plain green text links for pages that don't want pill/button styles */
+.text-link {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 600;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
 /* Optional: if the left green border looks odd with centered text, use a top border */
 .card.highlight-card {
   /* border-left: 6px solid #2e7d32; */  /* disable if switching to top border */
