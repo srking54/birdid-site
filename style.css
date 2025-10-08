@@ -1324,6 +1324,27 @@ body.home .instructions {
   .menu ul { align-items: center; }             /* center links in column layout */
 }
 
+/* Reusable green pill link (like your home tiles) */
+.pill-green {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #2e7d32;        /* green */
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1;
+}
+.pill-green:hover { background: #1b5e20; }
+
+
+.credits-list { padding-left: 18px; line-height: 1.5; }
+.credits-list a { text-decoration: underline; }
+
+.photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
+.photo-credit a { color: inherit; text-decoration: underline; }
+
+
 
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }

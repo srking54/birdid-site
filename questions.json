@@ -1,74 +1,302 @@
 [
   {
-    "question": "Which bird is commonly seen often walking on lawns in North America?",
+    "question": "Massive ground-dwelling bird of the Thar desert; males display a tall black crest and white wing panel. Identify it.",
     "choices": [
-      "American Robin",
-      "Northern Cardinal",
-      "House Finch",
-      "Scaret Tanager"
+      "Great Indian Bustard",
+      "Houbara Bustard",
+      "Sarus Crane",
+      "Indian Courser"
     ],
-    "answer": "American Robin",
-    "image": "robin.jpg",
-    "info": "https://ebird.org/species/amerob"
+    "answer": "Great Indian Bustard",
+    "image": "images/india/great_indian_bustard.jpg",
+    "info": "Tall bustard of arid grasslands and scrub in Rajasthan/Gujarat; long legs, heavy body, striking white wing patches in flight."
   },
   {
-    "question": "Which large raptor is known for its white head and tail in adulthood?",
+    "question": "Slender riverine bird that skims the water with its lower mandible at dusk; often on large northern rivers.",
     "choices": [
-      "Bald Eagle",
-      "Osprey",
-      "Golden Eagle",
-      "Turkey Vulture"
+      "Black-bellied Tern",
+      "Indian Skimmer",
+      "River Tern",
+      "Little Tern"
     ],
-    "answer": "Bald Eagle",
-    "image": "bald_eagle.jpg",
-    "info": "https://ebird.org/species/baleag"
+    "answer": "Indian Skimmer",
+    "image": "images/india/indian_skimmer.jpg",
+    "info": "Distinct long orange bill with knife-like lower mandible; roosts on sandbars of the Ganga, Chambal, and Mahanadi systems."
   },
   {
-    "question": "Which duck species has an iridescent green head (male), a white ring and a curly tail?",
+    "question": "Large, bare-headed scavenger with a red head and powerful bill; now very local in the NE and gangetic plains.",
     "choices": [
-      "Mallard",
-      "Northern Shoveler",
-      "Wood Duck",
-      "Gadwall"
+      "Red-headed Vulture",
+      "White-rumped Vulture",
+      "Cinereous Vulture",
+      "Egyptian Vulture"
     ],
-    "answer": "Mallard",
-    "image": "mallard.jpg",
-    "info": "https://ebird.org/species/mallar3"
+    "answer": "Red-headed Vulture",
+    "image": "images/india/red_headed_vulture.jpg",
+    "info": "Also called Asian King Vulture; dark body, bright red head. Now scarce; look near carcasses in forested/agrarian mosaics."
   },
   {
-    "question": "Which wading bird is tall, slate-blue, and often hunts fish slowly in shallow water?",
+    "question": "Tall wetland crane with a red head and upper neck; pairs perform loud bugling duets in NW and central India.",
     "choices": [
-      "Great Blue Heron",
-      "Sandhill Crane",
-      "Little Egret",
+      "Sarus Crane",
+      "Demoiselle Crane",
+      "Common Crane",
+      "Black-necked Crane"
+    ],
+    "answer": "Sarus Crane",
+    "image": "images/india/sarus_crane.jpg",
+    "info": "World’s tallest flying bird; prefers shallow wetlands and paddy fields; often seen in bonded pairs."
+  },
+  {
+    "question": "Secretive forest owl rediscovered in Satpuras in the 1990s after being ‘lost’ for decades.",
+    "choices": [
+      "Forest Owlet",
+      "Mottled Wood Owl",
+      "Collared Scops-Owl",
+      "Brown Fish-Owl"
+    ],
+    "answer": "Forest Owlet",
+    "image": "images/india/forest_owlet.jpg",
+    "info": "Small, big-headed owl with bold barring; diurnal tendencies; dry deciduous forest of central India."
+  },
+  {
+    "question": "Gangetic mega-stork with a massive wedge-shaped bill and bare head; scavenges near dumps and wetlands in Assam/Bihar.",
+    "choices": [
+      "Greater Adjutant",
+      "Lesser Adjutant",
+      "Painted Stork",
       "Black Stork"
     ],
-    "answer": "Great Blue Heron",
-    "image": "great_blue_heron.jpg",
-    "info": "https://www.audubon.org/field-guide/bird/great-blue-heron"
+    "answer": "Greater Adjutant",
+    "image": "images/india/greater_adjutant.jpg",
+    "info": "Huge stork with pendant throat pouch; stronghold around Guwahati landfills and nearby wetlands."
   },
   {
-    "question": "Which nocturnal bird has a heart-shaped facial disk and screeching call?",
+    "question": "Shy duck of forested wetlands in NE India; large white wing patch visible in flight.",
     "choices": [
-      "Snowy Owl",
-      "Short-eared Owl",
-      "Great Horned Owl",
-      "Barn Owl"
+      "White-winged Duck",
+      "Cotton Pygmy-Goose",
+      "Green-winged Teal",
+      "Garganey"
     ],
-    "answer": "Barn Owl",
-    "image": "barn_owl.jpg",
-    "info": "https://www.audubon.org/field-guide/bird/american-barn-owl"
+    "answer": "White-winged Duck",
+    "image": "images/india/white_winged_duck.jpg",
+    "info": "https://ebird.org/species/indbus1"
   },
   {
-    "question": "Which bird of prey hovers over fields and has a white rump visible in flight?",
+    "question": "Slender black-and-white tern of big rivers; dark belly and orange bill distinguish it.",
     "choices": [
-      "Red-tailed Hawk",
-      "Northern Harrier",
-      "Peregrine Falcon",
-      "American Kestrel"
+      "Black-bellied Tern",
+      "River Tern",
+      "Whiskered Tern",
+      "Caspian Tern"
     ],
-    "answer": "Northern Harrier",
-    "image": "northern_harrier.jpg",
-    "info": "https://www.audubon.org/field-guide/bird/northern-harrier"
+    "answer": "Black-bellied Tern",
+    "image": "images/india/black_bellied_tern.jpg",
+    "info": "Breeds on sandbars; declining on many Indian rivers; note dark underparts in breeding plumage."
+  },
+  {
+    "question": "NE hill forests babbler first described in 2006 from Arunachal; olive-green with orange throat wash.",
+    "choices": [
+      "Bugun Liocichla",
+      "Rufous-necked Laughingthrush",
+      "Streak-throated Barwing",
+      "Silver-eared Mesia"
+    ],
+    "answer": "Bugun Liocichla",
+    "image": "images/india/bugun_liocichla.jpg",
+    "info": "Very localized around Eaglenest WLS; skulks in dense undergrowth along forest edges."
+  },
+  {
+    "question": "Large hornbill with rufous neck and bluish facial skin; breeds in tall evergreen forests of NE India.",
+    "choices": [
+      "Rufous-necked Hornbill",
+      "Great Hornbill",
+      "Oriental Pied Hornbill",
+      "Malabar Pied Hornbill"
+    ],
+    "answer": "Rufous-necked Hornbill",
+    "image": "images/india/rufous_necked_hornbill.jpg",
+    "info": "Male with rufous neck and dark bill; prefers mature forests with large fruiting trees."
+  },
+  {
+    "question": "Tall stork with duller plumage than its larger cousin; widespread but declining in wetlands.",
+    "choices": [
+      "Lesser Adjutant",
+      "Greater Adjutant",
+      "Woolly-necked Stork",
+      "Asian Openbill"
+    ],
+    "answer": "Lesser Adjutant",
+    "image": "images/india/lesser_adjutant.jpg",
+    "info": "Smaller adjutant; bare head, heavy bill; breeds in trees near marshes."
+  },
+  {
+    "question": "Elusive nightjar-like bird from scrub and rocky plateaus of Andhra Pradesh; extremely difficult to find.",
+    "choices": [
+      "Jerdon’s Courser",
+      "Indian Nightjar",
+      "Eurasian Thick-knee",
+      "Painted Sandgrouse"
+    ],
+    "answer": "Jerdon’s Courser",
+    "image": "images/india/jerdons_courser.jpg",
+    "info": "Nocturnal, long-legged courser; favors sparse scrub with open patches; one of India’s most secretive birds."
+  },
+  {
+    "question": "Large heron of wide rivers in NE India; pale gray with a striking white belly.",
+    "choices": [
+      "White-bellied Heron",
+      "Grey Heron",
+      "Purple Heron",
+      "Black-headed Ibis"
+    ],
+    "answer": "White-bellied Heron",
+    "image": "images/india/white_bellied_heron.jpg",
+    "info": "Among the world’s rarest herons; hunts along quiet river stretches with big rocks and overhanging trees."
+  },
+  {
+    "question": "River-island megapode from the Nicobars; builds huge mound nests of leaves and sand.",
+    "choices": [
+      "Nicobar Megapode",
+      "Red Junglefowl",
+      "Grey Francolin",
+      "Kalij Pheasant"
+    ],
+    "answer": "Nicobar Megapode",
+    "image": "images/india/nicobar_megapode.jpg",
+    "info": "Male and female tend large incubation mounds; coastal scrub and forest edges on Nicobar Islands."
+  },
+  {
+    "question": "Graceful white-and-black vulture with contrasting dark mantle; was once abundant across India.",
+    "choices": [
+      "White-rumped Vulture",
+      "Slender-billed Vulture",
+      "Himalayan Vulture",
+      "Egyptian Vulture"
+    ],
+    "answer": "White-rumped Vulture",
+    "image": "images/india/white_rumped_vulture.jpg",
+    "info": "Compact vulture with short bill; often roosts in tall roadside trees near villages and fields."
+  },
+  {
+    "question": "Long-legged plover of sandy riverbanks; bold face mask and chestnut crown are key.",
+    "choices": [
+      "River Lapwing",
+      "Red-wattled Lapwing",
+      "Yellow-wattled Lapwing",
+      "Sociable Lapwing"
+    ],
+    "answer": "River Lapwing",
+    "image": "images/india/river_lapwing.jpg",
+    "info": "Breeds on open shingle and sandbars; wary and often in pairs away from disturbance."
+  },
+  {
+    "question": "Heavy-billed migrant duck occasionally wintering in NE India; males show dark head and white flanks.",
+    "choices": [
+      "Baer’s Pochard",
+      "Ferruginous Duck",
+      "Common Pochard",
+      "Tufted Duck"
+    ],
+    "answer": "Baer’s Pochard",
+    "image": "images/india/baers_pochard.jpg",
+    "info": "Favors vegetated lakes and marshes; rarity worth documenting with photos if found."
+  },
+  {
+    "question": "Gangetic sandbar nester with thin black mask and orange bill; dives for fish near the surface.",
+    "choices": [
+      "River Tern",
+      "Indian Skimmer",
+      "Little Tern",
+      "Whiskered Tern"
+    ],
+    "answer": "River Tern",
+    "image": "images/india/river_tern.jpg",
+    "info": "Commoner than skimmer; gray upperparts, white below, orange bill with black tip in breeding."
+  },
+  {
+    "question": "Stocky tree-nester vulture of NE India with unusually slender bill for a vulture.",
+    "choices": [
+      "Slender-billed Vulture",
+      "Himalayan Vulture",
+      "Red-headed Vulture",
+      "Indian Vulture"
+    ],
+    "answer": "Slender-billed Vulture",
+    "image": "images/india/slender_billed_vulture.jpg",
+    "info": "Pale-headed with slim, long bill; breeds in tall trees; mostly in Assam and adjoining areas."
+  },
+  {
+    "question": "Shy forest pigeon from the Andamans; slate-gray with iridescent neck feathers.",
+    "choices": [
+      "Andaman Wood Pigeon",
+      "Nilgiri Wood Pigeon",
+      "Rock Pigeon",
+      "Green Imperial-Pigeon"
+    ],
+    "answer": "Andaman Wood Pigeon",
+    "image": "images/india/andaman_wood_pigeon.jpg",
+    "info": "Endemic to Andamans’ evergreen forests; low, resonant calls; prefers tall primary forest."
+  },
+  {
+    "question": "Elegant crane of high Ladakh plateau; black neck and head with white crown patch.",
+    "choices": [
+      "Black-necked Crane",
+      "Demoiselle Crane",
+      "Common Crane",
+      "Sarus Crane"
+    ],
+    "answer": "Black-necked Crane",
+    "image": "images/india/black_necked_crane.jpg",
+    "info": "Breeds around high-altitude marshes and meadows; sacred to local communities."
+  },
+  {
+    "question": "Large woodpecker of NE foothills with creamy head and stout bill; excavates big nest holes.",
+    "choices": [
+      "Pale-headed Woodpecker",
+      "Great Slaty Woodpecker",
+      "Lesser Yellownape",
+      "Grey-headed Woodpecker"
+    ],
+    "answer": "Pale-headed Woodpecker",
+    "image": "images/india/pale_headed_woodpecker.jpg",
+    "info": "Uncommon in moist broadleaf forests; listen for loud drumming and harsh calls."
+  },
+  {
+    "question": "Slaty-grey duck of Andamans with white face crescent; skulks in mangrove-lined creeks.",
+    "choices": [
+      "Andaman Teal",
+      "Garganey",
+      "Lesser Whistling-Duck",
+      "Northern Shoveler"
+    ],
+    "answer": "Andaman Teal",
+    "image": "images/india/andaman_teal.jpg",
+    "info": "Small dabbling duck; forages in saline/brackish wetlands and mangroves; often in small groups."
+  },
+  {
+    "question": "Shy rail from the Andamans; chestnut head/neck, olive-brown upperparts, and barred flanks.",
+    "choices": [
+      "Andaman Crake",
+      "Ruddy-breasted Crake",
+      "Slaty-legged Crake",
+      "Water Rail"
+    ],
+    "answer": "Andaman Crake",
+    "image": "images/india/andaman_crake.jpg",
+    "info": "Often heard more than seen in dense undergrowth near streams and forest edges."
+  },
+  {
+    "question": "Forest pheasant of the western Himalaya; male is richly patterned with red and black, with white-spotted flanks.",
+    "choices": [
+      "Western Tragopan",
+      "Satyr Tragopan",
+      "Koklass Pheasant",
+      "Himalayan Monal"
+    ],
+    "answer": "Western Tragopan",
+    "image": "images/india/western_tragopan.jpg",
+    "info": "Elusive in steep temperate forests with dense understory; high conservation priority in HP/J&K."
   }
 ]
