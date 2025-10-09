@@ -1480,12 +1480,6 @@ section#current-quiz,
   .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
 }
 
-/* Optional: if the left green border looks odd with centered text, use a top border */
-.card.highlight-card {
-  /* border-left: 6px solid #2e7d32; */  /* disable if switching to top border */
-  /* border-top: 6px solid #2e7d32; */
-}
-
 .pill-green:hover { background: #1b5e20; }
 
 
