@@ -1512,3 +1512,41 @@ section#current-quiz,
     margin-top: 8px;
   }
 }
+
+/* Ensure header sits on top on Resources */
+.top-bar { position: relative; z-index: 50; }
+
+/* Normalize hamburger appearance */
+.top-bar .hamburger {
+  color: #222;                  /* dark icon */
+  background: transparent;
+  border: 0;
+  line-height: 1;
+}
+.top-bar .hamburger:focus,
+.top-bar .hamburger:active {
+  outline: none;
+  filter: none;
+}
+
+/* Mobile dropdown: force it to show when .open is present */
+@media (max-width: 720px) {
+  .menu { display: none !important; position: absolute; right: 14px; top: 56px; z-index: 40; }
+  .menu.open { display: block !important; }
+  .menu.open ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+}
+/* Desktop keeps your normal inline nav */
+@media (min-width: 721px) {
+  .menu { position: static; display: block !important; }
+}
+
