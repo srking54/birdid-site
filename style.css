@@ -1474,6 +1474,23 @@ section#current-quiz,
   gap: 14px;          /* was 12px */
 }
 
+.hamburger { position: relative; z-index: 10; }
+.menu { position: relative; z-index: 9; }
+
+/* mobile dropdown behavior (make sure these exist) */
+@media (max-width: 720px) {
+  .menu { display: none; }
+  .menu.open { display: block; }
+  .menu.open ul {
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 8px;
+  }
+}
+
 /* On very small screens, allow logo to scale a bit more */
 @media (max-width: 420px) {
   .brand-logo { width: clamp(52px, 12vw, 88px); }

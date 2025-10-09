@@ -15,9 +15,8 @@
     }
   </style>
 </head>
-<body>
 
-  <script>
+<script>
   (function () {
     const btn  = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
@@ -29,7 +28,9 @@
   })();
 </script>
 
-  <header class="top-bar card">
+<body>
+
+<header class="top-bar card">
   <div class="brand">
     <a href="/images/brand/birdid-logo.png"
        class="brand-logo-link"
@@ -38,7 +39,7 @@
        aria-label="Open full-size BirdID Lite logo">
       <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
     </a>
-    <h1 class="brand-name">Resources</h1> <!-- ← change per page -->
+    <h1 class="brand-name">Resources</h1>
   </div>
 
   <button class="hamburger" id="menu-toggle" aria-label="Toggle menu"
@@ -48,11 +49,12 @@
     <ul>
       <li><a href="/index.html">Home</a></li>
       <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
-      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/resources.html" aria-current="page">Resources</a></li>
       <li><a href="/credits.html">Credits</a></li>
     </ul>
   </nav>
 </header>
+
 
 
   <main class="page-wrap">
