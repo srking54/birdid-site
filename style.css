@@ -1477,6 +1477,28 @@ section#current-quiz,
 .hamburger { position: relative; z-index: 10; }
 .menu { position: relative; z-index: 9; }
 
+/* On very small screens, allow logo to scale a bit more */
+@media (max-width: 420px) {
+  .brand-logo { width: clamp(52px, 12vw, 88px); }
+  .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
+}
+
+.pill-green:hover { background: #1b5e20; }
+
+.credits-list { padding-left: 18px; line-height: 1.5; }
+.credits-list a { text-decoration: underline; }
+
+.photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
+.photo-credit a { color: inherit; text-decoration: underline; }
+
+
+
+#answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
+#answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
+
+.hamburger { position: relative; z-index: 10; }
+.menu { position: relative; z-index: 9; }
+
 /* mobile dropdown behavior (make sure these exist) */
 @media (max-width: 720px) {
   .menu { display: none; }
@@ -1490,23 +1512,3 @@ section#current-quiz,
     margin-top: 8px;
   }
 }
-
-/* On very small screens, allow logo to scale a bit more */
-@media (max-width: 420px) {
-  .brand-logo { width: clamp(52px, 12vw, 88px); }
-  .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
-}
-
-.pill-green:hover { background: #1b5e20; }
-
-
-.credits-list { padding-left: 18px; line-height: 1.5; }
-.credits-list a { text-decoration: underline; }
-
-.photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
-.photo-credit a { color: inherit; text-decoration: underline; }
-
-
-
-#answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
-#answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
