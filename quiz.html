@@ -58,11 +58,45 @@
     @media (max-width:430px){ #go-home{ padding:3px 8px; font-size:.78rem; } }
   </style>
 </head>
+
+<script>
+  (function () {
+    const btn  = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  })();
+</script>
+
 <body>
-  <header>
-    <h1>Bird Identification Quiz</h1>
-    <a id="go-home" class="btn" href="index.html">Home</a>
-  </header>
+  <header class="top-bar card">
+  <div class="brand">
+    <a href="/images/brand/birdid-logo.png"
+       class="brand-logo-link"
+       target="_blank"
+       rel="noopener"
+       aria-label="Open full-size BirdID Lite logo">
+      <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+    </a>
+    <h1 class="brand-name">BirdID Lite Quiz</h1> <!-- ← change per page -->
+  </div>
+
+  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu"
+          aria-controls="menu" aria-expanded="false">☰</button>
+
+  <nav class="menu" id="menu" aria-label="Main navigation">
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/credits.html">Credits</a></li>
+    </ul>
+  </nav>
+</header>
+
 
   <!-- QUIZ SECTION -->
   <section id="quiz-section">

@@ -36,17 +36,17 @@
   <div class="brand">
     <a href="/images/brand/birdid-logo.png"
        class="brand-logo-link"
-       target="_blank" rel="noopener noreferrer"
+       target="_blank"
+       rel="noopener"
        aria-label="Open full-size BirdID Lite logo">
       <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
     </a>
-    <h1 class="brand-name">Bird-ID Lite</h1>
+    <h1 class="brand-name">Bird-ID Lite</h1> <!-- ← change per page -->
   </div>
 
-  <!-- Hamburger (phones) -->
-  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">☰</button>
+  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu"
+          aria-controls="menu" aria-expanded="false">☰</button>
 
-  <!-- Nav -->
   <nav class="menu" id="menu" aria-label="Main navigation">
     <ul>
       <li><a href="/index.html">Home</a></li>
@@ -57,11 +57,12 @@
   </nav>
 </header>
 
+
   <!-- Welcome -->
   <section id="welcome-section" class="welcome">
   <h1>Welcome to BirdID-Lite</h1>
   <p><p>
-  Welcome to the Bird Identification, a simple Quiz—made for Pi Network bird lovers and curious newcomers alike.
+  Welcome to the Bird Identification Quiz, a simple Quiz—made for Pi Network bird lovers and curious newcomers alike.
   Drawing on trusted resources like
   <a href="https://ebird.org/" target="_blank" rel="noopener noreferrer">eBird</a>
   and
@@ -92,6 +93,7 @@
 <section id="current-quiz" class="card highlight-card">
   <h2>This Week’s Quiz</h2>
   <p id="current-quiz-title">Loading…</p>
+  <li><a href="/quiz.html?mode=leisure">Take the Leisure Quiz</a></li>
 </section>
 
 <script>

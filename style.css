@@ -1375,6 +1375,111 @@ section#current-quiz,
   text-decoration: underline;
 }
 
+/* --- Unified header layout --- */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0; /* prevent overflow */
+}
+
+.brand-logo {
+  width: clamp(40px, 8vw, 70px);  /* responsive size */
+  height: auto;
+  display: block;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hamburger */
+.hamburger {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Nav */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: clamp(10px, 2.5vw, 18px);
+}
+.menu a {
+  text-decoration: none;
+  color: #2e7d32;          /* green text links, consistent with your choice */
+  font-weight: 600;
+}
+.menu a:hover { text-decoration: underline; }
+
+/* Mobile: collapse to hamburger */
+@media (max-width: 720px) {
+  .menu { display: none; }
+  .menu.open { display: block; }
+  .menu.open ul {
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 8px;
+  }
+}
+
+/* ——— Bigger header brand/logo/text ——— */
+.brand-logo {
+  /* was: clamp(40px, 8vw, 70px) */
+  width: clamp(56px, 9vw, 96px);
+}
+
+.brand-name {
+  /* was: clamp(1.1rem, 3.5vw, 1.6rem) */
+  font-size: clamp(1.35rem, 4.2vw, 2rem);
+  letter-spacing: 0.3px;
+}
+
+/* Slightly larger nav links */
+.menu a {
+  font-size: clamp(0.98rem, 2.6vw, 1.1rem);
+}
+
+/* Larger hamburger icon for mobile */
+.hamburger {
+  font-size: 1.8rem; /* was 1.4rem */
+  padding: 4px 8px;  /* a bit more hit area */
+}
+
+/* Add a touch more breathing room in the header */
+.top-bar {
+  padding: 12px 16px; /* was 10px 14px */
+  gap: 14px;          /* was 12px */
+}
+
+/* On very small screens, allow logo to scale a bit more */
+@media (max-width: 420px) {
+  .brand-logo { width: clamp(52px, 12vw, 88px); }
+  .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
+}
+
 /* Optional: if the left green border looks odd with centered text, use a top border */
 .card.highlight-card {
   /* border-left: 6px solid #2e7d32; */  /* disable if switching to top border */
