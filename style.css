@@ -1483,19 +1483,6 @@ section#current-quiz,
   .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
 }
 
-.pill-green:hover { background: #1b5e20; }
-
-.credits-list { padding-left: 18px; line-height: 1.5; }
-.credits-list a { text-decoration: underline; }
-
-.photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
-.photo-credit a { color: inherit; text-decoration: underline; }
-
-
-
-#answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
-#answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
-
 .hamburger { position: relative; z-index: 10; }
 .menu { position: relative; z-index: 9; }
 
@@ -1513,40 +1500,16 @@ section#current-quiz,
   }
 }
 
-/* Ensure header sits on top on Resources */
-.top-bar { position: relative; z-index: 50; }
+.pill-green:hover { background: #1b5e20; }
 
-/* Normalize hamburger appearance */
-.top-bar .hamburger {
-  color: #222;                  /* dark icon */
-  background: transparent;
-  border: 0;
-  line-height: 1;
-}
-.top-bar .hamburger:focus,
-.top-bar .hamburger:active {
-  outline: none;
-  filter: none;
-}
+.credits-list { padding-left: 18px; line-height: 1.5; }
+.credits-list a { text-decoration: underline; }
 
-/* Mobile dropdown: force it to show when .open is present */
-@media (max-width: 720px) {
-  .menu { display: none !important; position: absolute; right: 14px; top: 56px; z-index: 40; }
-  .menu.open { display: block !important; }
-  .menu.open ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 0;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-  }
-}
-/* Desktop keeps your normal inline nav */
-@media (min-width: 721px) {
-  .menu { position: static; display: block !important; }
-}
+.photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
+.photo-credit a { color: inherit; text-decoration: underline; }
+
+
+
+#answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
+#answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
 
