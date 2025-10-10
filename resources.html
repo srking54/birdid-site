@@ -42,9 +42,21 @@
     <h1 class="brand-name">Resources</h1>
   </div>
 
-  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu"
-          aria-controls="menu" aria-expanded="false">☰
-  </button>
+  <button
+       class="hamburger"
+       id="menu-toggle"
+       aria-label="Toggle menu"
+       aria-controls="menu"
+       aria-expanded="false"
+       onclick="
+    (function(){
+      var m = document.getElementById('menu');
+      var open = m.classList.toggle('open');
+      document.getElementById('menu-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    })();
+  "
+>☰</button>
+
 
   <nav class="menu" id="menu" aria-label="Main navigation">
     <ul>
