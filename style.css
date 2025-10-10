@@ -1520,6 +1520,7 @@ section#current-quiz,
   .top-bar.menu-open .menu { display: block !important; }
 }
 
+
 .pill-green:hover { background: #1b5e20; }
 
 .credits-list { padding-left: 18px; line-height: 1.5; }
@@ -1533,3 +1534,161 @@ section#current-quiz,
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
 
+/* ——— Mobile-only header behavior ——— */
+@media (max-width: 720px) {
+  /* Always show the hamburger on mobile */
+  .hamburger {
+    display: inline-block !important;
+    font-size: 1.8rem;
+    color: #2e7d32;           /* visible on light background */
+    background: transparent;
+    border: 0;
+    line-height: 1;
+    padding: 6px 10px;
+  }
+
+  /* Hide menu by default on mobile */
+  .top-bar .menu {
+    display: none !important;
+    position: static !important; /* keep it inside the header card */
+    margin: 0;
+  }
+
+  /* When header has .menu-open (toggled), stack links inside the card */
+  .top-bar.menu-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .top-bar.menu-open .menu { display: block !important; }
+  .top-bar.menu-open .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+/* ——— Desktop keeps inline nav and hides hamburger ——— */
+@media (min-width: 721px) {
+  .top-bar .menu { display: block !important; position: static !important; }
+  .top-bar .hamburger { display: none !important; }
+}
+
+/* --- Force reliable mobile header behavior (<721px) --- */
+@media (max-width: 720px) {
+  header.top-bar { position: relative; z-index: 5; }
+
+  /* FORCE the hamburger to be visible/clickable on mobile */
+  header.top-bar .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    background: transparent !important;
+    border: 0 !important;
+    cursor: pointer;
+    z-index: 10;
+  }
+  /* ensure the SVG bars are visible (dark green) */
+  header.top-bar .hamburger svg rect {
+    fill: #2e7d32 !important;
+  }
+
+  /* Hide menu by default; show only when header has .menu-open */
+  header.top-bar .menu { display: none !important; position: static !important; margin: 0; }
+  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  header.top-bar.menu-open .menu { display: block !important; }
+  header.top-bar.menu-open .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+/* --- Desktop keeps inline nav and hides hamburger --- */
+@media (min-width: 721px) {
+  header.top-bar .menu { display: block !important; position: static !important; }
+  header.top-bar .hamburger { display: none !important; }
+}
+
+/* --- Force reliable mobile header behavior (<721px) --- */
+@media (max-width: 720px) {
+  header.top-bar { position: relative; z-index: 5; }
+
+  /* FORCE the hamburger to be visible/clickable on mobile */
+  header.top-bar .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    background: transparent !important;
+    border: 0 !important;
+    cursor: pointer;
+    z-index: 10;
+  }
+  /* ensure the SVG bars are visible (dark green) */
+  header.top-bar .hamburger svg rect {
+    fill: #2e7d32 !important;
+  }
+
+  /* Hide menu by default; show only when header has .menu-open */
+  header.top-bar .menu { display: none !important; position: static !important; margin: 0; }
+  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  header.top-bar.menu-open .menu { display: block !important; }
+  header.top-bar.menu-open .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+/* --- Desktop keeps inline nav and hides hamburger --- */
+@media (min-width: 721px) {
+  header.top-bar .menu { display: block !important; position: static !important; }
+  header.top-bar .hamburger { display: none !important; }
+}
+
+/* Keep the header on top on the quiz page */
+header.top-bar { position: relative; z-index: 1000; }
+
+/* Make sure quiz elements don't overlay the header */
+#quiz-wrapper,
+.quiz-container,
+#quiz-section,
+#question-img {
+  position: relative;
+  z-index: 1;
+}
+
+/* On mobile, menu opens inside header as a column */
+@media (max-width: 720px) {
+  header.top-bar .menu { display: none !important; }
+  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  header.top-bar.menu-open .menu { display: block !important; }
+  header.top-bar.menu-open .menu ul {
+    display: flex; flex-direction: column; gap: 10px;
+    background: transparent; border: 0; padding: 0; margin: 0; box-shadow: none;
+  }
+}
