@@ -357,6 +357,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (resultsSummary) resultsSummary.classList.add("hidden");
         if (answerReviewEl) answerReviewEl.classList.remove("hidden");
         renderAnswerReview();
+        document.body.classList.add("results-mode");
+
       });
     }
 

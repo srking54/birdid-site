@@ -1692,3 +1692,14 @@ header.top-bar { position: relative; z-index: 1000; }
     background: transparent; border: 0; padding: 0; margin: 0; box-shadow: none;
   }
 }
+
+/* Remove map + use a soft green on results/review screens */
+body.results-mode,
+body.review-mode {
+  background-image: none !important;
+  background-color: #eef8ee;        /* light, calm green */
+  /* optional hard resets if your base sets these */
+  background-size: auto !important;
+  background-position: initial !important;
+  background-repeat: no-repeat !important;
+}
