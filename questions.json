@@ -9,7 +9,8 @@
     ],
     "answer": "Great Indian Bustard",
     "image": "images/india/great_indian_bustard.jpg",
-    "info": "Tall bustard of arid grasslands and scrub in Rajasthan/Gujarat; long legs, heavy body, striking white wing patches in flight."
+    "info_text": "Tall bustard of arid grasslands and scrub in Rajasthan/Gujarat; long legs, heavy body, striking white wing patches in flight.",
+    "info_url": "https://ebird.org/species/indbus1"
   },
   {
     "question": "Slender riverine bird that skims the water with its lower mandible at dusk; often on large northern rivers.",
@@ -21,7 +22,8 @@
     ],
     "answer": "Indian Skimmer",
     "image": "images/india/indian_skimmer.jpg",
-    "info": "Distinct long orange bill with knife-like lower mandible; roosts on sandbars of the Ganga, Chambal, and Mahanadi systems."
+    "info_text": "Distinct long orange bill with knife-like lower mandible; roosts on sandbars of the Ganga, Chambal, and Mahanadi systems.",
+    "info_url": "https://ebird.org/species/indski1"
   },
   {
     "question": "Large, bare-headed scavenger with a red head and powerful bill; now very local in the NE and gangetic plains.",
@@ -33,7 +35,8 @@
     ],
     "answer": "Red-headed Vulture",
     "image": "images/india/red_headed_vulture.jpg",
-    "info": "Also called Asian King Vulture; dark body, bright red head. Now scarce; look near carcasses in forested/agrarian mosaics."
+    "info_text": "Critically Endangered, It's also called Asian King Vulture; dark body, bright red head. Now scarce; look near carcasses in forested/agrarian mosaics.",
+    "info_url": "https://ebird.org/species/rehvul1"
   },
   {
     "question": "Tall wetland crane with a red head and upper neck; pairs perform loud bugling duets in NW and central India.",
@@ -45,7 +48,8 @@
     ],
     "answer": "Sarus Crane",
     "image": "images/india/sarus_crane.jpg",
-    "info": "World’s tallest flying bird; prefers shallow wetlands and paddy fields; often seen in bonded pairs."
+    "info_text": "World’s tallest flying bird; prefers shallow wetlands and paddy fields; often seen in bonded pairs.",
+    "info_url": "https://ebird.org/species/sarcra1"
   },
   {
     "question": "Secretive forest owl rediscovered in Satpuras in the 1990s after being ‘lost’ for decades.",
@@ -57,7 +61,8 @@
     ],
     "answer": "Forest Owlet",
     "image": "images/india/forest_owlet.jpg",
-    "info": "Small, big-headed owl with bold barring; diurnal tendencies; dry deciduous forest of central India."
+    "info_text": "Small, big-headed owl with bold barring; diurnal tendencies; dry deciduous forest of central India.",
+    "info_url": "https://ebird.org/species/forowl1"
   },
   {
     "question": "Gangetic mega-stork with a massive wedge-shaped bill and bare head; scavenges near dumps and wetlands in Assam/Bihar.",
@@ -69,7 +74,8 @@
     ],
     "answer": "Greater Adjutant",
     "image": "images/india/greater_adjutant.jpg",
-    "info": "Huge stork with pendant throat pouch; stronghold around Guwahati landfills and nearby wetlands."
+    "info_text": "Huge stork with pendant throat pouch; stronghold around Guwahati landfills and nearby wetlands.",
+    "info_url": "https://ebird.org/species/greadj1"
   },
   {
     "question": "Shy duck of forested wetlands in NE India; large white wing patch visible in flight.",
