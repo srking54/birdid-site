@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "ts": 1731026400,
+    "date_iso": "2025-11-07T18:00:00Z",
+    "amount_pi": 1.25,
+    "from_user": "anon_3f2b", 
+    "recipient": "Bombay Natural History Society",
+    "purpose": "General conservation support",
+    "tx_id": "pi_tx_abc123", 
+    "proof_url": "https://example.org/proof/abc123",
+    "note": "Thank you for supporting BirdID!"
+  }
+]

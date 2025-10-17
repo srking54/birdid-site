@@ -2,53 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Donations Ledger • BirdID</title>
+<title>Public Donations Ledger • BirdID</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  .card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.08);max-width:720px;margin:20px auto}
-  table{width:100%;border-collapse:collapse}
-  th,td{padding:8px;border-bottom:1px solid #e6e6e6;text-align:left}
-  th{background:#f6f7fb}
+  .card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.08);max-width:840px;margin:20px auto}
   .muted{color:#666}
+  .totals{margin:8px 0 16px;font-weight:600}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:10px 8px;border-bottom:1px solid #e6e6e6;text-align:left;vertical-align:top}
+  th{background:#f6f7fb;font-weight:600}
+  code{font-size:.95em}
+  @media (max-width:700px){
+    .hide-sm{display:none}
+    td,th{padding:8px 6px}
+  }
 </style>
 </head>
 <body>
   <div class="card">
     <h1>Public Donations Ledger</h1>
-    <p class="muted">We publish Pi tips pledged for bird conservation. (Test ledger; will list first beneficiary after KYB.)</p>
+    <p class="muted">
+      We publish Pi tips pledged for bird conservation. (Test ledger; first beneficiary will be shown after KYB.)
+    </p>
+
     <div id="status" class="muted">Loading…</div>
+    <div id="totals" class="totals" style="display:none"></div>
+
     <table id="tbl" style="display:none">
-      <thead><tr><th>Date</th><th>TxID</th><th>Amount (Pi)</th><th>Beneficiary</th><th>Note</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Date (UTC)</th>
+          <th class="hide-sm">TxID</th>
+          <th>Amount (π)</th>
+          <th>Recipient</th>
+          <th class="hide-sm">Note / Proof</th>
+        </tr>
+      </thead>
       <tbody id="rows"></tbody>
     </table>
-    <p class="muted">
-      Raw files: <a href="/ledger/donations.json">JSON</a> • <a href="/ledger/donations.csv">CSV</a>
+
+    <p class="muted" style="margin-top:12px">
+      Raw files:
+      <a href="/ledger/donations.json" target="_blank" rel="noopener">JSON</a> •
+      <a href="/ledger/donations.csv"  target="_blank" rel="noopener">CSV</a>
     </p>
-    <p><a class="btn-home" href="/index.html">Back to Home</a></p>
+
+    <p><a href="/index.html">Back to Home</a></p>
   </div>
+
 <script>
 (async function(){
   const status = document.getElementById('status');
+  const totals = document.getElementById('totals');
   const tbl = document.getElementById('tbl');
   const rows = document.getElementById('rows');
+
+  function pick(obj, keys, def="") {
+    for (const k of keys) if (obj && obj[k] != null && obj[k] !== "") return obj[k];
+    return def;
+  }
+  function parseTs(rec){
+    const ts = Number(pick(rec, ['ts'], NaN));
+    if (!Number.isNaN(ts)) return ts*1000;
+    const iso = pick(rec, ['date_iso','date'], '');
+    const t = Date.parse(iso);
+    return Number.isNaN(t) ? 0 : t;
+  }
+  function fmtIsoUTC(ms){
+    if (!ms) return '';
+    return new Date(ms).toISOString().replace('.000Z','Z');
+  }
+
   try {
-    const res = await fetch('/ledger/donations.json?v=' + Date.now(), {cache:'no-store'});
+    const res = await fetch('/ledger/donations.json?v=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
+
     if (!Array.isArray(data) || data.length === 0) {
       status.textContent = 'No donations yet — check back soon.';
       return;
     }
-    status.style.display = 'none';
-    tbl.style.display = '';
-    data.forEach(rec => {
+
+    // Normalize + sort newest first
+    const norm = data.map(r => {
+      const whenMs   = parseTs(r);
+      const dateIso  = pick(r, ['date_iso','date'], fmtIsoUTC(whenMs));
+      const txId     = pick(r, ['tx_id','txid'], '');
+      const amount   = Number(pick(r, ['amount_pi','amount'], 0)) || 0;
+      const recip    = pick(r, ['recipient','beneficiary'], '');
+      const note     = pick(r, ['note'], '');
+      const proof    = pick(r, ['proof_url','proof'], '');
+      return { whenMs, dateIso, txId, amount, recip, note, proof };
+    }).sort((a,b) => b.whenMs - a.whenMs);
+
+    // Totals
+    const total = norm.reduce((s,r)=> s + r.amount, 0);
+    totals.textContent = `Total donated so far: ${total.toFixed(2)} π`;
+    totals.style.display = '';
+
+    // Render table
+    rows.innerHTML = '';
+    norm.forEach(r => {
       const tr = document.createElement('tr');
-      const td = (t)=>{const d=document.createElement('td'); d.textContent=t||''; return d;};
-      tr.append(td(rec.date), td(rec.txid), td(rec.amount_pi), td(rec.beneficiary), td(rec.note));
+
+      const tdDate = document.createElement('td');
+      tdDate.textContent = r.dateIso || fmtIsoUTC(r.whenMs);
+
+      const tdTx = document.createElement('td');
+      tdTx.className = 'hide-sm';
+      tdTx.innerHTML = r.txId ? `<code>${r.txId}</code>` : '';
+
+      const tdAmt = document.createElement('td');
+      tdAmt.textContent = r.amount.toFixed(2);
+
+      const tdRec = document.createElement('td');
+      tdRec.textContent = r.recip || '';
+
+      const tdNote = document.createElement('td');
+      tdNote.className = 'hide-sm';
+      tdNote.innerHTML = [
+        r.note ? `<span>${escapeHtml(r.note)}</span>` : '',
+        r.proof ? ` <a href="${r.proof}" target="_blank" rel="noopener">proof</a>` : ''
+      ].join('');
+
+      tr.append(tdDate, tdTx, tdAmt, tdRec, tdNote);
       rows.appendChild(tr);
     });
+
+    status.style.display = 'none';
+    tbl.style.display = '';
   } catch (e) {
+    console.error(e);
     status.textContent = 'Ledger not available yet.';
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 })();
 </script>

@@ -243,18 +243,20 @@ function nextQuestion() {
 window.nextQuestion = nextQuestion; // for inline onclick in HTML
 
 function showResults() {
-  if (quizSection)    quizSection.style.display = "none";
-  if (quizHeader)     quizHeader.style.display  = "none";
+  if (quizSection)  quizSection.style.display = "none";
+  if (quizHeader)   quizHeader.style.display  = "none";
 
-  // reveal either/both results containers, depending on your HTML
-  const resultsSection = document.getElementById("results-section");
-  if (resultsSection) resultsSection.style.display = "block";
-  if (resultsSummary) resultsSummary.classList.remove("hidden");
+  // Use local refs with *El* suffix
+  const resultsSectionEl = document.getElementById("results-section");
+  const resultsSummaryEl = document.getElementById("results-summary");
+
+  if (resultsSectionEl) resultsSectionEl.style.display = "block";
+  if (resultsSummaryEl) resultsSummaryEl.classList.remove("hidden");
 
   const total = questions.length;
   const percent = total ? Math.round((score / total) * 100) : 0;
 
-  if (finalScoreEl) finalScoreEl.textContent = `${score} / ${total} (${percent}%)`;
+  if (finalScoreEl)   finalScoreEl.textContent = `${score} / ${total} (${percent}%)`;
   if (finalMessageEl) {
     finalMessageEl.textContent =
       percent === 100 ? "You're a master birder! 🦅🏆" :
@@ -262,8 +264,112 @@ function showResults() {
       percent >= 50   ? "Nice work! There’s a birder in you yet 🌿" :
                         "Keep exploring — birding is a journey 🐣";
   }
+
+  // --- Donate block (add once) ---
+  donate.innerHTML = `
+  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
+    <label for="pi-amount" class="muted">Amount:</label>
+    <select id="pi-amount">
+      <option value="0.1">0.1 π</option>
+      <option value="0.5">0.5 π</option>
+      <option value="1">1 π</option>
+      <option value="custom">Custom…</option>
+    </select>
+
+    <input id="pi-amount-custom" type="number" min="0.01" step="0.01"
+           placeholder="e.g., 2.5" style="display:none; width:8em">
+
+    <button id="tip-pi" class="btn">Donate</button>
+    <span id="tip-status" class="muted" style="margin-left:8px;"></span>
+  </div>
+
+  <p class="muted" style="margin:6px 0 0;">
+    Pi donations work inside the <strong>Pi Browser</strong>.
+    Otherwise, see our <a href="/ledger.html">Public Donations Ledger</a>.
+  </p>
+`;
+
+    resultsSummaryEl.appendChild(donate);
+  }
+
+function getSelectedAmount() {
+  const sel = document.getElementById('pi-amount');
+  const custom = document.getElementById('pi-amount-custom');
+
+  let val = (sel && sel.value === 'custom') ? (custom?.value || '') : (sel?.value || '');
+  const amt = parseFloat(val);
+
+  if (!isFinite(amt) || amt <= 0) {
+    throw new Error('Please enter a valid amount.');
+  }
+  // keep at most 4 decimals
+  return Math.round(amt * 10000) / 10000;
 }
 
+// Toggle the custom amount box when dropdown changes
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.id === 'pi-amount') {
+    const showCustom = e.target.value === 'custom';
+    const custom = document.getElementById('pi-amount-custom');
+    if (custom) {
+      custom.style.display = showCustom ? 'inline-block' : 'none';
+      if (showCustom) custom.focus();
+    }
+  }
+});
+
+// Use the selected amount when donating
+document.addEventListener('click', (e) => {
+  const t = e.target;
+  if (t && t.id === 'tip-pi') {
+    e.preventDefault();
+    const status = document.getElementById('tip-status');
+    try {
+      const amt = getSelectedAmount();
+      if (status) status.textContent = `Preparing to donate ${amt} π…`;
+      tipInPi(amt);
+    } catch (err) {
+      if (status) status.textContent = err.message;
+    }
+  }
+});
+
+
+async function tipInPi(amount = 0.1) {
+  const status = document.getElementById('tip-status');
+  if (status) status.textContent = 'Preparing…';
+
+  const hasPiSdk = typeof window !== 'undefined' && window.Pi && window.Pi.createPayment;
+
+  if (hasPiSdk) {
+    try {
+      await window.Pi.createPayment({
+        amount,
+        memo: 'BirdID-Lite donation',
+        metadata: { purpose: 'donation', version: 1 }
+      });
+      if (status) status.textContent = 'Payment started in Pi Browser — thank you!';
+    } catch (e) {
+      console.error(e);
+      if (status) status.textContent = 'Payment cancelled or failed.';
+    }
+    return;
+  }
+
+  // No Pi SDK (normal browsers): explain what to do
+  if (status) {
+    status.innerHTML = `Open this site in the <strong>Pi Browser</strong> to donate Pi, or view our <a href="/ledger.html">Public Donations Ledger</a>.`;
+  }
+}
+
+// Delegate click so it works even if the button is injected later
+document.addEventListener('click', (e) => {
+  const t = e.target;
+  if (t && t.id === 'tip-pi') {
+    e.preventDefault();
+    tipInPi(0.1);
+  }
+});
 
 
 function renderAnswerReview() {

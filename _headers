@@ -1,18 +1,11 @@
-/questions.json
-  Cache-Control: no-store
-
-/config.json
-  Cache-Control: no-store
-
-/images/*
-  Cache-Control: public, max-age=604800, immutable
-
 /*
   Content-Security-Policy: upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer-when-downgrade
+  Access-Control-Allow-Origin: *
 
-  /ledger/donations.csv
-  Content-Type: text/plain; charset=utf-8
-  Content-Disposition: inline; filename="donations.csv"
+/ledger/*.json
+  Cache-Control: no-store
 
+/ledger/*.csv
+  Cache-Control: no-store
