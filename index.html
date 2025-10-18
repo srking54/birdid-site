@@ -47,13 +47,15 @@
   
 
   <nav class="menu" id="menu" aria-label="Main navigation">
-    <ul>
-      <li><a href="/index.html">Home</a></li>
-      <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
-      <li><a href="/resources.html">Resources</a></li>
-      <li><a href="/credits.html">Credits</a></li>
-    </ul>
-  </nav>
+  <ul>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
+    <li><a href="/resources.html">Resources</a></li>
+    <li><a href="/credits.html">Credits</a></li>
+    <li><a href="/privacy.html">Privacy</a></li> <!-- NEW -->
+  </ul>
+</nav>
+
 
   <button
   class="hamburger"
@@ -103,7 +105,7 @@
 <p>
   This app is about action, not just answers. Together we can understand, appreciate, and protect our feathered friends—one question at a time.
   And with millions of birders worldwide, we’re bringing <strong>Pi cryptocurrency</strong> to the forefront of global conservation:
-  <strong>Once a week, 50% of the Pi</strong> brought in through this app is donated to vetted, KYB (Know Your Business) nonprofit bird-conservation organizations that accept Pi,
+  <strong>No less than once a month, 50% of the Pi</strong> brought in through this app is donated to vetted, KYB (Know Your Business) nonprofit bird-conservation organizations that accept Pi,
   helping to fund real projects in the places birds need most.
 </p>
 <p><em>Happy birding!</em></p>
@@ -141,7 +143,7 @@
         el.textContent = cfg.quiz_title;
       } else {
         const derived = prettyFromFilename(cfg.question_file || 'questions.json');
-        el.textContent = derived ? `Endangered Birds of ${derived}` : 'Featured quiz';
+        el.textContent = derived ? `Endangered Birds of India ${derived}` : 'Endangered Bird Species of India';
       }
     })
     .catch(() => {

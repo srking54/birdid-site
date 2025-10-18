@@ -1,17 +1,104 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><title>Privacy Policy • BirdID Lite</title>
-<link rel="stylesheet" href="/style.css">
-</head><body>
-<div class="card" style="max-width:800px;margin:20px auto;">
-<h1>Privacy Policy</h1>
-<p>Last updated: 2025-10-01</p>
-<p>BirdID Lite is a static site hosted on Cloudflare Pages. We do not collect personal data or set cookies. Quiz play happens entirely in your browser.</p>
-<h2>Pi Browser & Payments</h2>
-<p>If you open the site in Pi Browser, the Pi SDK may become available to enable Pi tips. Any Pi payment data is handled by the Pi Network per their SDK and wallet policies. We do not store payment details on our servers.</p>
-<h2>Analytics</h2>
-<p>No third-party analytics are used.</p>
-<h2>Contact</h2>
-<p>Questions about privacy? Email: <em>(your contact)</em></p>
-<p><a class="btn-home" href="/index.html">Back to Home</a></p>
-</div>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Privacy • BirdID Lite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Same header structure you use elsewhere -->
+  <header class="top-bar card">
+    <div class="brand">
+      <a href="/images/brand/birdid-logo.png"
+         class="brand-logo-link"
+         target="_blank"
+         rel="noopener"
+         aria-label="Open full-size BirdID Lite logo">
+        <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+      </a>
+      <h1 class="brand-name">BirdID Lite</h1>
+    </div>
+
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu"
+            aria-controls="menu" aria-expanded="false">☰</button>
+
+    <nav class="menu" id="menu" aria-label="Main navigation">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
+        <li><a href="/resources.html">Resources</a></li>
+        <li><a href="/credits.html">Credits</a></li>
+        <li><a href="/privacy.html" aria-current="page">Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Privacy Policy</h2>
+      <p>Last updated: <strong>October 2025</strong></p>
+
+      <h3>Overview</h3>
+      <p>
+        BirdID Lite is a simple quiz app. We do not sell your data or
+        use third-party advertising trackers.
+      </p>
+
+      <h3>What we collect</h3>
+      <ul>
+        <li><strong>Basic usage metrics (optional):</strong> Anonymous counters like number of quiz plays and correct answers, stored locally in your browser (localStorage) for your personal stats.</li>
+        <li><strong>Donations:</strong> If you donate via Pi Browser, the Pi SDK processes the payment. We may record a public, non-identifying donation entry (amount, date, optional memo) in our public ledger.</li>
+        <li><strong>No account required:</strong> We don’t require login for taking the quiz.</li>
+      </ul>
+
+      <h3>Cookies & local storage</h3>
+      <p>
+        We may use localStorage for your quiz stats. You can clear it anytime
+        via your browser settings.
+      </p>
+
+      <h3>Third-party services</h3>
+      <ul>
+        <li><strong>Pi Browser / Pi SDK:</strong> Used only to initiate voluntary donations when you choose to tip. Outside the Pi Browser, the donation button is disabled or shows guidance.</li>
+        <li><strong>Hosting/CDN:</strong> Static files are served via Cloudflare Pages. They may collect standard logs for security and performance.</li>
+      </ul>
+
+      <h3>Data retention</h3>
+      <p>
+        Public donation entries (amount/date/memo) remain in the
+        <a href="/ledger.html">Public Donations Ledger</a>. No personal identifiers are published.
+      </p>
+
+      <h3>Your choices</h3>
+      <ul>
+        <li>You can use the quiz without donating.</li>
+        <li>You can clear local stats via your browser.</li>
+      </ul>
+
+      <h3>Contact</h3>
+      <p>
+        Questions? Contact the maintainer at: <a href="mailto:srking@example.com">srking@example.com</a>
+        (replace with your actual email).
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Keep your existing hamburger toggle behavior
+    (function(){
+      const btn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          const open = menu.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          const header = document.querySelector('header.top-bar');
+          if (header) header.classList.toggle('menu-open', open);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+
