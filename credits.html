@@ -72,6 +72,7 @@
     <li><a href="/resources.html">Resources</a></li>
     <li><a href="/credits.html">Credits</a></li>
     <li><a href="/privacy.html">Privacy</a></li> <!-- NEW -->
+    <li><a href="/ledger.html">Donations Ledger</a><li>
   </ul>
 </nav>
 
@@ -193,9 +194,30 @@
     </section>
   </main>
 
-       <footer class="container credits-foot">
-          <a href="/index.html" class="pill-green">🏠 Back to Home</a>
-      </footer>
+  <footer class="site-footer boxed">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/quiz.html?mode=leisure">Leisure</a>
+      <a href="/resources.html">Resources</a>
+      <a href="/credits.html">Credits</a>
+      <a href="/ledger.html">Donations Ledger</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <div class="footer-copy">
+      <span>© <span id="year"></span> BirdID Lite</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // set current year in footer
+  (function(){ 
+    var y = document.getElementById('year'); 
+    if (y) y.textContent = new Date().getFullYear(); 
+  })();
+</script>
+
 
 
   <!-- tiny hamburger toggle -->

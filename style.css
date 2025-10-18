@@ -1703,3 +1703,101 @@ body.review-mode {
   background-position: initial !important;
   background-repeat: no-repeat !important;
 }
+
+/* Temporary: hide legacy bottom buttons now that we have a footer */
+.hide-legacy-bottom {
+  display: none !important;
+}
+
+/* ---------- Global footer ---------- */
+.site-footer {
+  margin-top: 24px;
+  background: #f6f7fb;        /* soft light background */
+  border-top: 1px solid #e6e6e6;
+}
+
+.site-footer .footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.footer-nav a {
+  color: #0f6c3f;             /* same green as your site links */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* tighten on very small screens */
+@media (max-width: 420px) {
+  .site-footer .footer-inner {
+    padding: 14px 16px;
+  }
+  .footer-nav a {
+    font-size: 0.95rem;
+  }
+}
+
+/* Boxed footer variant: use this on pages where you don't want a full-width bar */
+.site-footer.boxed {
+  background: transparent;        /* remove the full-width background strip */
+  border-top: 0;                  /* no full-width top border */
+}
+
+.site-footer.boxed .footer-inner {
+  max-width: 980px;               /* keep consistent page width */
+  margin: 16px auto 0;
+  background: #f6f7fb;            /* same soft panel look as cards */
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  padding: 16px 20px;
+}
+
+/* ===== Transparent footers (both full-width and boxed) ===== */
+
+/* Remove bar background on the default footer */
+.site-footer {
+  background: transparent;
+  border-top: 0;               /* no hard line across the page */
+}
+
+/* Make the boxed footer panel transparent too */
+.site-footer.boxed .footer-inner {
+  background: transparent;     /* kill the white panel */
+  border: 0;                   /* remove thin gray border */
+  box-shadow: none;            /* remove card shadow */
+  padding: 16px 20px;          /* keep spacing */
+}
+
+/* Keep content centered (from earlier step) */
+.site-footer .footer-inner {
+  justify-items: center;
+  text-align: center;
+}
+
+.site-footer .footer-nav {
+  justify-content: center;
+}
+
+.site-footer.boxed .footer-inner { justify-items: center; text-align: center; }
+.site-footer.boxed .footer-nav { justify-content: center; }
+.site-footer.boxed .footer-copy { text-align: center; }
