@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Contact • BirdID Lite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/style.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="top-bar card">
+    <div class="brand">
+      <a href="/images/brand/birdid-logo.png" class="brand-logo-link" target="_blank" rel="noopener" aria-label="Open full-size BirdID Lite logo">
+        <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+      </a>
+      <h1 class="brand-name">BirdID Lite</h1>
+    </div>
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">☰</button>
+    <nav class="menu" id="menu" aria-label="Main navigation">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/quiz.html?mode=leisure">Leisure Quiz</a></li>
+        <li><a href="/resources.html">Resources</a></li>
+        <li><a href="/credits.html">Credits</a></li>
+        <li><a href="/ledger.html">Donations Ledger</a><li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <!-- Page -->
+  <main class="container">
+    <section class="card" style="max-width:760px;margin:20px auto;">
+      <h2>Contact Us</h2>
+      <p class="muted">Most questions are answered on our <a href="/faq.html">FAQ</a>. For suggestions, bug reports, or partnership inquiries, use the form below.</p>
+
+      <!-- Replace action with your Formspree endpoint -->
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="stack">
+        <div class="row">
+          <label for="email"><strong>Your email</strong></label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="row">
+          <label for="topic"><strong>Topic</strong></label>
+          <select id="topic" name="topic" required>
+            <option value="" disabled selected>Select a topic</option>
+            <option value="bug">Bug / broken image</option>
+            <option value="content">Suggest a question</option>
+            <option value="donations">Donations / ledger</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="message"><strong>Message</strong></label>
+          <textarea id="message" name="message" rows="6" placeholder="Tell us what's up…" required></textarea>
+        </div>
+
+        <!-- Optional: contextual fields when reporting a specific quiz item -->
+        <input type="hidden" id="question" name="question">
+        <input type="hidden" id="image" name="image">
+        <input type="hidden" id="ua" name="user_agent">
+
+        <button type="submit" class="btn">Send</button>
+        <p class="muted" style="margin-top:8px">By submitting, you agree to our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer boxed">
+    <div class="footer-inner">
+      <nav class="footer-nav">
+        <a href="/index.html">Home</a>
+      <a href="/quiz.html?mode=leisure">Leisure</a>
+      <a href="/resources.html">Resources</a>
+      <a href="/credits.html">Credits</a>
+      <a href="/ledger.html">Donations Ledger</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/faq.html">FAQ</a>
+      </nav>
+    <div class="footer-copy">© <span id="yr"></span> BirdID Lite</div>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger
+    document.getElementById('menu-toggle').onclick = () => {
+      const m = document.getElementById('menu'); const open = m.classList.toggle('open');
+      document.getElementById('menu-toggle').setAttribute('aria-expanded', open ? 'true':'false');
+    };
+
+    // Prefill from query params, e.g. /contact.html?topic=bug&question=...&image=...
+    const params = new URLSearchParams(location.search);
+    const t = params.get('topic'); if (t) document.getElementById('topic').value = t;
+    const q = params.get('question'); if (q) document.getElementById('question').value = q;
+    const img = params.get('image'); if (img) document.getElementById('image').value = img;
+    document.getElementById('ua').value = navigator.userAgent;
+
+    // Gentle client-side validation (optional)
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      const email = document.getElementById('email').value.trim();
+      const topic = document.getElementById('topic').value;
+      const msg = document.getElementById('message').value.trim();
+      if (!email || !topic || !msg) {
+        e.preventDefault();
+        alert('Please complete all required fields.');
+      }
+    });
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+
+  <style>
+    /* light form styling using your theme */
+    .stack .row { margin-bottom: 12px; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid #dcdcdc; border-radius: 8px;
+      background: rgba(255,255,255,0.85);
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #78b488; box-shadow: 0 0 0 3px rgba(120,180,136,.15); }
+    label { display:block; margin-bottom: 6px; }
+    .btn { background: #4e9af1; color:#fff; border:0; padding:10px 16px; border-radius:8px; cursor:pointer; }
+    .btn:hover { background: #357ddf; }
+  </style>
+</body>
+</html>
