@@ -1801,3 +1801,115 @@ body.review-mode {
 .site-footer.boxed .footer-inner { justify-items: center; text-align: center; }
 .site-footer.boxed .footer-nav { justify-content: center; }
 .site-footer.boxed .footer-copy { text-align: center; }
+
+/* Intro Section Styling */
+.intro {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #2b2b2b;
+}
+
+.intro h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00796b; /* Subtle green tone */
+}
+
+.intro p {
+  margin-bottom: 1rem;
+}
+
+.intro ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  padding-left: 0;
+}
+
+.intro ul li {
+  margin-bottom: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .intro {
+    padding: 1.2rem 1rem;
+    font-size: 1rem;
+  }
+
+  .intro h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.quiz-info {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #2b2b2b;
+}
+
+.quiz-info h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #00796b;
+}
+
+.quiz-info p {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .quiz-info {
+    padding: 1.2rem 1rem;
+    font-size: 1rem;
+  }
+
+  .quiz-info h2 {
+    font-size: 1.4rem;
+  }
+}
+
+.pi-entry-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #234733;
+  margin: 0.8rem auto 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.play-button {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  background-color: #007bff;   /* your blue */
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  background-color: #005fcc;   /* darker blue on hover */
+}
+
