@@ -8,10 +8,19 @@ h1, h2, h3 {
 }
 
 section {
+  .welcome,
+.pi-donations,
+.how-quiz-works,
+.this-weeks-quiz,
+.how-to-play,
+.why-it-matters,
+.pledge 
   background-image: url('images/feathers.png');
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 60px;
+  padding-top: 80px;
+  opacity: 0.95; /* subtle fade */
 }
 
 .home-box:hover {
