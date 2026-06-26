@@ -7,20 +7,27 @@ h1, h2, h3 {
   font-size: x-large;
 }
 
-section {
-  .welcome,
+section,
+.welcome,
 .pi-donations,
-.how-quiz-works,
+.quiz-info,
+#current-quiz,
+#instructions,
+#conservation,
+#quotes,
+#quiz-section,
+#results-section,
 .this-weeks-quiz,
 .how-to-play,
 .why-it-matters,
-.pledge 
+.words-to-remember,
+.pledge {
   background-image: url('images/feathers.png');
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 60px;
   padding-top: 80px;
-  opacity: 0.95; /* subtle fade */
+  opacity: 0.95;
 }
 
 .home-box:hover {
@@ -1859,11 +1866,10 @@ body.review-mode {
 .quiz-info {
   max-width: 850px;
   margin: 2rem auto;
-  padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.75);
+  padding: 80px 2rem 2rem; /* matches Why It Matters top spacing */
+  background-color: rgba(255, 255, 255, 0.75); /* preserves feathers */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  font-size: 1.05rem;
   line-height: 1.6;
   color: #2b2b2b;
 }
@@ -1880,16 +1886,10 @@ body.review-mode {
   margin-bottom: 1rem;
 }
 
-@media (max-width: 600px) {
-  .quiz-info {
-    padding: 1.2rem 1rem;
-    font-size: 1rem;
-  }
 
   .quiz-info h2 {
     font-size: 1.4rem;
   }
-}
 
 .pi-entry-badge {
   display: inline-block;
