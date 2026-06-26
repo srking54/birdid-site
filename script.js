@@ -227,10 +227,6 @@ function handleAnswer(selected, q) {
   if (nextButton) nextButton.style.display = "block";
 }
 
-
-
-
-
 function nextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
@@ -334,33 +330,18 @@ document.addEventListener('click', (e) => {
   }
 });
 
-
 async function tipInPi(amount = 0.1) {
+  console.warn("Pi donations are not yet enabled.");
   const status = document.getElementById('tip-status');
-  if (status) status.textContent = 'Preparing…';
+  if (status) status.textContent = 'Pi donations are not yet supported.';
+  return;
+}
 
-  const hasPiSdk = typeof window !== 'undefined' && window.Pi && window.Pi.createPayment;
-
-  if (hasPiSdk) {
-    try {
-      await window.Pi.createPayment({
-        amount,
-        memo: 'BirdID-Lite donation',
-        metadata: { purpose: 'donation', version: 1 }
-      });
-      if (status) status.textContent = 'Payment started in Pi Browser — thank you!';
-    } catch (e) {
-      console.error(e);
-      if (status) status.textContent = 'Payment cancelled or failed.';
-    }
-    return;
-  }
 
   // No Pi SDK (normal browsers): explain what to do
   if (status) {
     status.innerHTML = `Open this site in the <strong>Pi Browser</strong> to donate Pi, or view our <a href="/ledger.html">Public Donations Ledger</a>.`;
   }
-}
 
 // Delegate click so it works even if the button is injected later
 document.addEventListener('click', (e) => {
