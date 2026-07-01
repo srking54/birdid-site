@@ -7,22 +7,22 @@ h1, h2, h3 {
   font-size: x-large;
 }
 
-section,
-.welcome,
-.pi-donations,
-.quiz-info,
-#current-quiz,
-#instructions,
-#conservation,
-#quotes,
-#quiz-section,
-.results-section,
-.this-weeks-quiz,
-.how-to-play,
-.why-it-matters,
-.words-to-remember,
-.pledge 
-{
+.card-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(253,246,227,0.7), rgba(230,230,250,0.7));
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 85%;
+  max-width: 400px;
+}
+
+ 
+.pledge{
   background-image: url('images/feathers.png');
   background-repeat: no-repeat;
   background-position: top right;
@@ -69,13 +69,6 @@ section,
   color: #00695c;
   text-decoration: underline;
 }
-
-#start-section {
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-
-
 
 #start-section {
   display: flex;
@@ -166,18 +159,10 @@ header {
   color: #00796b;
 }
 
-.hamburger {
-  background-color: #00796b;
-  color: white;
-  font-size: 28px;
-  padding: 0.3em;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.hamburger:hover {
-  color: #ffd700;
-}
+
+
+
+
 
 .menu {
   z-index: 999;
@@ -191,6 +176,7 @@ header {
   flex-direction: column;
   gap: 0.5em;
   min-width: 150px;
+  width: 100%;
 }
 
 .menu.show {
@@ -236,6 +222,7 @@ section {
 #quiz-section {
   max-width: 100%;
   padding: 1em;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #quiz-header {
@@ -261,8 +248,8 @@ section {
 
 #progress-container {
   width: 100%;
-  max-width: 400px;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 #progressBar {
@@ -311,6 +298,7 @@ button {
 }
 button:hover {
   background-color: #005fa3;
+  transform: scale(1.05);
 }
 
 /* === Images === */
@@ -362,58 +350,18 @@ button:hover {
 .choices button.correct { background-color: #a3e3aa; }
 .choices button.incorrect { background-color: #f7b5b5; }
 
-/* === Responsive Design === */
-@media (max-width: 768px) {
-  section {
-    padding: 1em;
-  }
 
-  #quiz-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  #progress-container {
-    max-width: 100%;
-  }
 
-  #progressFill {
-  transition: width 0.9s linear;
-  }
 
-}
 
-/* === Desktop Navigation === */
-/* Show hamburger only on small screens */
-@media (max-width: 768px) {}
-    .hamburger {
-    display: block;
-}
 
-@media screen and (min-width: 1024px) {
-  nav.menu a {
-    font-size: 0.8rem; /* or any smaller size you prefer */
-  }
-}
-
-@media (min-width: 769px) {
-  .menu {
-    display: flex;
-    flex-direction: row;
-    position: static;
-    background: none;
-    padding: 0;
-    gap: 1em;
-  }
-
-  .menu {
-    display: none;
-    flex-direction: column;
-  }
+/* Mobile: show hamburger, hide menu until opened */
 
   .menu.open {
     display: flex;
+    flex-direction: column;
   }
-}
+
 
 /* On wider screens, menu is always visible */
 @media (min-width: 769px) {
@@ -426,21 +374,14 @@ button:hover {
     gap: 1em;
   }
 
-  .hamburger {
-    display: none;
+  
   
 button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-button:hover {
-  transform: scale(1.05);
-   }
-}
-/* === Base Layout & Global Styles === */
 
-#quiz-section {
-  background-color: rgba(255, 255, 255, 0.8);
-}
+
+/* === Base Layout & Global Styles === */
 
 #results-summary {
   text-align: center;
@@ -492,21 +433,6 @@ main {
 }
 
 
-/* === Quiz Section === */
-#quiz-section {
-  max-width: 100%;
-  padding: 1em;
-}
-
-#quiz-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 15px;
-  flex-direction: column;
-  
-}
 
 #timer-text {
   color: black;
@@ -519,12 +445,6 @@ main {
   font-size: 1.1em;
   text-align: center;
   margin-bottom: 15px;
-}
-
-#progress-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
 }
 
 #progressBar {
@@ -585,19 +505,13 @@ main {
 /* === Responsive Design === */
 
   
-  #progress-container {
-    max-width: 100%;
-  }
+ 
 
   #progressFill {
   transition: width 0.9s linear;
 }
 
- /* === Desktop Navigation === */
-
-  .hamburger {
-    display: none;
-  }
+ 
 
 .result-item {
   margin: 1rem 0;
@@ -671,10 +585,6 @@ main {
   transform: scale(1.05);          /* subtle grow on hover */
 }
 
-.info-button:hover {
-  color: #005fa3;
-}
-
 #results-summary #view-answers {
   font-weight: 700 !important;
   background-color: #0078d4; /* optional */
@@ -719,9 +629,7 @@ main {
 #go-home:hover { background-color: #005ea2;
 }
 
-#go-home:hover {
-  background-color: #45a049;
-}
+
 
 /* Keep review images contained */
 #answer-review img,
@@ -742,98 +650,106 @@ body.results-mode {
   background-image: none !important;
   background-color: #a1c9ac !important; /* or #EDF7F1 or #FFF8F0 */
 }
-/* Make welcome + instructions text bold */
-#welcome-section p,
-#welcome-section li,
-#instructions p,
-#instructions li {
-  font-weight: 700;  /* try 600 if 700 feels too heavy */
-}
 
-/* Keep headings tidy (optional, in case your h1/h2 weren’t bold) */
-#welcome-section h1,
-#instructions h2 {
-  font-weight: 700;
-}
-
-/* unify color + weight for Welcome + How to play */
 :root { --deep-green: #284737; }
 
-/* Welcome */
-#welcome-section,
-section.welcome {
-  color: var(--deep-green);
+/* === HEADER BASE === */
+.top-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;   /* brand on top, nav below */
+  align-items: center;      /* center brand horizontally */
+  gap: 10px;
+  padding: 12px 16px;
 }
-#welcome-section h1,
-section.welcome h1,
-#welcome-section p,
-section.welcome p,
-#welcome-section li,
-section.welcome li {
+
+
+
+
+.brand-name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+/* Desktop nav under brand */
+.menu ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: inline-block;
+  color: #284737;        /* deep green from your palette */
+  text-decoration: none;
   font-weight: 700;
+  
 }
 
-/* How to play — match a few possibilities */
-#instructions,
-section.instructions,
-#how-to-play,
-section#how-to-play,
-section[data-section="instructions"] {
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* Hamburger button (mobile only) */
+.hamburger {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: none;           /* hidden on desktop */
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background: #0078d4;
+  cursor: pointer;
+  background-color: #00796b;
+  color: white;
+  font-size: 28px;
+  padding: 0.3em;
+  transition: color 0.2s ease;
+  display: inline-block;
+ }
+
+.hamburger:hover {
+  background: #005ea2;
+}
+
+
+
+ 
+
+  
+
+  
+  
+
+  .brand-name {
+    font-size: 1.25rem;
+  }
+
+
+
+#welcome-section,
+#instructions {
   color: var(--deep-green);
 }
 
+#welcome-section h1,
+#welcome-section p,
+#welcome-section li,
 #instructions h2,
-section.instructions h2,
-#how-to-play h2,
-section#how-to-play h2,
-section[data-section="instructions"] h2,
 #instructions p,
-section.instructions p,
-#how-to-play p,
-section#how-to-play p,
-section[data-section="instructions"] p,
-#instructions li,
-section.instructions li,
-#how-to-play li,
-section#how-to-play li,
-section[data-section="instructions"] li {
+#instructions li {
   font-weight: 700;
 }
 
 /* Match How to play styling to Welcome */
-:root { --deep-green: #284737; }  /* same color we used for Welcome */
-
-body #instructions {
-  color: var(--deep-green);
-}
-
-/* Bold the content inside How to play */
-body #instructions h2,
-body #instructions p,
-body #instructions li {
-  font-weight: 700;
-}
-
-/* (Optional) If your list items still look muted, tighten spacing a bit */
-body #instructions ol,
-body #instructions ul {
-  margin-top: 0.4rem;
-  margin-bottom: 0.6rem;
-}
-
-/* Force-bold How to play (id="instructions") */
-body #instructions,
-body #instructions h2,
-body #instructions p,
-body #instructions li {
-  font-weight: 700 !important;
-}
-
-/* Make sure links/buttons inside inherit the same color/weight nicely */
-body #instructions a {
-  color: inherit;
-  font-weight: 700 !important;
-}
 
 /* Make 'View Answers' and 'Back to Home' match on the results screen */
 #results-summary #view-answers,
@@ -927,13 +843,7 @@ body #instructions a {
   font-weight: 700;
 }
 
-/* Pledge emphasis */
-#conservation .pledge {
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-left: 4px solid #2e7d32;   /* your green */
-  background: rgba(255, 255, 255, 0.7);
-}
+
 
 /* Quotes styling */
 #quotes blockquote {
@@ -965,26 +875,6 @@ body #instructions a {
   color: #333;
 }
 
-.card {
-  background:rgba(255, 255, 255, 0.7); padding:20px; border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  max-width: 1000px; margin:20px auto; box-sizing:border-box;
-}
-#conservation .pledge {
-  margin-top:10px; padding:10px 14px;
-  border-left:4px solid #2e7d32; background:#f3faf4;
-}
-#quotes blockquote {
-  margin:12px 0; padding:10px 14px;
-  border-left:4px solid #2e7d32; background:#f7fbf8; font-style:italic;
-}
-#quotes .attribution {
-  display:block; margin-top:6px; font-style:normal; font-weight:600; color:#2e7d32;
-}
-#sources .sources-list { margin:10px 0 6px; padding-left:18px; }
-#sources .sources-list li { margin:6px 0; }
-#sources .note { margin-top:8px; font-size:0.95rem; color:#333; }
-
 /* compact Home-style button */
 .btn-home {
   display:inline-flex; align-items:center; justify-content:center;
@@ -995,33 +885,8 @@ body #instructions a {
 }
 .btn-home:hover { background:#0063ad; }
 
-/* Header brand */
-.site-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
 
-.brand-logo {
-  width: 100px;          /* adjust to taste: 32–56px works well */
-  height: 100px;
-  object-fit: contain;
-  border-radius: 8px;    /* remove if your logo shouldn’t be rounded */
-}
-
-.brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;     /* bump up or down as needed */
-  color: #00796b;       /* dark gray; or inherit */
-}
 
 /* Wider cards on the home page only */
 body.home .card {
@@ -1038,297 +903,10 @@ body.home .instructions {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* Top header bar with logo + title + nav */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-}
-
-/* Logo + name cluster */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-}
-.brand-logo {
-  width: 175px;     /* tweak to taste: 32–56px works well */
-  height: 120px;
-  object-fit: contain;
-  border-radius: 8px; /* remove if your logo is circular/square and you want no rounding */
-  margin-right: 20px;
-}
-.brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;  /* adjust as needed */
-}
-
-/* Right-side nav links */
-.main-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.main-nav .nav-link {
-  display: inline-block;
-  padding: 6px 10px;
-  font-size: 0.95rem;
-  background: #0078d4;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  border: none;
-  transition: background-color .2s ease;
-}
-.main-nav .nav-link:hover,
-.main-nav .nav-link:focus {
-  background: #005ea2;
-  outline: none;
-}
-
-/* Small screens: let items wrap neatly */
-@media (max-width: 460px) {
-  .top-bar { flex-wrap: wrap; }
-  .main-nav { width: 100%; justify-content: flex-start; }
-}
-
-.brand-logo-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;   /* no underline */
-  line-height: 0;          /* removes tiny gap around inline images */
-}
-
-.brand-logo-link:focus {
-  outline: 2px solid #1a73e8;
-  outline-offset: 2px;
-  border-radius: 10px;     /* matches your rounded logo corners */
-  /* optional: add a soft focus shadow */
-  box-shadow: 0 0 0 2px rgba(26,115,232,0.15);
-}
-
-/* Mobile-friendly header layout */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;           /* <-- let it wrap on small widths */
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;              /* prevent overflow */
-}
-
-.brand-logo { width: 36px; height: 36px; } /* slightly smaller on mobile */
-.brand-name { font-size: 1.1rem; }
-
-/* Nav always visible; drops below brand on wrap */
-.main-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  overflow: visible;         /* ensure not clipped */
-}
-
-.main-nav .nav-link {
-  padding: 6px 10px;
-  font-size: 0.95rem;
-}
-
-/* Tighten further for very small screens */
-@media (max-width: 430px) {
-  .top-bar { align-items: flex-start; }
-  .brand-logo { width: 32px; height: 32px; }
-  .brand-name { font-size: 1rem; }
-  .main-nav { width: 100%; margin-top: 6px; } /* forces nav onto next line */
-}
-
-/* Base header layout */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Hamburger button */
-.menu-toggle {
-  display: none;                /* hidden by default (desktop) */
-  width: 40px; height: 40px;
-  border: none; border-radius: 6px;
-  background: #0078d4;
-  position: relative;
-  cursor: pointer;
-}
-.menu-toggle:hover { background:#005ea2; }
-.menu-toggle span {
-  position: absolute; left: 8px; right: 8px;
-  height: 2px; background: #fff; border-radius: 2px;
-}
-.menu-toggle span:nth-child(1) { top: 12px; }
-.menu-toggle span:nth-child(2) { top: 19px; }
-.menu-toggle span:nth-child(3) { top: 26px; }
-
-/* Nav (desktop default) */
-.main-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* Mobile behavior */
-@media (max-width: 640px) {
-  .menu-toggle { display: inline-block; }     /* show hamburger */
-  /* collapse nav by default on phones */
-  .main-nav {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  /* when open, show it */
-  .main-nav.open { display: flex; }
-
-  /* tighten logo/title a bit */
-  .brand-logo { width: 32px; height: 32px; }
-  .brand-name { font-size: 1rem; }
-}
-
-/* Layout */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 12px 16px;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;            /* more space between logo and title */
-  min-width: 0;
-}
-.brand-logo { width: 40px; height: 40px; object-fit: contain; border-radius: 8px; }
-.brand-name { margin: 0; font-size: 1.25rem; font-weight: 700; }
-
-/* Nav (desktop) */
-.menu ul {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.menu a {
-  display: inline-block;
-  padding: 6px 10px;
-  font-size: 0.95rem;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background-color .2s ease;
-}
-.menu a:hover, .menu a:focus { background:#005ea2; outline: none; }
-
-/* Hamburger button */
-.hamburger {
-  display: none;           /* hidden on desktop */
-  font-size: 1.4rem;
-  line-height: 1;
-  width: 42px; height: 42px;
-  border: none; border-radius: 6px;
-  background: #0078d4; color: #fff;
-  cursor: pointer;
-}
-.hamburger:hover, .hamburger:focus { background:#005ea2; }
-
-/* Mobile behavior */
-@media (max-width: 640px) {
-  .brand-logo { width: 32px; height: 32px; }
-  .brand-name { font-size: 1.1rem; }
-
-  .hamburger { display: inline-block; }
-
-  /* collapse nav by default on phones */
-  .menu {
-    display: none;
-    width: 100%;
-  }
-  .menu.open { display: block; }
-
-  .menu ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 8px;
-  }
-  .menu a { width: auto; }
-}
-
-/* Make the header a vertical stack and center brand */
-.top-bar {
-  position: relative;           /* so we can place the hamburger on mobile */
-  display: flex;
-  flex-direction: column;       /* brand on top, nav below */
-  align-items: center;          /* center brand horizontally */
-  gap: 10px;
-  padding: 12px 16px;
-}
-
-/* Center the brand cluster and enlarge the logo */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;                    /* space between logo and title */
-  text-align: center;
-}
-.brand-logo {
-  width: 100px;                  /* ⬅️ bigger logo (adjust to taste) */
-  height: 100px;
-  object-fit: contain;
-  border-radius: 10px;
-}
-.brand-name {
-  margin: 0;
-  font-size: 1.4rem;            /* slightly larger title */
-  font-weight: 800;
-}
-
-/* Center the desktop nav under the brand */
-.menu ul {
-  justify-content: center;      /* center nav row */
-}
-
-/* Hamburger placement on phones */
-.hamburger {
-  position: absolute;
-  right: 12px;                  /* keep it reachable with thumb */
-  top: 12px;
-}
-
-/* Phone tweaks */
-@media (max-width: 640px) {
-  .brand-logo { width: 56px; height: 56px; }    /* still large but a touch smaller on tiny screens */
-  .brand-name { font-size: 1.25rem; }
-  .menu { width: 100%; }                        /* menu spans width when open */
-  .menu ul { align-items: center; }             /* center links in column layout */
-}
+ 
+   
+ 
+  
 
 /* Reusable green pill link (like your home tiles) */
 .pill-green {
@@ -1341,10 +919,7 @@ body.home .instructions {
   font-weight: 600;
   line-height: 1;
 
-  .highlight-card {
-  border-left: 6px solid #2e7d32;  /* your green accent */
-  background: #f5fbf6;             /* subtle green-tinted background */
-}
+ 
 #current-quiz h2 { margin-top: 0; }
 #current-quiz-title {
   font-weight: 700;
@@ -1382,16 +957,20 @@ section#current-quiz,
 }
 
 .brand {
-  display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0; /* prevent overflow */
+  display: inline-flex;
+  text-decoration: none;
+  font-size: 1.25rem;
 }
 
 .brand-logo {
-  width: clamp(40px, 8vw, 70px);  /* responsive size */
-  height: auto;
   display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .brand-name {
@@ -1402,120 +981,28 @@ section#current-quiz,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 1.25rem;
 }
 
 /* Hamburger */
-.hamburger {
-  background: transparent;
-  border: none;
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-}
 
-/* Nav */
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: clamp(10px, 2.5vw, 18px);
-}
-.menu a {
-  text-decoration: none;
-  color: #2e7d32;          /* green text links, consistent with your choice */
-  font-weight: 600;
-}
+
+
+
+
 .menu a:hover { text-decoration: underline; }
 
-/* Mobile: collapse to hamburger */
-@media (max-width: 720px) {
-  .menu { display: none; }
-  .menu.open { display: block; }
-  .menu.open ul {
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 8px;
-  }
-}
 
-/* ——— Bigger header brand/logo/text ——— */
-.brand-logo {
-  /* was: clamp(40px, 8vw, 70px) */
-  width: clamp(56px, 9vw, 96px);
-}
 
-.brand-name {
-  /* was: clamp(1.1rem, 3.5vw, 1.6rem) */
-  font-size: clamp(1.35rem, 4.2vw, 2rem);
-  letter-spacing: 0.3px;
-}
 
-/* Slightly larger nav links */
-.menu a {
-  font-size: clamp(0.98rem, 2.6vw, 1.1rem);
-}
 
-/* Larger hamburger icon for mobile */
-.hamburger {
-  font-size: 1.8rem; /* was 1.4rem */
-  padding: 4px 8px;  /* a bit more hit area */
-}
 
-/* Add a touch more breathing room in the header */
-.top-bar {
-  padding: 12px 16px; /* was 10px 14px */
-  gap: 14px;          /* was 12px */
-}
 
-.hamburger { position: relative; z-index: 10; }
-.menu { position: relative; z-index: 9; }
 
-/* On very small screens, allow logo to scale a bit more */
-@media (max-width: 420px) {
-  .brand-logo { width: clamp(52px, 12vw, 88px); }
-  .brand-name { font-size: clamp(1.25rem, 5vw, 1.7rem); }
-}
 
-/* Desktop: keep menu INSIDE the header card */
-@media (min-width: 721px) {
-  .top-bar { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    gap: 14px;
-  }
-  .top-bar .menu {
-    display: block !important;
-    position: static !important;   /* kill any leftover absolute positioning */
-    margin: 0;
-  }
-  .top-bar .menu ul {
-    display: flex;
-    flex-direction: row;
-    gap: clamp(10px, 2.5vw, 18px);
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin: 0;                     /* ensure no outside spacing */
-    box-shadow: none;
-  }
-  .top-bar .hamburger { display: none; } /* desktop doesn't need it */
-}
 
-/* Mobile: menu toggles INSIDE header (for completeness) */
-@media (max-width: 720px) {
-  .menu { display: none !important; }
-  .top-bar.menu-open { 
-    flex-direction: column; 
-    align-items: stretch; 
-    gap: 8px; 
-  }
-  .top-bar.menu-open .menu { display: block !important; }
-}
+
+
 
 
 .pill-green:hover { background: #1b5e20; }
@@ -1532,143 +1019,11 @@ section#current-quiz,
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
 
 /* ——— Mobile-only header behavior ——— */
-@media (max-width: 720px) {
-  /* Always show the hamburger on mobile */
-  .hamburger {
-    display: inline-block !important;
-    font-size: 1.8rem;
-    color: #2e7d32;           /* visible on light background */
-    background: transparent;
-    border: 0;
-    line-height: 1;
-    padding: 6px 10px;
-  }
 
-  /* Hide menu by default on mobile */
-  .top-bar .menu {
-    display: none !important;
-    position: static !important; /* keep it inside the header card */
-    margin: 0;
-  }
 
-  /* When header has .menu-open (toggled), stack links inside the card */
-  .top-bar.menu-open {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-  .top-bar.menu-open .menu { display: block !important; }
-  .top-bar.menu-open .menu ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-  }
-}
+  
+  
 
-/* ——— Desktop keeps inline nav and hides hamburger ——— */
-@media (min-width: 721px) {
-  .top-bar .menu { display: block !important; position: static !important; }
-  .top-bar .hamburger { display: none !important; }
-}
-
-/* --- Force reliable mobile header behavior (<721px) --- */
-@media (max-width: 720px) {
-  header.top-bar { position: relative; z-index: 5; }
-
-  /* FORCE the hamburger to be visible/clickable on mobile */
-  header.top-bar .hamburger {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    margin: 0;
-    background: transparent !important;
-    border: 0 !important;
-    cursor: pointer;
-    z-index: 10;
-  }
-  /* ensure the SVG bars are visible (dark green) */
-  header.top-bar .hamburger svg rect {
-    fill: #2e7d32 !important;
-  }
-
-  /* Hide menu by default; show only when header has .menu-open */
-  header.top-bar .menu { display: none !important; position: static !important; margin: 0; }
-  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-  header.top-bar.menu-open .menu { display: block !important; }
-  header.top-bar.menu-open .menu ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-  }
-}
-
-/* --- Desktop keeps inline nav and hides hamburger --- */
-@media (min-width: 721px) {
-  header.top-bar .menu { display: block !important; position: static !important; }
-  header.top-bar .hamburger { display: none !important; }
-}
-
-/* --- Force reliable mobile header behavior (<721px) --- */
-@media (max-width: 720px) {
-  header.top-bar { position: relative; z-index: 5; }
-
-  /* FORCE the hamburger to be visible/clickable on mobile */
-  header.top-bar .hamburger {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    margin: 0;
-    background: transparent !important;
-    border: 0 !important;
-    cursor: pointer;
-    z-index: 10;
-  }
-  /* ensure the SVG bars are visible (dark green) */
-  header.top-bar .hamburger svg rect {
-    fill: #2e7d32 !important;
-  }
-
-  /* Hide menu by default; show only when header has .menu-open */
-  header.top-bar .menu { display: none !important; position: static !important; margin: 0; }
-  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-  header.top-bar.menu-open .menu { display: block !important; }
-  header.top-bar.menu-open .menu ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-  }
-}
-
-/* --- Desktop keeps inline nav and hides hamburger --- */
-@media (min-width: 721px) {
-  header.top-bar .menu { display: block !important; position: static !important; }
-  header.top-bar .hamburger { display: none !important; }
-}
-
-/* Keep the header on top on the quiz page */
-header.top-bar { position: relative; z-index: 1000; }
 
 /* Make sure quiz elements don't overlay the header */
 #quiz-wrapper,
@@ -1679,16 +1034,7 @@ header.top-bar { position: relative; z-index: 1000; }
   z-index: 1;
 }
 
-/* On mobile, menu opens inside header as a column */
-@media (max-width: 720px) {
-  header.top-bar .menu { display: none !important; }
-  header.top-bar.menu-open { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-  header.top-bar.menu-open .menu { display: block !important; }
-  header.top-bar.menu-open .menu ul {
-    display: flex; flex-direction: column; gap: 10px;
-    background: transparent; border: 0; padding: 0; margin: 0; box-shadow: none;
-  }
-}
+
 
 /* Remove map + use a soft green on results/review screens */
 body.results-mode,
@@ -1743,15 +1089,7 @@ body.review-mode {
   font-size: 0.95rem;
 }
 
-/* tighten on very small screens */
-@media (max-width: 420px) {
-  .site-footer .footer-inner {
-    padding: 14px 16px;
-  }
-  .footer-nav a {
-    font-size: 0.95rem;
-  }
-}
+
 
 /* Boxed footer variant: use this on pages where you don't want a full-width bar */
 .site-footer.boxed {
@@ -1842,7 +1180,19 @@ body.review-mode {
   .intro h2 {
     font-size: 1.5rem;
   }
+  
 }
+
+/* Desktop: hide hamburger and show menu */
+@media (min-width: 641px) {
+  .hamburger {
+    display: none !important;
+  }
+  .menu {
+    display: block !important;
+  }
+}
+
 
 .quiz-info {
   max-width: 850px;
@@ -1855,22 +1205,12 @@ body.review-mode {
   color: #2b2b2b;
 }
 
-.quiz-info h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #00796b;
-}
+
 
 .quiz-info p {
   margin-bottom: 1rem;
 }
 
-
-  .quiz-info h2 {
-    font-size: 1.4rem;
-  }
 
 .pi-entry-badge {
   display: inline-block;
@@ -1902,4 +1242,3 @@ body.review-mode {
 .play-button:hover {
   background-color: #005fcc;   /* darker blue on hover */
 }
-
