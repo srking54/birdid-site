@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <title>FAQ • BirdID Lite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="/style.css" rel="stylesheet" />
+  <link href="/style.css?v=103" rel="stylesheet" />
+  <script src="menu.js" defer></script>
 </head>
 <body>
   <!-- Header -->
@@ -15,7 +16,7 @@
       </a>
       <h1 class="brand-name">BirdID Lite</h1>
     </div>
-    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">☰</button>
+    <button class="hamburger" id="menu-toggle" aria-control=" menu" aria-controls="menu" aria-expanded="false">☰</button>
     <nav class="menu" id="menu" aria-label="Main navigation">
       <ul>
         <li><a href="/index.html">Home</a></li>
@@ -93,5 +94,8 @@
     };
     document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
+
+  <script src="menu.js" defer></script>
+
 </body>
 </html>

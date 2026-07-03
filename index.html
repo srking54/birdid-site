@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bird ID Lite Quiz</title>
-  <link rel="stylesheet" href="style.css?v=101" />
+  <link rel="stylesheet" href="/style.css?v=104" />
   <link rel="icon" type="image/png" href="/images/brand/birdid-logo-512.png">
   <meta property="og:title" content="BirdID Lite">
   <meta property="og:description" content="Learn birds, support conservation.">
@@ -13,10 +13,13 @@
   <meta property="og:title" content="BirdID Lite">
   <meta property="og:description" content="Learn birds, support conservation.">
   <meta property="og:image" content="/images/brand/birdid-logo.png">
+  <script src="/script.js" defer></script>
 </head>
 
 
 <body class="home">
+
+<script src="quiz.js?v=104"></script>
 
 <script>
   (function () {
@@ -311,6 +314,32 @@
   })();
 </script>
 
+/* Hamburger button: hidden by default (desktop) */
+  .hamburger {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background-color: #00796b;
+    color: white;
+    font-size: 28px;
+    padding: 0.3em;
+    cursor: pointer;
+    display: none; /* shown only on small screens */
+  }
+  .hamburger:hover {
+    background-color: #005ea2;
+  }
+
+  /* ===== MOBILE NAV (phones) ===== */
+  @media (max-width: 640px) {
+    /* show hamburger, hide horizontal menu */
+    .hamburger {
+      display: inline-block;
+    }
 
 
 </body>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Resources • BirdID</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css?v=3" />
   <style>
     /* page-specific nudges (kept tiny) */
     .card h2 { margin-top: 0; }
@@ -16,17 +16,7 @@
   </style>
 </head>
 
-<script>
-  (function () {
-    const btn  = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-    if (!btn || !menu) return;
-    btn.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  })();
-</script>
+
 
 <body>
 
@@ -48,13 +38,7 @@
   aria-label="Toggle menu"
   aria-controls="menu"
   aria-expanded="false"
-  onclick="(function(){
-    var m = document.getElementById('menu');
-    var open = m.classList.toggle('open');
-    document.getElementById('menu-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
-    var header = document.querySelector('header.top-bar');
-    if (header) header.classList.toggle('menu-open', open);
-  })();"
+
 >
   <!-- high-contrast SVG icon -->
   <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
@@ -100,7 +84,7 @@
       </p>
     </section>
 
-    <footer class="site-footer">
+<footer class="site-footer">
   <div class="footer-inner">
     <nav class="footer-nav" aria-label="Footer">
       <a href="/index.html">Home</a>
@@ -118,13 +102,13 @@
 </footer>
 
 <script>
-  // set current year in footer
   (function(){ 
     var y = document.getElementById('year'); 
     if (y) y.textContent = new Date().getFullYear(); 
   })();
 </script>
 
-  </main>
+<script src="/menu.js" defer></script>
+
 </body>
 </html>

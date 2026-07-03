@@ -21,7 +21,6 @@ h1, h2, h3 {
   max-width: 400px;
 }
 
- 
 .pledge{
   background-image: url('images/feathers.png');
   background-repeat: no-repeat;
@@ -59,7 +58,7 @@ h1, h2, h3 {
 }
 
 #welcome-section h2 {
-  text-align: center;
+  text-align: flex;
   color: #00796b;
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   margin-bottom: 1rem;
@@ -71,7 +70,7 @@ h1, h2, h3 {
 }
 
 #start-section {
-  display: flex;
+  display: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -96,6 +95,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  
 }
 
 a {
@@ -104,21 +105,6 @@ a {
 }
 a:hover {
   text-decoration: underline;
-}
-
-/* === Header & Navigation === */
-header {
-  display: flex;
-  justify-content: center;      /* centers items horizontally */
-  align-items: center;          /* centers items vertically */
-  flex-wrap: wrap;              /* allows title and nav to stack if needed */
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
-  text-align: center; /* Center contents inside header */
-  margin-bottom: 20px;
-  max-width: 800px;
-  margin: 12px auto;
 }
 
 .btn .a {
@@ -159,29 +145,20 @@ header {
   color: #00796b;
 }
 
-
-
-
-
-
+/* BASE MENU — DESKTOP FIRST */
 .menu {
-  z-index: 999;
-  position: absolute;
-  top: 60px;
-  right: 10px;
-  background-color: #b3be6a;
-  padding: 1em;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: static;
+  background: none;
+  width: auto;
   display: none;
-  flex-direction: column;
-  gap: 0.5em;
-  min-width: 150px;
-  width: 100%;
 }
 
-.menu.show {
-  display: flex;
-}
 .menu li a {
   color: rgb(41, 159, 102);
   font-weight: bold;
@@ -197,16 +174,6 @@ nav.menu li {
   list-style-type: none;
 }
 
-/* === Main Layout & Sections === */
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 1em;
-}
 
 section {
   background-color: rgba(16, 184, 50, 0.7);
@@ -218,11 +185,20 @@ section {
   width: 90%;
 }
 
+main.page-content section {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* MOBILE MENU — REQUIRED */
+
+
 /* === Quiz Section === */
 #quiz-section {
-  max-width: 100%;
+  max-width: 600px;
   padding: 1em;
   background-color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
 }
 
 #quiz-header {
@@ -231,6 +207,13 @@ section {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 15px;
+  width: 100% !important;
+
+  header.top-bar {
+  width: 100%;
+  max-width: none;
+}
+
 }
 
 #timer-text {
@@ -281,6 +264,14 @@ section {
   width: 0%;
   transition: width 0.3s ease;
 }
+
+.page-content {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
 
 /* === Buttons & Interactivity === */
 button {
@@ -352,37 +343,11 @@ button:hover {
 
 
 
-
-
-
-/* Mobile: show hamburger, hide menu until opened */
-
-  .menu.open {
-    display: flex;
-    flex-direction: column;
-  }
-
-
-/* On wider screens, menu is always visible */
-@media (min-width: 769px) {
-  .menu {
-    display: flex;
-    flex-direction: row;
-    position: static;
-    background: none;
-    padding: 0;
-    gap: 1em;
-  }
-
-  
-  
 button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
 /* === Base Layout & Global Styles === */
-
 #results-summary {
   text-align: center;
   border: 2px solid black; /* Example border */
@@ -423,16 +388,8 @@ a:hover {
 
 /* === Main Layout & Sections === */
 main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 1em;
 }
-
-
 
 #timer-text {
   color: black;
@@ -461,14 +418,6 @@ main {
   transition: width 0.3s ease;
 }
 
-.progress-bar {
-  background-color: #ddd;
-  height: 16px;
-  border-radius: 10px;
-  overflow: hidden;
-  flex-grow: 1;
-  margin-left: 10px;
-}
 
 .progress-fill {
   background-color: #5da7f9;
@@ -496,22 +445,15 @@ main {
   margin-bottom: 1em;
   color: #333;
   }
-}
 
 #restart-btn {
   background-color: #4caf50;
   color: white;
 }
 /* === Responsive Design === */
-
-  
- 
-
   #progressFill {
   transition: width 0.9s linear;
 }
-
- 
 
 .result-item {
   margin: 1rem 0;
@@ -566,7 +508,6 @@ main {
   background-color: #357ddf;
 }
 
-
 .info-button {
   background-color: #0077cc;       /* match main quiz button blue */
   color: white;
@@ -593,7 +534,6 @@ main {
 #results-summary #view-answers:hover {
   background-color: #0063ad; /* optional */
 }
-
 
 @media (max-width: 600px) {
   #go-home {
@@ -629,8 +569,6 @@ main {
 #go-home:hover { background-color: #005ea2;
 }
 
-
-
 /* Keep review images contained */
 #answer-review img,
 #answer-review .question-image {
@@ -661,28 +599,19 @@ body.results-mode {
   align-items: center;      /* center brand horizontally */
   gap: 10px;
   padding: 12px 16px;
+  z-index: 1000;
+  
 }
-
-
-
 
 .brand-name {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 2.00rem;
 }
 
 /* Desktop nav under brand */
-.menu ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+
 
 .menu a {
   display: inline-block;
@@ -716,23 +645,15 @@ body.results-mode {
   display: inline-block;
  }
 
-.hamburger:hover {
-  background: #005ea2;
-}
 
 
-
- 
-
-  
-
-  
-  
-
-  .brand-name {
-    font-size: 1.25rem;
+/* MOBILE LANDSCAPE */
+@media (max-width: 640px) and (orientation: landscape) {
+  .menu {
+    max-width: 300px;
+    right: 10px;
   }
-
+}
 
 
 #welcome-section,
@@ -748,8 +669,6 @@ body.results-mode {
 #instructions li {
   font-weight: 700;
 }
-
-/* Match How to play styling to Welcome */
 
 /* Make 'View Answers' and 'Back to Home' match on the results screen */
 #results-summary #view-answers,
@@ -843,8 +762,6 @@ body.results-mode {
   font-weight: 700;
 }
 
-
-
 /* Quotes styling */
 #quotes blockquote {
   margin: 12px 0;
@@ -885,9 +802,6 @@ body.results-mode {
 }
 .btn-home:hover { background:#0063ad; }
 
-
-
-
 /* Wider cards on the home page only */
 body.home .card {
   max-width: 1000px;      /* was ~600px */
@@ -903,10 +817,6 @@ body.home .instructions {
   margin-left: auto;
   margin-right: auto;
 }
- 
-   
- 
-  
 
 /* Reusable green pill link (like your home tiles) */
 .pill-green {
@@ -919,7 +829,6 @@ body.home .instructions {
   font-weight: 600;
   line-height: 1;
 
- 
 #current-quiz h2 { margin-top: 0; }
 #current-quiz-title {
   font-weight: 700;
@@ -939,7 +848,6 @@ body.home .instructions {
 }
 
 }
-
 /* Center text inside the "This Week’s Quiz" card */
 section#current-quiz,
 .card.highlight-card#current-quiz {
@@ -962,7 +870,7 @@ section#current-quiz,
   min-width: 0; /* prevent overflow */
   display: inline-flex;
   text-decoration: none;
-  font-size: 1.25rem;
+  font-size: 2.00rem;
 }
 
 .brand-logo {
@@ -981,60 +889,35 @@ section#current-quiz,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 1.25rem;
+  font-size: 2.00rem;
 }
 
 /* Hamburger */
-
-
-
-
-
 .menu a:hover { text-decoration: underline; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .pill-green:hover { background: #1b5e20; }
-
 .credits-list { padding-left: 18px; line-height: 1.5; }
 .credits-list a { text-decoration: underline; }
-
 .photo-credit { font-size: 0.85rem; color: #566; margin-top: 6px; }
 .photo-credit a { color: inherit; text-decoration: underline; }
-
-
-
 #answer-review .result-item.correct   { border-color: #2e7d32 !important; background: #edf7ee; }
 #answer-review .result-item.incorrect { border-color: #c62828 !important; background: #fbeaea; }
 
 /* ——— Mobile-only header behavior ——— */
 
-
-  
-  
-
-
 /* Make sure quiz elements don't overlay the header */
 #quiz-wrapper,
 .quiz-container,
 #quiz-section,
+#results-section,
+#answer-review {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 #question-img {
   position: relative;
   z-index: 1;
 }
-
-
 
 /* Remove map + use a soft green on results/review screens */
 body.results-mode,
@@ -1046,6 +929,7 @@ body.review-mode {
   background-position: initial !important;
   background-repeat: no-repeat !important;
 }
+
 
 /* Temporary: hide legacy bottom buttons now that we have a footer */
 .hide-legacy-bottom {
@@ -1089,8 +973,6 @@ body.review-mode {
   font-size: 0.95rem;
 }
 
-
-
 /* Boxed footer variant: use this on pages where you don't want a full-width bar */
 .site-footer.boxed {
   background: transparent;        /* remove the full-width background strip */
@@ -1114,6 +996,12 @@ body.review-mode {
   background: transparent;
   border-top: 0;               /* no hard line across the page */
 }
+.footer-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
 
 /* Make the boxed footer panel transparent too */
 .site-footer.boxed .footer-inner {
@@ -1184,15 +1072,23 @@ body.review-mode {
 }
 
 /* Desktop: hide hamburger and show menu */
-@media (min-width: 641px) {
+@media (min-width: 900px) {
   .hamburger {
     display: none !important;
   }
   .menu {
     display: block !important;
   }
+  .menu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
-
 
 .quiz-info {
   max-width: 850px;
@@ -1205,12 +1101,9 @@ body.review-mode {
   color: #2b2b2b;
 }
 
-
-
 .quiz-info p {
   margin-bottom: 1rem;
 }
-
 
 .pi-entry-badge {
   display: inline-block;
@@ -1242,3 +1135,65 @@ body.review-mode {
 .play-button:hover {
   background-color: #005fcc;   /* darker blue on hover */
 }
+
+/* ==========================================
+   1. MOBILE PORTRAIT (Default State)
+   ========================================== */
+@media (max-width: 768px) and (orientation: portrait) {
+  /* Hide menu on vertical phone screens */
+  #menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Sits right below the header */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+  }
+
+  /* Show it vertically when open */
+  #menu.open {
+    display: block;
+  }
+
+  #menu ul {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    padding: 20px;
+    margin: 0;
+    list-style: none;
+  }
+
+  #menu li {
+    margin: 10px 0;
+  }
+}
+
+/* ==========================================
+   2. LANDSCAPE & DESKTOP (Horizontal State)
+   ========================================== */
+@media (min-width: 769px), (orientation: landscape) {
+  /* Hide the hamburger button since the menu fits horizontally */
+  #menu-toggle {
+    display: none;
+  }
+
+  /* Force the menu to always stay visible */
+  #menu {
+    display: block !important;
+    position: static; /* Removes absolute positioning */
+    box-shadow: none;
+  }
+
+  /* Arrange the links side-by-side */
+  #menu ul {
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    gap: 15px; /* Spaces out your links evenly */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
