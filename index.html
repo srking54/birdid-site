@@ -168,18 +168,20 @@
 <!-- Conservation & Pledge -->
 <section id="conservation" class="card">
   <h2>Why It Matters</h2>
+
   <p>
     Bird populations are under pressure—habitat loss, collisions, invasive species,
     and climate change all play a role. Studies estimate North America alone has lost
     roughly <strong>3 billion</strong> birds since 1970. BirdID-Lite’s mission is to help people
     learn and care—and to support the groups doing the hard work on the ground.
-</p>
+  </p>
 
- <p class="pledge">
-  <strong>Pledge:</strong> BirdID‑Lite will support bird conservation efforts once verified nonprofits
-  begin accepting Pi. When that becomes possible, a portion of all Pi contributions will be directed
-  toward organizations that have completed <strong>KYB</strong> (Know Your Business) on the Pi platform.
-</p>
+  <p>
+    <strong>My Pledge:</strong> BirdID‑Lite will support bird conservation efforts once verified nonprofits
+    begin accepting Pi. When that becomes possible, a portion of all Pi contributions will be directed
+    toward organizations that have completed <strong>KYB</strong> (Know Your Business) on the Pi platform.
+  </p>
+</section>
 
 </section>
 
@@ -206,25 +208,6 @@
     “A bird doesn’t sing because it has an answer, it sings because it has a song.”
     <span class="attribution">— Maya Angelou</span>
   </blockquote>
-</section>
-
-
-
-<!-- 🧠 Quiz Page -->
-<section id="quiz-section" style="display: none;">
-  <div id="quiz-header" style="display: none;">
-    <div id="timer-text">Time left: 30s</div>
-    <div id="progressBar"></div>
-  </div>
-
-  <div id="result-box" class="hidden">
-    <p id="feedback"></p>
-    <a id="info-link" href="#" target="_blank">More Information</a><br>
-    <button id="next-btn" style="display: none;">Next</button>
-  </div>
-  <div id="final-result" style="display: none;"></div>
-    <button id="start-quiz">Start Quiz</button>
-    <button id="info-button" style="display: none;">More Info</button>
 </section>
 
 <!-- 🌟 Results Page -->
@@ -298,6 +281,7 @@
       <a href="/resources.html">Resources</a>
       <a href="/credits.html">Credits</a>
       <a href="/ledger.html">Donations Ledger</a>
+      <a href="/faq.html">FAQ</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
     <div class="footer-copy">
@@ -313,34 +297,6 @@
     if (y) y.textContent = new Date().getFullYear(); 
   })();
 </script>
-
-/* Hamburger button: hidden by default (desktop) */
-  .hamburger {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 6px;
-    background-color: #00796b;
-    color: white;
-    font-size: 28px;
-    padding: 0.3em;
-    cursor: pointer;
-    display: none; /* shown only on small screens */
-  }
-  .hamburger:hover {
-    background-color: #005ea2;
-  }
-
-  /* ===== MOBILE NAV (phones) ===== */
-  @media (max-width: 640px) {
-    /* show hamburger, hide horizontal menu */
-    .hamburger {
-      display: inline-block;
-    }
-
 
 </body>
 

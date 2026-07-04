@@ -22,7 +22,7 @@ h1, h2, h3 {
 }
 
 .pledge{
-  background-image: url('images/feathers.png');
+  
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 60px;
@@ -1098,7 +1098,7 @@ body.review-mode {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   line-height: 1.6;
-  color: #2b2b2b;
+  color:#222;
 }
 
 .quiz-info p {
@@ -1194,6 +1194,7 @@ body.review-mode {
     margin: 0;
     padding: 0;
   }
+  
 }
 
 
