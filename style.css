@@ -58,14 +58,14 @@ h1, h2, h3 {
 }
 
 #welcome-section h2 {
-  text-align: flex;
+  text-align: center;
   color: #00796b;
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   margin-bottom: 1rem;
 }
 
 #welcome-section a {
-  color: #00695c;
+  color: #1f2d1f;
   text-decoration: underline;
 }
 
@@ -1103,6 +1103,10 @@ body.review-mode {
 
 .quiz-info p {
   margin-bottom: 1rem;
+}
+
+.quiz-info {
+  font-weight: 600;
 }
 
 .pi-entry-badge {
