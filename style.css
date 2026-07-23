@@ -1059,6 +1059,10 @@ body.review-mode {
   margin-bottom: 0.6rem;
 }
 
+.last-updated {
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .intro {
     padding: 1.2rem 1rem;
