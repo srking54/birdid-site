@@ -72,9 +72,9 @@
           purpose: "testnet-checklist"
         }
       }, {
-       onReadyForServerApproval: async function(paymentId) {
-  alert("Approval callback fired: " + paymentId);
+      onReadyForServerApproval: async function(paymentId) {
   console.log("Ready for server approval:", paymentId);
+  setStatus("Approving payment on server...");
 
     try {
     const res = await fetch("https://married-bathrooms-snow-excuse.trycloudflare.com/api/pi/approve", {
