@@ -72,14 +72,64 @@
           purpose: "testnet-checklist"
         }
       }, {
-        onReadyForServerApproval: function(paymentId) {
-          console.log("Ready for server approval:", paymentId);
-          setStatus("Payment created. Server approval would happen here. Payment ID: " + paymentId);
-        },
-        onReadyForServerCompletion: function(paymentId, txid) {
-          console.log("Ready for server completion:", paymentId, txid);
-          setStatus("Payment ready for completion. TxID: " + txid);
-        },
+       onReadyForServerApproval: async function(paymentId) {
+  console.log("Ready for server approval:", paymentId);
+  setStatus("Approving payment on server...");
+
+  try {
+    const res = await fetch("https://through-applying-thank-potential.trycloudflare.com/api/pi/approve", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ paymentId: paymentId })
+    });
+
+    const data = await res.json();
+    console.log("Approve response:", data);
+
+    if (!res.ok || !data.ok) {
+      setStatus("Server approval failed: " + (data.error || "unknown error"));
+      return;
+    }
+
+    setStatus("Payment approved. Complete it in Pi Browser.");
+  } catch (err) {
+    console.error(err);
+    setStatus("Server approval error: " + err.message);
+  }
+},
+
+onReadyForServerCompletion: async function(paymentId, txid) {
+  console.log("Ready for server completion:", paymentId, txid);
+  setStatus("Completing payment on server...");
+
+  try {
+    const res = await fetch("https://through-applying-thank-potential.trycloudflare.com/api/pi/complete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        paymentId: paymentId,
+        txid: txid
+      })
+    });
+
+    const data = await res.json();
+    console.log("Complete response:", data);
+
+    if (!res.ok || !data.ok) {
+      setStatus("Server completion failed: " + (data.error || "unknown error"));
+      return;
+    }
+
+    setStatus("Payment completed successfully. Check the Pi Developer checklist.");
+  } catch (err) {
+    console.error(err);
+    setStatus("Server completion error: " + err.message);
+  }
+},
         onCancel: function(paymentId) {
           console.log("Payment cancelled:", paymentId);
           setStatus("Payment cancelled.");
