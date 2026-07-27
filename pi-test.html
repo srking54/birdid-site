@@ -46,9 +46,18 @@
       }
 
       Pi.authenticate(["payments"], function (payment) {
-        console.log("Incomplete payment found:", payment);
-        setStatus("Incomplete payment found. For this test, try again or cancel it in Pi Browser.");
-      }).then(function (auth) {
+  console.log("Incomplete payment found:", payment);
+
+  const paymentId = payment && payment.identifier ? payment.identifier : "(no identifier)";
+  const txid = payment && payment.transaction && payment.transaction.txid
+    ? payment.transaction.txid
+    : "";
+
+  setStatus(
+    "Incomplete payment found. Payment ID: " + paymentId +
+    (txid ? " TxID: " + txid : " No TxID yet.")
+  );
+}).then(function (auth) {
         console.log("Authenticated:", auth);
         setStatus("Signed in. You can now process the test transaction.");
         payBtn.disabled = false;
