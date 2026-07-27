@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Terms of Service • BirdID Lite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/style.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="top-bar card">
+    <div class="brand">
+      <a href="/images/brand/birdid-logo.png" class="brand-logo-link" target="_blank" rel="noopener" aria-label="Open full-size BirdID Lite logo">
+        <img src="/images/brand/birdid-logo.png" alt="BirdID Lite logo" class="brand-logo">
+      </a>
+      <h1 class="brand-name">BirdID Lite</h1>
+    </div>
+
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">☰</button>
+
+    <nav class="menu" id="menu" aria-label="Main navigation">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/quiz.html?mode=leisure">Leisure</a></li>
+        <li><a href="/resources.html">Resources</a></li>
+        <li><a href="/credits.html">Credits</a></li>
+        <li><a href="/ledger.html">Ledger</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Terms of Service</h2>
+      <p class="last-updated">Last updated: <strong>July 2026</strong></p>
+
+      <h3>Overview</h3>
+      <p>
+        BirdID Lite is a free educational bird identification quiz created to help users learn about birds,
+        conservation, habitats, and trusted birding resources.
+      </p>
+
+      <h3>Use of the App</h3>
+      <p>
+        You may use BirdID Lite for personal, educational, and non-commercial purposes. Please do not misuse
+        the app, attempt to disrupt it, copy it for misleading purposes, or use it in a way that violates
+        applicable laws or platform rules.
+      </p>
+
+      <h3>No Professional Advice</h3>
+      <p>
+        BirdID Lite is for general education and enjoyment. Bird identification information, conservation notes,
+        and links to outside resources are provided for learning purposes and should not be treated as professional,
+        scientific, legal, financial, or conservation management advice.
+      </p>
+
+      <h3>Third-Party Resources</h3>
+      <p>
+        BirdID Lite may link to outside resources such as eBird, Audubon, Wikimedia Commons, conservation groups,
+        and other educational sources. We are not responsible for the content, policies, or availability of third-party websites.
+      </p>
+
+      <h3>Images and Credits</h3>
+      <p>
+        Bird images and other media may be used under public domain, Creative Commons, or other permitted licenses.
+        Attribution is provided on the <a href="/credits.html">Credits</a> page where applicable.
+      </p>
+
+      <h3>Pi Network and Payments</h3>
+      <p>
+        BirdID Lite is free to use during launch. Optional Pi donations may be added in a future version after payment
+        testing is complete. No payment is required to use the quiz at this time.
+      </p>
+
+      <h3>Conservation Donations</h3>
+      <p>
+        BirdID Lite intends to support bird conservation when verified nonprofit bird conservation organizations are able
+        to accept Pi. Any future public donation records will be shown on the <a href="/ledger.html">Public Donations Ledger</a>.
+      </p>
+
+      <h3>Changes to the App</h3>
+      <p>
+        We may update, pause, change, or discontinue BirdID Lite at any time, including quiz content, features,
+        links, donation options, or availability.
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        Questions about these terms may be sent through the <a href="/contact.html">Contact</a> page.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer boxed">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/index.html">Home</a>
+        <a href="/resources.html">Resources</a>
+        <a href="/credits.html">Credits</a>
+        <a href="/ledger.html">Donations Ledger</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copy">© <span id="yr"></span> BirdID Lite</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menu-toggle').onclick = () => {
+      const m = document.getElementById('menu');
+      const open = m.classList.toggle('open');
+      document.getElementById('menu-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
