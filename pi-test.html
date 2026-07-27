@@ -73,10 +73,10 @@
         }
       }, {
        onReadyForServerApproval: async function(paymentId) {
+  alert("Approval callback fired: " + paymentId);
   console.log("Ready for server approval:", paymentId);
-  setStatus("Approving payment on server...");
 
-  try {
+    try {
     const res = await fetch("https://through-applying-thank-potential.trycloudflare.com/api/pi/approve", {
       method: "POST",
       headers: {
